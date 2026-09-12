@@ -9,6 +9,9 @@ const mobileMenu = document.querySelector('.mobile-menu');
 
 const year = document.getElementById('year');
 if (year) year.textContent = new Date().getFullYear();
+document.querySelectorAll('.current-year').forEach((element) => {
+  element.textContent = new Date().getFullYear();
+});
 
 function setMenu(open) {
   if (!menuToggle || !mobileMenu) return;
