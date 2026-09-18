@@ -1,80 +1,89 @@
-<!doctype html>
+<!DOCTYPE html>
+
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Two ASP.NET Core interview questions that expose whether you have shipped: the middleware pipeline order, and DI service lifetimes with captive dependencies. The trade-off answers that sound senior." />
-  <meta name="author" content="Ayman Atif" />
-  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
-  <meta name="color-scheme" content="dark light" />
-  <meta name="theme-color" content="#0b0d10" />
-  <meta name="keywords" content="ASP.NET Core middleware order, middleware pipeline interview question, DI service lifetimes, scoped vs transient vs singleton, captive dependency, senior .NET interview" />
-  <link rel="canonical" href="https://ayman-atif.vercel.app/blog/aspnet-core-middleware-order-di-lifetimes/" />
-
-  <meta property="og:type" content="article" />
-  <meta property="og:locale" content="en_US" />
-  <meta property="og:site_name" content="Ayman Atif Portfolio" />
-  <meta property="og:url" content="https://ayman-atif.vercel.app/blog/aspnet-core-middleware-order-di-lifetimes/" />
-  <meta property="og:title" content="ASP.NET Core Interviews: Middleware Order and DI Lifetimes" />
-  <meta property="og:description" content="Two questions that expose whether you have shipped: the middleware pipeline order and service lifetimes with captive dependencies." />
-  <meta property="og:image" content="https://ayman-atif.vercel.app/assets/img/ayman-atif.jpg" />
-  <meta property="article:published_time" content="2026-09-06" />
-  <meta property="article:modified_time" content="2026-09-06" />
-  <meta property="article:author" content="Ayman Atif" />
-  <meta property="article:section" content="Software Engineering" />
-  <meta property="article:tag" content=".NET" />
-  <meta property="article:tag" content="ASP.NET Core" />
-  <meta property="article:tag" content="Technical interviews" />
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="ASP.NET Core Interviews: Middleware Order and DI Lifetimes" />
-  <meta name="twitter:description" content="Two questions that expose whether you have shipped: the middleware pipeline order and service lifetimes with captive dependencies." />
-  <meta name="twitter:image" content="https://ayman-atif.vercel.app/assets/img/ayman-atif.jpg" />
-
-  <title>ASP.NET Core Interviews: Middleware Order and DI Lifetimes</title>
-
-  <link rel="icon" href="../../assets/img/favicon.svg" type="image/svg+xml" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="../../assets/css/styles.css" />
-  <link rel="stylesheet" href="../../assets/css/blog.css" />
-
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "BlogPosting",
-    "@id": "https://ayman-atif.vercel.app/blog/aspnet-core-middleware-order-di-lifetimes/#article",
-    "headline": "ASP.NET Core Interviews: Middleware Order and DI Service Lifetimes",
-    "description": "Two ASP.NET Core interview questions that expose whether you have shipped: the middleware pipeline order, and DI service lifetimes with captive dependencies. The trade-off answers that sound senior.",
-    "image": "https://ayman-atif.vercel.app/assets/img/ayman-atif.jpg",
-    "datePublished": "2026-09-06",
-    "dateModified": "2026-09-06",
-    "wordCount": 1350,
-    "inLanguage": "en",
-    "url": "https://ayman-atif.vercel.app/blog/aspnet-core-middleware-order-di-lifetimes/",
-    "author": {
-      "@type": "Person",
-      "name": "Ayman Atif",
-      "url": "https://ayman-atif.vercel.app/",
-      "jobTitle": "Freelance Software Engineer",
-      "sameAs": [
-        "https://www.linkedin.com/in/a95yman/",
-        "https://github.com/i95compile",
-        "https://medium.com/@a95yman"
-      ]
-    },
-    "publisher": {
-      "@type": "Person",
-      "name": "Ayman Atif",
-      "url": "https://ayman-atif.vercel.app/"
-    },
-    "mainEntityOfPage": { "@type": "WebPage", "@id": "https://ayman-atif.vercel.app/blog/aspnet-core-middleware-order-di-lifetimes/" },
-    "isPartOf": { "@type": "Blog", "@id": "https://ayman-atif.vercel.app/blog/#blog" },
-    "keywords": ["ASP.NET Core middleware order", "middleware pipeline", "DI service lifetimes", "scoped vs transient vs singleton", "captive dependency"],
-    "articleSection": "Software Engineering"
-  }
-  </script>
-  <script type="application/ld+json">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="Two ASP.NET Core interview questions that expose whether you have shipped: the middleware pipeline order, and DI service lifetimes with captive dependencies. The trade-off answers that sound senior." name="description"/>
+<meta content="Ayman Atif" name="author"/>
+<meta content="index, follow, max-image-preview:large, max-snippet:-1" name="robots"/>
+<meta content="dark light" name="color-scheme"/>
+<meta content="#0b0d10" name="theme-color"/>
+<meta content="ASP.NET Core middleware order, middleware pipeline interview question, DI service lifetimes, scoped vs transient vs singleton, captive dependency, senior .NET interview" name="keywords"/>
+<link href="https://ayman-atif.vercel.app/blog/aspnet-core-middleware-order-di-lifetimes/" rel="canonical"/>
+<meta content="article" property="og:type"/>
+<meta content="en_US" property="og:locale"/>
+<meta content="Ayman Atif Portfolio" property="og:site_name"/>
+<meta content="https://ayman-atif.vercel.app/blog/aspnet-core-middleware-order-di-lifetimes/" property="og:url"/>
+<meta content="ASP.NET Core Interviews: Middleware Order and DI Lifetimes" property="og:title"/>
+<meta content="Two questions that expose whether you have shipped: the middleware pipeline order and service lifetimes with captive dependencies." property="og:description"/>
+<meta content="https://ayman-atif.vercel.app/assets/img/ayman-atif.jpg" property="og:image"/>
+<meta content="2026-09-06" property="article:published_time"/>
+<meta content="2026-09-18" property="article:modified_time"/>
+<meta content="Ayman Atif" property="article:author"/>
+<meta content="Software Engineering" property="article:section"/>
+<meta content=".NET" property="article:tag"/>
+<meta content="ASP.NET Core" property="article:tag"/>
+<meta content="Technical interviews" property="article:tag"/>
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="ASP.NET Core Interviews: Middleware Order and DI Lifetimes" name="twitter:title"/>
+<meta content="Two questions that expose whether you have shipped: the middleware pipeline order and service lifetimes with captive dependencies." name="twitter:description"/>
+<meta content="https://ayman-atif.vercel.app/assets/img/ayman-atif.jpg" name="twitter:image"/>
+<title>ASP.NET Core Interviews: Middleware Order and DI Lifetimes</title>
+<link href="../../assets/img/favicon.svg" rel="icon" type="image/svg+xml"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Manrope:wght@500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="../../assets/css/styles.css" rel="stylesheet"/>
+<link href="../../assets/css/blog.css" rel="stylesheet"/>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "@id": "https://ayman-atif.vercel.app/blog/aspnet-core-middleware-order-di-lifetimes/#article",
+  "headline": "ASP.NET Core Interviews: Middleware Order and DI Service Lifetimes",
+  "description": "Two ASP.NET Core interview questions that expose whether you have shipped: the middleware pipeline order, and DI service lifetimes with captive dependencies. The trade-off answers that sound senior.",
+  "image": "https://ayman-atif.vercel.app/assets/img/ayman-atif.jpg",
+  "datePublished": "2026-09-06",
+  "dateModified": "2026-09-18",
+  "wordCount": 1056,
+  "inLanguage": "en",
+  "url": "https://ayman-atif.vercel.app/blog/aspnet-core-middleware-order-di-lifetimes/",
+  "author": {
+    "@type": "Person",
+    "name": "Ayman Atif",
+    "url": "https://ayman-atif.vercel.app/",
+    "jobTitle": "Freelance Software Engineer",
+    "sameAs": [
+      "https://www.linkedin.com/in/a95yman/",
+      "https://github.com/i95compile",
+      "https://medium.com/@a95yman"
+    ]
+  },
+  "publisher": {
+    "@type": "Person",
+    "name": "Ayman Atif",
+    "url": "https://ayman-atif.vercel.app/"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://ayman-atif.vercel.app/blog/aspnet-core-middleware-order-di-lifetimes/"
+  },
+  "isPartOf": {
+    "@type": "Blog",
+    "@id": "https://ayman-atif.vercel.app/blog/#blog"
+  },
+  "keywords": [
+    "ASP.NET Core middleware order",
+    "middleware pipeline",
+    "DI service lifetimes",
+    "scoped vs transient vs singleton",
+    "captive dependency"
+  ],
+  "articleSection": "Software Engineering"
+}
+</script>
+<script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
@@ -87,118 +96,100 @@
   </script>
 </head>
 <body>
-  <a class="skip-link" href="#main-content">Skip to main content</a>
-  <div class="noise" aria-hidden="true"></div>
-  <div class="cursor-glow" aria-hidden="true"></div>
+<a class="skip-link" href="#main-content">Skip to main content</a>
+<div aria-hidden="true" class="noise"></div>
+<div aria-hidden="true" class="cursor-glow"></div>
+<header class="site-header">
+<a aria-label="Ayman Atif, home" class="brand" href="../../index.html">
+<span aria-hidden="true" class="brand-mark">AA</span>
+<span class="brand-copy">Ayman Atif</span>
+</a>
+<nav aria-label="Primary navigation" class="nav">
+<a href="../../index.html">Home</a><a href="../../about/index.html">About</a>
+<a href="../../services/index.html">Services</a>
+<a aria-current="page" href="../index.html">Blog</a><a href="../../certifications/index.html">Certifications</a>
+<a class="nav-cta" href="mailto:a95yman@gmail.com?subject=Software%20project%20inquiry">Start a conversation</a>
+</nav>
+<button aria-controls="mobile-menu" aria-expanded="false" aria-label="Open menu" class="menu-toggle" type="button">
+<span></span><span></span>
+</button>
+</header>
+<nav aria-hidden="true" aria-label="Mobile navigation" class="mobile-menu" id="mobile-menu">
+<a href="../../index.html">Home</a><a href="../../about/index.html">About</a>
+<a href="../../services/index.html">Services</a>
+<a aria-current="page" href="../index.html">Blog</a><a href="../../certifications/index.html">Certifications</a>
+<a href="mailto:a95yman@gmail.com?subject=Software%20project%20inquiry">Contact</a>
+</nav>
+<main class="section-dark blog-page" id="main-content">
+<article class="post">
+<nav aria-label="Breadcrumb" class="post-breadcrumb">
+<a href="../../index.html">Home</a><span aria-hidden="true">/</span>
+<a href="../index.html">Blog</a><span aria-hidden="true">/</span>
+<span>Middleware order &amp; DI lifetimes</span>
+</nav>
+<header class="post-header">
+<h1 class="post-title">ASP.NET Core Interviews: Middleware Order and DI Service Lifetimes</h1>
+<p class="post-meta">
+<span>Ayman Atif</span>
+<span aria-hidden="true" class="dot"></span>
+<time datetime="2026-09-06">6 September 2026</time>
+<span aria-hidden="true" class="dot"></span>
+<span>6 min read</span>
+</p>
+</header>
+<p class="post-lede">Two ASP.NET Core questions come up constantly, and both have a “knows the words” answer and a “has been burned” answer. Interviewers are listening for the second one.</p>
+<div class="post-body">
+<h2>Question 1: “Explain the middleware pipeline.”</h2>
+<p><strong>Student answer:</strong> “Middleware components are registered in <code>Program.cs</code> and run in order. Each one can do work before and after calling <code>next()</code>, forming a request pipeline.”</p>
+<p>Correct, and it tells the interviewer nothing. The pipeline being ordered is the whole point of the question — so lead with the consequence of ordering it wrong.</p>
+<p><strong>Engineer answer:</strong> “The pipeline is a nested chain — each middleware wraps everything after it, on the way in and the way back out. What matters in practice is that the order is a contract, not a preference:</p>
+<ul>
+<li>Exception-handling / problem-details middleware has to be near the top, or it can’t catch what happens below it.</li>
+<li><code>UseRouting</code> must come before <code>UseAuthorization</code>, because authorization needs to know which endpoint was matched to read its <code>[Authorize]</code> metadata.</li>
+<li><code>UseAuthentication</code> before <code>UseAuthorization</code> — you can’t authorize a principal you haven’t established.</li>
+<li><code>UseCors</code> has to sit between routing and authorization, and a misplaced <code>UseCors</code> is a classic bug: put it after the middleware that short-circuits, and preflight <code>OPTIONS</code> requests get rejected before CORS headers are ever attached.</li>
+<li>Static files early, so you don’t run auth on every image.</li>
+</ul>
+<p>I’ve debugged a CORS issue that turned out to be exactly that ordering mistake — the browser reported a CORS failure, but the real cause was <code>UseCors</code> registered in the wrong place. The lesson I took: when something in the pipeline misbehaves, check the order before you touch the configuration.”</p>
+<p><strong>Follow-ups:</strong> <em>“What’s the difference between <code>Use</code>, <code>Run</code>, and <code>Map</code>?”</em> — <code>Use</code> can call the next middleware, <code>Run</code> is terminal, <code>Map</code> branches the pipeline on a path. <em>“Middleware vs filters?”</em> — middleware is framework-wide and runs before MVC even picks an action; filters are MVC-aware and can see the action, model state, and result.</p>
+<h2>Question 2: “Scoped, Transient, Singleton — when do you use each?”</h2>
+<p><strong>Student answer:</strong> “Transient is a new instance every time it’s requested. Scoped is one instance per request. Singleton is one instance for the whole application.”</p>
+<p>Again, true, and it’s the definition the interviewer already knows. The real question underneath is: <em>“have you caused a bug by picking the wrong one?”</em></p>
+<p><strong>Engineer answer:</strong> “The lifetimes themselves are simple — the trap is mixing them. The captive-dependency problem is where a longer-lived service holds a reference to a shorter-lived one: inject a scoped service into a singleton and that scoped instance is now effectively a singleton, alive for the whole app, long after its request ended. The classic anti-pattern is injecting <code>DbContext</code> — which is scoped — into a singleton. You get a context that’s shared across requests and across threads, and <code>DbContext</code> isn’t thread-safe, so you start seeing random <code>InvalidOperationException</code>s about concurrent use, or data from one request leaking into another. In development the container’s scope validation usually catches the direct case at startup; the ones that slip through are indirect, or a manually constructed singleton.”</p>
+<p>My defaults: stateless services that are cheap to construct — scoped, so they align with the request and can depend on other scoped things safely. Anything holding a <code>DbContext</code> or per-request state — scoped. Genuinely shared, thread-safe, expensive-to-build things like a configured <code>HttpClient</code> factory, a cache, or a background queue — singleton. Transient I use sparingly, mostly for lightweight things where I explicitly don’t want shared state. And when a singleton genuinely needs something scoped, it injects <code>IServiceScopeFactory</code> and creates a scope per unit of work instead of capturing one.”</p>
+<p><strong>Follow-ups:</strong> <em>“Why is <code>IHttpClientFactory</code> the recommended pattern?”</em> — a raw <code>new HttpClient()</code> per call exhausts sockets, a static one never picks up DNS changes; the factory pools handlers and rotates them. <em>“How does a singleton use a scoped service in a hosted background service?”</em> — <code>IServiceScopeFactory.CreateScope()</code> inside the work loop.</p>
+<h2>The pattern</h2>
+<p>Both answers are the same move: skip the definition the interviewer already has, name the specific failure the design guards against, attach one real diagnosis, and end with the rule you now apply. That structure — definition, cost, scenario, decision — is what makes a mid-level answer sound senior without adding any new facts.</p>
 
-  <header class="site-header">
-    <a class="brand" href="../../index.html" aria-label="Ayman Atif, home">
-      <span class="brand-mark" aria-hidden="true">AA</span>
-      <span class="brand-copy">Ayman Atif</span>
-    </a>
-    <nav class="nav" aria-label="Primary navigation">
-      <a href="../../index.html">Home</a>
-      <a href="../../services/index.html">Services</a>
-      <a href="../index.html" aria-current="page">Blog</a>
-      <a class="nav-cta" href="mailto:a95yman@gmail.com?subject=Software%20project%20inquiry">Start a conversation</a>
-    </nav>
-    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-menu" aria-label="Open menu">
-      <span></span><span></span>
-    </button>
-  </header>
-
-  <nav class="mobile-menu" id="mobile-menu" aria-label="Mobile navigation" aria-hidden="true">
-    <a href="../../index.html">Home</a>
-    <a href="../../services/index.html">Services</a>
-    <a href="../index.html" aria-current="page">Blog</a>
-    <a href="mailto:a95yman@gmail.com?subject=Software%20project%20inquiry">Contact</a>
-  </nav>
-
-  <main id="main-content" class="section-dark blog-page">
-    <article class="post">
-      <nav class="post-breadcrumb" aria-label="Breadcrumb">
-        <a href="../../index.html">Home</a><span aria-hidden="true">/</span>
-        <a href="../index.html">Blog</a><span aria-hidden="true">/</span>
-        <span>Middleware order &amp; DI lifetimes</span>
-      </nav>
-
-      <header class="post-header">
-        <h1 class="post-title">ASP.NET Core Interviews: Middleware Order and DI Service Lifetimes</h1>
-        <p class="post-meta">
-          <span>Ayman Atif</span>
-          <span class="dot" aria-hidden="true"></span>
-          <time datetime="2026-09-06">6 September 2026</time>
-          <span class="dot" aria-hidden="true"></span>
-          <span>6 min read</span>
-        </p>
-      </header>
-
-      <p class="post-lede">Two ASP.NET Core questions come up constantly, and both have a &ldquo;knows the words&rdquo; answer and a &ldquo;has been burned&rdquo; answer. Interviewers are listening for the second one.</p>
-
-      <div class="post-body">
-        <h2>Question 1: &ldquo;Explain the middleware pipeline.&rdquo;</h2>
-
-        <p><strong>Student answer:</strong> &ldquo;Middleware components are registered in <code>Program.cs</code> and run in order. Each one can do work before and after calling <code>next()</code>, forming a request pipeline.&rdquo;</p>
-
-        <p>Correct, and it tells the interviewer nothing. The pipeline being ordered is the whole point of the question &mdash; so lead with the consequence of ordering it wrong.</p>
-
-        <p><strong>Engineer answer:</strong> &ldquo;The pipeline is a nested chain &mdash; each middleware wraps everything after it, on the way in and the way back out. What matters in practice is that the order is a contract, not a preference:</p>
-
-        <ul>
-          <li>Exception-handling / problem-details middleware has to be near the top, or it can&rsquo;t catch what happens below it.</li>
-          <li><code>UseRouting</code> must come before <code>UseAuthorization</code>, because authorization needs to know which endpoint was matched to read its <code>[Authorize]</code> metadata.</li>
-          <li><code>UseAuthentication</code> before <code>UseAuthorization</code> &mdash; you can&rsquo;t authorize a principal you haven&rsquo;t established.</li>
-          <li><code>UseCors</code> has to sit between routing and authorization, and a misplaced <code>UseCors</code> is a classic bug: put it after the middleware that short-circuits, and preflight <code>OPTIONS</code> requests get rejected before CORS headers are ever attached.</li>
-          <li>Static files early, so you don&rsquo;t run auth on every image.</li>
-        </ul>
-
-        <p>I&rsquo;ve debugged a CORS issue that turned out to be exactly that ordering mistake &mdash; the browser reported a CORS failure, but the real cause was <code>UseCors</code> registered in the wrong place. The lesson I took: when something in the pipeline misbehaves, check the order before you touch the configuration.&rdquo;</p>
-
-        <p><strong>Follow-ups:</strong> <em>&ldquo;What&rsquo;s the difference between <code>Use</code>, <code>Run</code>, and <code>Map</code>?&rdquo;</em> &mdash; <code>Use</code> can call the next middleware, <code>Run</code> is terminal, <code>Map</code> branches the pipeline on a path. <em>&ldquo;Middleware vs filters?&rdquo;</em> &mdash; middleware is framework-wide and runs before MVC even picks an action; filters are MVC-aware and can see the action, model state, and result.</p>
-
-        <h2>Question 2: &ldquo;Scoped, Transient, Singleton &mdash; when do you use each?&rdquo;</h2>
-
-        <p><strong>Student answer:</strong> &ldquo;Transient is a new instance every time it&rsquo;s requested. Scoped is one instance per request. Singleton is one instance for the whole application.&rdquo;</p>
-
-        <p>Again, true, and it&rsquo;s the definition the interviewer already knows. The real question underneath is: <em>&ldquo;have you caused a bug by picking the wrong one?&rdquo;</em></p>
-
-        <p><strong>Engineer answer:</strong> &ldquo;The lifetimes themselves are simple &mdash; the trap is mixing them. The captive-dependency problem is where a longer-lived service holds a reference to a shorter-lived one: inject a scoped service into a singleton and that scoped instance is now effectively a singleton, alive for the whole app, long after its request ended. The classic anti-pattern is injecting <code>DbContext</code> &mdash; which is scoped &mdash; into a singleton. You get a context that&rsquo;s shared across requests and across threads, and <code>DbContext</code> isn&rsquo;t thread-safe, so you start seeing random <code>InvalidOperationException</code>s about concurrent use, or data from one request leaking into another. In development the container&rsquo;s scope validation usually catches the direct case at startup; the ones that slip through are indirect, or a manually constructed singleton.&rdquo;</p>
-
-        <p>My defaults: stateless services that are cheap to construct &mdash; scoped, so they align with the request and can depend on other scoped things safely. Anything holding a <code>DbContext</code> or per-request state &mdash; scoped. Genuinely shared, thread-safe, expensive-to-build things like a configured <code>HttpClient</code> factory, a cache, or a background queue &mdash; singleton. Transient I use sparingly, mostly for lightweight things where I explicitly don&rsquo;t want shared state. And when a singleton genuinely needs something scoped, it injects <code>IServiceScopeFactory</code> and creates a scope per unit of work instead of capturing one.&rdquo;</p>
-
-        <p><strong>Follow-ups:</strong> <em>&ldquo;Why is <code>IHttpClientFactory</code> the recommended pattern?&rdquo;</em> &mdash; a raw <code>new HttpClient()</code> per call exhausts sockets, a static one never picks up DNS changes; the factory pools handlers and rotates them. <em>&ldquo;How does a singleton use a scoped service in a hosted background service?&rdquo;</em> &mdash; <code>IServiceScopeFactory.CreateScope()</code> inside the work loop.</p>
-
-        <h2>The pattern</h2>
-
-        <p>Both answers are the same move: skip the definition the interviewer already has, name the specific failure the design guards against, attach one real diagnosis, and end with the rule you now apply. That structure &mdash; definition, cost, scenario, decision &mdash; is what makes a mid-level answer sound senior without adding any new facts.</p>
-
-        <div class="post-note">
-          <p>I use this format for every .NET interview topic. The full set &mdash; ASP.NET Core internals, DI, EF Core, async, CLR and GC, system design &mdash; is an A4-printable prep system called <a href="https://yaman95.gumroad.com/l/dotnet-job-interview-os" target="_blank" rel="noreferrer"><strong>.NET Job Interview OS</strong></a>, with weak-versus-strong answers side by side for each question.</p>
-        </div>
-
-        <h2>The takeaway</h2>
-
-        <p>Middleware order and DI lifetimes look like trivia. They are actually the two places in an ASP.NET Core app where a small, invisible mistake produces a confusing production bug &mdash; a CORS failure that isn&rsquo;t about CORS, a threading exception that isn&rsquo;t about your code. Interviewers ask them because the strong answer proves you&rsquo;ve met that bug and know where to look next time.</p>
-      </div>
-
-      <footer class="post-end">
-        <p>Written by Ayman Atif &mdash; freelance .NET and Python software engineer, working remotely with clients worldwide.</p>
-        <a class="button button-primary" href="../../index.html#contact">Start a conversation <span aria-hidden="true">&#8599;</span></a>
-      </footer>
-    </article>
-  </main>
-
-  <footer class="site-footer">
-    <div class="container site-footer-inner">
-      <div class="site-footer-brand"><strong>Ayman Atif</strong><p>Freelance .NET and Python software engineer building reliable business software for remote clients worldwide.</p></div>
-      <nav class="site-footer-nav" aria-label="Footer navigation">
-        <a href="../../index.html">Home</a><a href="../../services/index.html">Services</a><a href="../../index.html#work">Selected work</a><a href="../index.html">Blog</a><a href="mailto:a95yman@gmail.com">Email</a><a href="https://www.linkedin.com/in/a95yman/" target="_blank" rel="me noreferrer">LinkedIn</a>
-      </nav>
-      <div class="site-footer-bottom"><span>Working remotely with clients worldwide</span><span>© <span class="current-year">2026</span> Ayman Atif</span></div>
-    </div>
-  </footer>
-
-  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js" defer></script>
-  <script src="../../assets/js/script.js" defer></script>
+<section class="post-deep-dive"><h2>A pipeline order I can reason through</h2><p>I find it easier to remember middleware as dependencies rather than as a magic list. Exception handling needs to wrap the work it is supposed to catch. Routing has to identify an endpoint before authorization can inspect endpoint metadata. Authentication has to establish an identity before authorization can decide what that identity may do.</p><pre><code>app.UseExceptionHandler();
+app.UseHttpsRedirection();
+app.UseStaticFiles();
+app.UseRouting();
+app.UseCors();
+app.UseAuthentication();
+app.UseAuthorization();
+app.MapControllers();</code></pre><p>The exact pipeline changes with the application, but the reasoning does not. For every component, ask two questions: <em>what information does this middleware need?</em> and <em>what must it wrap?</em> That is much more reliable than memorizing a screenshot from documentation.</p><h2>A DI lifetime test I use mentally</h2><p>Before choosing a lifetime, I ask who owns the state and how long that state is valid. Request-specific state naturally belongs to a scope. Shared application state needs thread-safety. A disposable dependency should not accidentally live longer because a singleton captured it.</p><p>This also makes code review easier. If I see a singleton constructor accepting a repository backed by <code>DbContext</code>, I do not need to wait for a production exception. The lifetime graph already tells me something is wrong.</p><h2>What I would check during a real incident</h2><ul><li>Print or inspect the effective middleware order before changing CORS or authorization settings.</li><li>Check whether a middleware short-circuits and prevents later components from running.</li><li>Turn on scope validation in development.</li><li>Trace singleton dependencies transitively, not only direct constructor parameters.</li><li>For background work, create an explicit scope for each unit of work instead of holding request-scoped services.</li></ul></section><div class="post-note">
+<p>I use this format for every .NET interview topic. The full set — ASP.NET Core internals, DI, EF Core, async, CLR and GC, system design — is an A4-printable prep system called <a href="https://yaman95.gumroad.com/l/dotnet-job-interview-os" rel="noreferrer" target="_blank"><strong>.NET Job Interview OS</strong></a>, with weak-versus-strong answers side by side for each question.</p>
+</div>
+<h2>The takeaway</h2>
+<p>Middleware order and DI lifetimes look like trivia. They are actually the two places in an ASP.NET Core app where a small, invisible mistake produces a confusing production bug — a CORS failure that isn’t about CORS, a threading exception that isn’t about your code. Interviewers ask them because the strong answer proves you’ve met that bug and know where to look next time.</p>
+</div>
+<footer class="post-end">
+<p>Written by Ayman Atif — freelance .NET and Python software engineer, working remotely with clients worldwide.</p>
+<a class="button button-primary" href="../../index.html#contact">Start a conversation <span aria-hidden="true">↗</span></a>
+</footer>
+</article>
+</main>
+<footer class="site-footer">
+<div class="container site-footer-inner">
+<div class="site-footer-brand"><strong>Ayman Atif</strong><p>Freelance .NET and Python software engineer building reliable business software for remote clients worldwide.</p></div>
+<nav aria-label="Footer navigation" class="site-footer-nav">
+<a href="../../index.html">Home</a><a href="../../services/index.html">Services</a><a href="../../index.html#work">Selected work</a><a href="../index.html">Blog</a><a href="mailto:a95yman@gmail.com">Email</a><a href="https://www.linkedin.com/in/a95yman/" rel="me noreferrer" target="_blank">LinkedIn</a>
+</nav>
+<div class="site-footer-bottom"><span>Working remotely with clients worldwide</span><span>© <span class="current-year">2026</span> Ayman Atif</span></div>
+</div>
+</footer>
+<script defer="" src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script defer="" src="../../assets/js/script.js"></script>
 </body>
 </html>

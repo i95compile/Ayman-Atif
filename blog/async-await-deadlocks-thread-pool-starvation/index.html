@@ -1,80 +1,90 @@
-<!doctype html>
+<!DOCTYPE html>
+
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="The async/await interview question is not about I/O versus CPU. It is about what happens when you block a thread pool thread under load. The trade-off answer that signals senior." />
-  <meta name="author" content="Ayman Atif" />
-  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
-  <meta name="color-scheme" content="dark light" />
-  <meta name="theme-color" content="#0b0d10" />
-  <meta name="keywords" content="async await interview question, Result deadlock C#, ConfigureAwait false, thread pool starvation ASP.NET Core, SynchronizationContext deadlock, async await senior .NET interview" />
-  <link rel="canonical" href="https://ayman-atif.vercel.app/blog/async-await-deadlocks-thread-pool-starvation/" />
-
-  <meta property="og:type" content="article" />
-  <meta property="og:locale" content="en_US" />
-  <meta property="og:site_name" content="Ayman Atif Portfolio" />
-  <meta property="og:url" content="https://ayman-atif.vercel.app/blog/async-await-deadlocks-thread-pool-starvation/" />
-  <meta property="og:title" content="async/await in .NET Interviews: Deadlocks and Thread Pool Starvation" />
-  <meta property="og:description" content="The async question is not about I/O versus CPU. It is about what blocking a thread pool thread costs you under load. Here is the answer that sounds senior." />
-  <meta property="og:image" content="https://ayman-atif.vercel.app/assets/img/ayman-atif.jpg" />
-  <meta property="article:published_time" content="2026-09-06" />
-  <meta property="article:modified_time" content="2026-09-06" />
-  <meta property="article:author" content="Ayman Atif" />
-  <meta property="article:section" content="Software Engineering" />
-  <meta property="article:tag" content=".NET" />
-  <meta property="article:tag" content="Technical interviews" />
-  <meta property="article:tag" content="async/await" />
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="async/await in .NET Interviews: Deadlocks and Thread Pool Starvation" />
-  <meta name="twitter:description" content="The async question is not about I/O versus CPU. It is about what blocking a thread pool thread costs you under load." />
-  <meta name="twitter:image" content="https://ayman-atif.vercel.app/assets/img/ayman-atif.jpg" />
-
-  <title>async/await in .NET Interviews: Deadlocks and Thread Pool Starvation</title>
-
-  <link rel="icon" href="../../assets/img/favicon.svg" type="image/svg+xml" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="../../assets/css/styles.css" />
-  <link rel="stylesheet" href="../../assets/css/blog.css" />
-
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "BlogPosting",
-    "@id": "https://ayman-atif.vercel.app/blog/async-await-deadlocks-thread-pool-starvation/#article",
-    "headline": "async/await in .NET Interviews: Deadlocks, Thread Pool Starvation, and What Interviewers Are Really Asking",
-    "description": "The async/await interview question is not about I/O versus CPU. It is about what happens when you block a thread pool thread under load. The trade-off answer that signals senior.",
-    "image": "https://ayman-atif.vercel.app/assets/img/ayman-atif.jpg",
-    "datePublished": "2026-09-06",
-    "dateModified": "2026-09-06",
-    "wordCount": 1400,
-    "inLanguage": "en",
-    "url": "https://ayman-atif.vercel.app/blog/async-await-deadlocks-thread-pool-starvation/",
-    "author": {
-      "@type": "Person",
-      "name": "Ayman Atif",
-      "url": "https://ayman-atif.vercel.app/",
-      "jobTitle": "Freelance Software Engineer",
-      "sameAs": [
-        "https://www.linkedin.com/in/a95yman/",
-        "https://github.com/i95compile",
-        "https://medium.com/@a95yman"
-      ]
-    },
-    "publisher": {
-      "@type": "Person",
-      "name": "Ayman Atif",
-      "url": "https://ayman-atif.vercel.app/"
-    },
-    "mainEntityOfPage": { "@type": "WebPage", "@id": "https://ayman-atif.vercel.app/blog/async-await-deadlocks-thread-pool-starvation/" },
-    "isPartOf": { "@type": "Blog", "@id": "https://ayman-atif.vercel.app/blog/#blog" },
-    "keywords": ["async await interview question", "Result deadlock", "ConfigureAwait false", "thread pool starvation", "SynchronizationContext deadlock", "sync over async"],
-    "articleSection": "Software Engineering"
-  }
-  </script>
-  <script type="application/ld+json">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="The async/await interview question is not about I/O versus CPU. It is about what happens when you block a thread pool thread under load. The trade-off answer that signals senior." name="description"/>
+<meta content="Ayman Atif" name="author"/>
+<meta content="index, follow, max-image-preview:large, max-snippet:-1" name="robots"/>
+<meta content="dark light" name="color-scheme"/>
+<meta content="#0b0d10" name="theme-color"/>
+<meta content="async await interview question, Result deadlock C#, ConfigureAwait false, thread pool starvation ASP.NET Core, SynchronizationContext deadlock, async await senior .NET interview" name="keywords"/>
+<link href="https://ayman-atif.vercel.app/blog/async-await-deadlocks-thread-pool-starvation/" rel="canonical"/>
+<meta content="article" property="og:type"/>
+<meta content="en_US" property="og:locale"/>
+<meta content="Ayman Atif Portfolio" property="og:site_name"/>
+<meta content="https://ayman-atif.vercel.app/blog/async-await-deadlocks-thread-pool-starvation/" property="og:url"/>
+<meta content="async/await in .NET Interviews: Deadlocks and Thread Pool Starvation" property="og:title"/>
+<meta content="The async question is not about I/O versus CPU. It is about what blocking a thread pool thread costs you under load. Here is the answer that sounds senior." property="og:description"/>
+<meta content="https://ayman-atif.vercel.app/assets/img/ayman-atif.jpg" property="og:image"/>
+<meta content="2026-09-06" property="article:published_time"/>
+<meta content="2026-09-18" property="article:modified_time"/>
+<meta content="Ayman Atif" property="article:author"/>
+<meta content="Software Engineering" property="article:section"/>
+<meta content=".NET" property="article:tag"/>
+<meta content="Technical interviews" property="article:tag"/>
+<meta content="async/await" property="article:tag"/>
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="async/await in .NET Interviews: Deadlocks and Thread Pool Starvation" name="twitter:title"/>
+<meta content="The async question is not about I/O versus CPU. It is about what blocking a thread pool thread costs you under load." name="twitter:description"/>
+<meta content="https://ayman-atif.vercel.app/assets/img/ayman-atif.jpg" name="twitter:image"/>
+<title>async/await in .NET Interviews: Deadlocks and Thread Pool Starvation</title>
+<link href="../../assets/img/favicon.svg" rel="icon" type="image/svg+xml"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Manrope:wght@500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="../../assets/css/styles.css" rel="stylesheet"/>
+<link href="../../assets/css/blog.css" rel="stylesheet"/>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "@id": "https://ayman-atif.vercel.app/blog/async-await-deadlocks-thread-pool-starvation/#article",
+  "headline": "async/await in .NET Interviews: Deadlocks, Thread Pool Starvation, and What Interviewers Are Really Asking",
+  "description": "The async/await interview question is not about I/O versus CPU. It is about what happens when you block a thread pool thread under load. The trade-off answer that signals senior.",
+  "image": "https://ayman-atif.vercel.app/assets/img/ayman-atif.jpg",
+  "datePublished": "2026-09-06",
+  "dateModified": "2026-09-18",
+  "wordCount": 1411,
+  "inLanguage": "en",
+  "url": "https://ayman-atif.vercel.app/blog/async-await-deadlocks-thread-pool-starvation/",
+  "author": {
+    "@type": "Person",
+    "name": "Ayman Atif",
+    "url": "https://ayman-atif.vercel.app/",
+    "jobTitle": "Freelance Software Engineer",
+    "sameAs": [
+      "https://www.linkedin.com/in/a95yman/",
+      "https://github.com/i95compile",
+      "https://medium.com/@a95yman"
+    ]
+  },
+  "publisher": {
+    "@type": "Person",
+    "name": "Ayman Atif",
+    "url": "https://ayman-atif.vercel.app/"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://ayman-atif.vercel.app/blog/async-await-deadlocks-thread-pool-starvation/"
+  },
+  "isPartOf": {
+    "@type": "Blog",
+    "@id": "https://ayman-atif.vercel.app/blog/#blog"
+  },
+  "keywords": [
+    "async await interview question",
+    "Result deadlock",
+    "ConfigureAwait false",
+    "thread pool starvation",
+    "SynchronizationContext deadlock",
+    "sync over async"
+  ],
+  "articleSection": "Software Engineering"
+}
+</script>
+<script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
@@ -87,146 +97,118 @@
   </script>
 </head>
 <body>
-  <a class="skip-link" href="#main-content">Skip to main content</a>
-  <div class="noise" aria-hidden="true"></div>
-  <div class="cursor-glow" aria-hidden="true"></div>
+<a class="skip-link" href="#main-content">Skip to main content</a>
+<div aria-hidden="true" class="noise"></div>
+<div aria-hidden="true" class="cursor-glow"></div>
+<header class="site-header">
+<a aria-label="Ayman Atif, home" class="brand" href="../../index.html">
+<span aria-hidden="true" class="brand-mark">AA</span>
+<span class="brand-copy">Ayman Atif</span>
+</a>
+<nav aria-label="Primary navigation" class="nav">
+<a href="../../index.html">Home</a><a href="../../about/index.html">About</a>
+<a href="../../services/index.html">Services</a>
+<a aria-current="page" href="../index.html">Blog</a><a href="../../certifications/index.html">Certifications</a>
+<a class="nav-cta" href="mailto:a95yman@gmail.com?subject=Software%20project%20inquiry">Start a conversation</a>
+</nav>
+<button aria-controls="mobile-menu" aria-expanded="false" aria-label="Open menu" class="menu-toggle" type="button">
+<span></span><span></span>
+</button>
+</header>
+<nav aria-hidden="true" aria-label="Mobile navigation" class="mobile-menu" id="mobile-menu">
+<a href="../../index.html">Home</a><a href="../../about/index.html">About</a>
+<a href="../../services/index.html">Services</a>
+<a aria-current="page" href="../index.html">Blog</a><a href="../../certifications/index.html">Certifications</a>
+<a href="mailto:a95yman@gmail.com?subject=Software%20project%20inquiry">Contact</a>
+</nav>
+<main class="section-dark blog-page" id="main-content">
+<article class="post">
+<nav aria-label="Breadcrumb" class="post-breadcrumb">
+<a href="../../index.html">Home</a><span aria-hidden="true">/</span>
+<a href="../index.html">Blog</a><span aria-hidden="true">/</span>
+<span>async/await deadlocks</span>
+</nav>
+<header class="post-header">
+<h1 class="post-title">async/await in .NET Interviews: Deadlocks, Thread Pool Starvation, and What Interviewers Are Really Asking</h1>
+<p class="post-meta">
+<span>Ayman Atif</span>
+<span aria-hidden="true" class="dot"></span>
+<time datetime="2026-09-06">6 September 2026</time>
+<span aria-hidden="true" class="dot"></span>
+<span>7 min read</span>
+</p>
+</header>
+<p class="post-lede">Almost every mid-to-senior .NET interview asks about async/await. Almost every candidate answers the wrong question — the definition instead of the trade-off.</p>
+<div class="post-body">
+<p>The question usually arrives in one of three shapes:</p>
+<ul>
+<li>“What is async/await and how is it different from using a <code>Thread</code>?”</li>
+<li>“What’s wrong with calling <code>.Result</code> or <code>.Wait()</code> on a task?”</li>
+<li>“When would you use <code>Task.Run</code>?”</li>
+</ul>
+<p>They sound like three questions. They are one question, and it is this: <em>have you operated an async system under load, and do you know what it costs when you block the wrong thread?</em></p>
+<h2>The student answer</h2>
+<blockquote><p>“async/await is for I/O-bound work and threads are for CPU-bound work. <code>await</code> doesn’t block the thread, it frees it up. <code>Task.Run</code> schedules work on the thread pool. You shouldn’t block on async code because it can deadlock.”</p></blockquote>
+<p>Every sentence is true. None of it demonstrates that you have been on call for a service that fell over because of this. Interviewers hear this answer ten times a week and it moves nothing.</p>
+<h2>What is actually happening, so the trade-off makes sense</h2>
+<p>When you <code>await</code> a genuinely asynchronous operation — a database round trip, an HTTP call, a queue read — the compiler has rewritten your method as a state machine. At the <code>await</code> point, the method returns. The thread that was running it goes back to the pool and does other work. When the I/O completes, a continuation is scheduled to finish the method, possibly on a different thread.</p>
+<p>The entire value proposition is that <strong>a thread is not sitting still while something slow happens elsewhere</strong>. On a web server, threads are the scarce resource. A machine that can hold tens of thousands of open connections has a thread pool of maybe a few dozen threads to start. Async is how a small number of threads serve a large number of in-flight requests.</p>
+<p>Blocking breaks that. <code>task.Result</code>, <code>task.Wait()</code>, and <code>task.GetAwaiter().GetResult()</code> all stop the current thread until the task finishes. Now the thread is doing exactly what async was supposed to prevent: standing still, holding a slot, waiting.</p>
+<h2>Failure mode one: the classic deadlock</h2>
+<p>In older frameworks — ASP.NET on .NET Framework, WPF, WinForms — there is a <code>SynchronizationContext</code> that forces continuations back onto a specific thread (the request thread, the UI thread). The deadlock is mechanical:</p>
+<ul>
+<li>You call <code>SomeAsyncMethod().Result</code> on the request thread.</li>
+<li>That thread is now blocked, waiting for the task.</li>
+<li>Inside, the method finishes its <code>await</code> and tries to schedule its continuation back onto… the request thread.</li>
+<li>Which is blocked, waiting for the continuation. Neither side moves.</li>
+</ul>
+<p>This is the deadlock interviewers expect you to name. Knowing it exists is table stakes. Knowing that <code>ConfigureAwait(false)</code> avoids it — by telling the continuation it does not need the original context — is the next layer. Knowing that <code>ConfigureAwait(false)</code> is a workaround for a mistake you should not be making is the layer that sounds senior.</p>
+<h2>Failure mode two: thread pool starvation (the one people miss)</h2>
+<p>ASP.NET Core removed the request <code>SynchronizationContext</code>. Candidates often conclude “so blocking is fine now.” It is not. The failure just changes shape from a hard lock to a slow collapse.</p>
+<p>Here is a scenario I have had to trace. A background component called a third-party client library that only exposed synchronous methods, so someone wrapped an async pipeline around it and blocked internally with <code>.GetAwaiter().GetResult()</code>. Fine in development. Under production traffic, every one of those calls parked a thread pool thread for the duration of a network call. As load rose, the pool ran out of free threads. The pool’s injection logic adds new threads slowly — on the order of one or two per second — so it could not keep up with the arrival rate.</p>
+<p>The symptom was not an exception. It was latency: requests that normally returned in 80 ms started taking 3–10 seconds, because they were sitting in a queue waiting for a thread that was busy blocking on I/O. CPU was low. Memory was fine. Every dashboard looked healthy except the one that mattered. The fix was to use the library’s async API where it existed and to move the genuinely sync-only work off the request path entirely.</p>
+<h2>Task.Run is not a synonym for “make it async”</h2>
+<p><code>Task.Run</code> pushes a delegate onto the thread pool. That is the right tool for CPU-bound work you want off the current thread — image processing, a heavy calculation, parsing a large file. It is the wrong tool for I/O. Wrapping <code>await httpClient.GetAsync(...)</code> in <code>Task.Run</code> does not make the network faster; it just burns a second thread to wait for the first one. On a web server, <code>Task.Run</code> around I/O is usually a small self-inflicted wound.</p>
+<h2>The engineer answer</h2>
+<blockquote><p>“async/await isn’t really about I/O versus CPU — it’s about not holding a thread while you wait on something slow. Threads are the scarce resource on a server. The cost of getting it wrong is either a hard deadlock, in frameworks with a SynchronizationContext, or thread pool starvation in ASP.NET Core — which is worse to diagnose because it shows up as creeping latency with healthy CPU and memory. I’ve traced exactly that: a sync-over-async call to a third-party library that parked pool threads under load until requests started queuing for seconds. The rule I follow is: async all the way down, never block on a task on a request path, and only reach for <code>Task.Run</code> when the work is genuinely CPU-bound. <code>ConfigureAwait(false)</code> matters in library code; in an ASP.NET Core app it mostly doesn’t, because there’s no context to capture.”</p></blockquote>
+<p>Same knowledge as the student answer. Completely different signal — because it is anchored in a consequence, a diagnosis, and a rule you now follow.</p>
+<h2>Follow-ups interviewers use to check if the answer was memorised</h2>
+<ul>
+<li><strong>“Why is thread pool starvation hard to spot?”</strong> Low CPU, low memory, rising latency, requests queued before they reach your code.</li>
+<li><strong>“What’s <code>async void</code> for?”</strong> Event handlers only. Anywhere else, exceptions escape onto the synchronization context and can take the process down, and callers can’t await completion.</li>
+<li><strong>“Does async make a single request faster?”</strong> No. It improves throughput and scalability under concurrency. A lone request may even be marginally slower.</li>
+<li><strong>“How would you expose an async method to a sync-only caller?”</strong> Ideally you don’t. If forced, isolate it, understand you’re paying a thread, and keep it off hot paths.</li>
+</ul>
 
-  <header class="site-header">
-    <a class="brand" href="../../index.html" aria-label="Ayman Atif, home">
-      <span class="brand-mark" aria-hidden="true">AA</span>
-      <span class="brand-copy">Ayman Atif</span>
-    </a>
-    <nav class="nav" aria-label="Primary navigation">
-      <a href="../../index.html">Home</a>
-      <a href="../../services/index.html">Services</a>
-      <a href="../index.html" aria-current="page">Blog</a>
-      <a class="nav-cta" href="mailto:a95yman@gmail.com?subject=Software%20project%20inquiry">Start a conversation</a>
-    </nav>
-    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-menu" aria-label="Open menu">
-      <span></span><span></span>
-    </button>
-  </header>
+<section class="post-deep-dive"><h2>Async is mainly about what happens while you wait</h2><p>The distinction that matters to me is not “async versus threads.” It is whether the operation spends time using the CPU or waiting for something outside the process. Database calls, HTTP requests and file I/O spend a lot of their lifetime waiting. Asynchronous APIs let the thread return to the pool during that wait instead of occupying it for no useful work.</p><p>That is why wrapping naturally asynchronous I/O in <code>Task.Run</code> is usually a step backward in a web application. It schedules more thread-pool work without making the underlying I/O more asynchronous.</p><h2>Follow the request through</h2><pre><code>public async Task&lt;IActionResult&gt; GetOrder(int id)
+{
+    var order = await _db.Orders
+        .AsNoTracking()
+        .SingleOrDefaultAsync(x =&gt; x.Id == id);
 
-  <nav class="mobile-menu" id="mobile-menu" aria-label="Mobile navigation" aria-hidden="true">
-    <a href="../../index.html">Home</a>
-    <a href="../../services/index.html">Services</a>
-    <a href="../index.html" aria-current="page">Blog</a>
-    <a href="mailto:a95yman@gmail.com?subject=Software%20project%20inquiry">Contact</a>
-  </nav>
-
-  <main id="main-content" class="section-dark blog-page">
-    <article class="post">
-      <nav class="post-breadcrumb" aria-label="Breadcrumb">
-        <a href="../../index.html">Home</a><span aria-hidden="true">/</span>
-        <a href="../index.html">Blog</a><span aria-hidden="true">/</span>
-        <span>async/await deadlocks</span>
-      </nav>
-
-      <header class="post-header">
-        <h1 class="post-title">async/await in .NET Interviews: Deadlocks, Thread Pool Starvation, and What Interviewers Are Really Asking</h1>
-        <p class="post-meta">
-          <span>Ayman Atif</span>
-          <span class="dot" aria-hidden="true"></span>
-          <time datetime="2026-09-06">6 September 2026</time>
-          <span class="dot" aria-hidden="true"></span>
-          <span>7 min read</span>
-        </p>
-      </header>
-
-      <p class="post-lede">Almost every mid-to-senior .NET interview asks about async/await. Almost every candidate answers the wrong question &mdash; the definition instead of the trade-off.</p>
-
-      <div class="post-body">
-        <p>The question usually arrives in one of three shapes:</p>
-
-        <ul>
-          <li>&ldquo;What is async/await and how is it different from using a <code>Thread</code>?&rdquo;</li>
-          <li>&ldquo;What&rsquo;s wrong with calling <code>.Result</code> or <code>.Wait()</code> on a task?&rdquo;</li>
-          <li>&ldquo;When would you use <code>Task.Run</code>?&rdquo;</li>
-        </ul>
-
-        <p>They sound like three questions. They are one question, and it is this: <em>have you operated an async system under load, and do you know what it costs when you block the wrong thread?</em></p>
-
-        <h2>The student answer</h2>
-
-        <blockquote><p>&ldquo;async/await is for I/O-bound work and threads are for CPU-bound work. <code>await</code> doesn&rsquo;t block the thread, it frees it up. <code>Task.Run</code> schedules work on the thread pool. You shouldn&rsquo;t block on async code because it can deadlock.&rdquo;</p></blockquote>
-
-        <p>Every sentence is true. None of it demonstrates that you have been on call for a service that fell over because of this. Interviewers hear this answer ten times a week and it moves nothing.</p>
-
-        <h2>What is actually happening, so the trade-off makes sense</h2>
-
-        <p>When you <code>await</code> a genuinely asynchronous operation &mdash; a database round trip, an HTTP call, a queue read &mdash; the compiler has rewritten your method as a state machine. At the <code>await</code> point, the method returns. The thread that was running it goes back to the pool and does other work. When the I/O completes, a continuation is scheduled to finish the method, possibly on a different thread.</p>
-
-        <p>The entire value proposition is that <strong>a thread is not sitting still while something slow happens elsewhere</strong>. On a web server, threads are the scarce resource. A machine that can hold tens of thousands of open connections has a thread pool of maybe a few dozen threads to start. Async is how a small number of threads serve a large number of in-flight requests.</p>
-
-        <p>Blocking breaks that. <code>task.Result</code>, <code>task.Wait()</code>, and <code>task.GetAwaiter().GetResult()</code> all stop the current thread until the task finishes. Now the thread is doing exactly what async was supposed to prevent: standing still, holding a slot, waiting.</p>
-
-        <h2>Failure mode one: the classic deadlock</h2>
-
-        <p>In older frameworks &mdash; ASP.NET on .NET Framework, WPF, WinForms &mdash; there is a <code>SynchronizationContext</code> that forces continuations back onto a specific thread (the request thread, the UI thread). The deadlock is mechanical:</p>
-
-        <ul>
-          <li>You call <code>SomeAsyncMethod().Result</code> on the request thread.</li>
-          <li>That thread is now blocked, waiting for the task.</li>
-          <li>Inside, the method finishes its <code>await</code> and tries to schedule its continuation back onto&hellip; the request thread.</li>
-          <li>Which is blocked, waiting for the continuation. Neither side moves.</li>
-        </ul>
-
-        <p>This is the deadlock interviewers expect you to name. Knowing it exists is table stakes. Knowing that <code>ConfigureAwait(false)</code> avoids it &mdash; by telling the continuation it does not need the original context &mdash; is the next layer. Knowing that <code>ConfigureAwait(false)</code> is a workaround for a mistake you should not be making is the layer that sounds senior.</p>
-
-        <h2>Failure mode two: thread pool starvation (the one people miss)</h2>
-
-        <p>ASP.NET Core removed the request <code>SynchronizationContext</code>. Candidates often conclude &ldquo;so blocking is fine now.&rdquo; It is not. The failure just changes shape from a hard lock to a slow collapse.</p>
-
-        <p>Here is a scenario I have had to trace. A background component called a third-party client library that only exposed synchronous methods, so someone wrapped an async pipeline around it and blocked internally with <code>.GetAwaiter().GetResult()</code>. Fine in development. Under production traffic, every one of those calls parked a thread pool thread for the duration of a network call. As load rose, the pool ran out of free threads. The pool&rsquo;s injection logic adds new threads slowly &mdash; on the order of one or two per second &mdash; so it could not keep up with the arrival rate.</p>
-
-        <p>The symptom was not an exception. It was latency: requests that normally returned in 80&nbsp;ms started taking 3&ndash;10 seconds, because they were sitting in a queue waiting for a thread that was busy blocking on I/O. CPU was low. Memory was fine. Every dashboard looked healthy except the one that mattered. The fix was to use the library&rsquo;s async API where it existed and to move the genuinely sync-only work off the request path entirely.</p>
-
-        <h2>Task.Run is not a synonym for &ldquo;make it async&rdquo;</h2>
-
-        <p><code>Task.Run</code> pushes a delegate onto the thread pool. That is the right tool for CPU-bound work you want off the current thread &mdash; image processing, a heavy calculation, parsing a large file. It is the wrong tool for I/O. Wrapping <code>await httpClient.GetAsync(...)</code> in <code>Task.Run</code> does not make the network faster; it just burns a second thread to wait for the first one. On a web server, <code>Task.Run</code> around I/O is usually a small self-inflicted wound.</p>
-
-        <h2>The engineer answer</h2>
-
-        <blockquote><p>&ldquo;async/await isn&rsquo;t really about I/O versus CPU &mdash; it&rsquo;s about not holding a thread while you wait on something slow. Threads are the scarce resource on a server. The cost of getting it wrong is either a hard deadlock, in frameworks with a SynchronizationContext, or thread pool starvation in ASP.NET Core &mdash; which is worse to diagnose because it shows up as creeping latency with healthy CPU and memory. I&rsquo;ve traced exactly that: a sync-over-async call to a third-party library that parked pool threads under load until requests started queuing for seconds. The rule I follow is: async all the way down, never block on a task on a request path, and only reach for <code>Task.Run</code> when the work is genuinely CPU-bound. <code>ConfigureAwait(false)</code> matters in library code; in an ASP.NET Core app it mostly doesn&rsquo;t, because there&rsquo;s no context to capture.&rdquo;</p></blockquote>
-
-        <p>Same knowledge as the student answer. Completely different signal &mdash; because it is anchored in a consequence, a diagnosis, and a rule you now follow.</p>
-
-        <h2>Follow-ups interviewers use to check if the answer was memorised</h2>
-
-        <ul>
-          <li><strong>&ldquo;Why is thread pool starvation hard to spot?&rdquo;</strong> Low CPU, low memory, rising latency, requests queued before they reach your code.</li>
-          <li><strong>&ldquo;What&rsquo;s <code>async void</code> for?&rdquo;</strong> Event handlers only. Anywhere else, exceptions escape onto the synchronization context and can take the process down, and callers can&rsquo;t await completion.</li>
-          <li><strong>&ldquo;Does async make a single request faster?&rdquo;</strong> No. It improves throughput and scalability under concurrency. A lone request may even be marginally slower.</li>
-          <li><strong>&ldquo;How would you expose an async method to a sync-only caller?&rdquo;</strong> Ideally you don&rsquo;t. If forced, isolate it, understand you&rsquo;re paying a thread, and keep it off hot paths.</li>
-        </ul>
-
-        <div class="post-note">
-          <p>This post is one worked example of a format I use for every .NET interview topic: <strong>definition &rarr; cost &rarr; real scenario &rarr; decision</strong>. I turned the full set &mdash; CLR and GC, async internals, EF Core, ASP.NET Core, system design &mdash; into an A4-printable prep system called <a href="https://yaman95.gumroad.com/l/dotnet-job-interview-os" target="_blank" rel="noreferrer"><strong>.NET Job Interview OS</strong></a>, with weak-versus-strong answers side by side for each question.</p>
-        </div>
-
-        <h2>The takeaway</h2>
-
-        <p>When an interviewer asks about async/await, they are not asking you to recite the state machine. They are asking whether you understand that threads are scarce, that blocking spends them, and that the bill arrives as a latency cliff on a Tuesday afternoon. Answer that, with one real trace attached, and you have answered the question they meant to ask.</p>
-      </div>
-
-      <footer class="post-end">
-        <p>Written by Ayman Atif &mdash; freelance .NET and Python software engineer, working remotely with clients worldwide.</p>
-        <a class="button button-primary" href="../../index.html#contact">Start a conversation <span aria-hidden="true">&#8599;</span></a>
-      </footer>
-    </article>
-  </main>
-
-  <footer class="site-footer">
-    <div class="container site-footer-inner">
-      <div class="site-footer-brand"><strong>Ayman Atif</strong><p>Freelance .NET and Python software engineer building reliable business software for remote clients worldwide.</p></div>
-      <nav class="site-footer-nav" aria-label="Footer navigation">
-        <a href="../../index.html">Home</a><a href="../../services/index.html">Services</a><a href="../../index.html#work">Selected work</a><a href="../index.html">Blog</a><a href="mailto:a95yman@gmail.com">Email</a><a href="https://www.linkedin.com/in/a95yman/" target="_blank" rel="me noreferrer">LinkedIn</a>
-      </nav>
-      <div class="site-footer-bottom"><span>Working remotely with clients worldwide</span><span>© <span class="current-year">2026</span> Ayman Atif</span></div>
-    </div>
-  </footer>
-
-  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js" defer></script>
-  <script src="../../assets/js/script.js" defer></script>
+    return order is null ? NotFound() : Ok(order);
+}</code></pre><p>The useful property here is “async all the way.” The controller does not block on the task, and the data-access call uses an asynchronous database API. Replacing the <code>await</code> with <code>.Result</code> breaks that chain and makes the request hold a thread while it waits.</p><h2>Three debugging questions</h2><ul><li>Is the slow operation CPU-bound or I/O-bound?</li><li>Is anything synchronously blocking on a <code>Task</code> with <code>.Result</code>, <code>.Wait()</code> or <code>GetAwaiter().GetResult()</code>?</li><li>Did we create unbounded parallelism and flood the database, API or thread pool?</li></ul><p>Async code can improve scalability, but it does not remove capacity limits. If 5,000 requests all hit the same database at once, the bottleneck may simply move downstream. Concurrency still needs a budget.</p></section><div class="post-note">
+<p>This post is one worked example of a format I use for every .NET interview topic: <strong>definition → cost → real scenario → decision</strong>. I turned the full set — CLR and GC, async internals, EF Core, ASP.NET Core, system design — into an A4-printable prep system called <a href="https://yaman95.gumroad.com/l/dotnet-job-interview-os" rel="noreferrer" target="_blank"><strong>.NET Job Interview OS</strong></a>, with weak-versus-strong answers side by side for each question.</p>
+</div>
+<h2>The takeaway</h2>
+<p>When an interviewer asks about async/await, they are not asking you to recite the state machine. They are asking whether you understand that threads are scarce, that blocking spends them, and that the bill arrives as a latency cliff on a Tuesday afternoon. Answer that, with one real trace attached, and you have answered the question they meant to ask.</p>
+</div>
+<footer class="post-end">
+<p>Written by Ayman Atif — freelance .NET and Python software engineer, working remotely with clients worldwide.</p>
+<a class="button button-primary" href="../../index.html#contact">Start a conversation <span aria-hidden="true">↗</span></a>
+</footer>
+</article>
+</main>
+<footer class="site-footer">
+<div class="container site-footer-inner">
+<div class="site-footer-brand"><strong>Ayman Atif</strong><p>Freelance .NET and Python software engineer building reliable business software for remote clients worldwide.</p></div>
+<nav aria-label="Footer navigation" class="site-footer-nav">
+<a href="../../index.html">Home</a><a href="../../services/index.html">Services</a><a href="../../index.html#work">Selected work</a><a href="../index.html">Blog</a><a href="mailto:a95yman@gmail.com">Email</a><a href="https://www.linkedin.com/in/a95yman/" rel="me noreferrer" target="_blank">LinkedIn</a>
+</nav>
+<div class="site-footer-bottom"><span>Working remotely with clients worldwide</span><span>© <span class="current-year">2026</span> Ayman Atif</span></div>
+</div>
+</footer>
+<script defer="" src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script defer="" src="../../assets/js/script.js"></script>
 </body>
 </html>

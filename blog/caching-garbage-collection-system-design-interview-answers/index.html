@@ -1,80 +1,89 @@
-<!doctype html>
+<!DOCTYPE html>
+
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Three .NET interview questions that separate seniors from mid-levels: caching and invalidation, garbage collection generations, and a basic system-design walkthrough. The trade-off answer for each." />
-  <meta name="author" content="Ayman Atif" />
-  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
-  <meta name="color-scheme" content="dark light" />
-  <meta name="theme-color" content="#0b0d10" />
-  <meta name="keywords" content="caching interview question, cache invalidation, .NET garbage collection generations interview, gen 0 gen 1 gen 2, large object heap, system design interview .NET" />
-  <link rel="canonical" href="https://ayman-atif.vercel.app/blog/caching-garbage-collection-system-design-interview-answers/" />
-
-  <meta property="og:type" content="article" />
-  <meta property="og:locale" content="en_US" />
-  <meta property="og:site_name" content="Ayman Atif Portfolio" />
-  <meta property="og:url" content="https://ayman-atif.vercel.app/blog/caching-garbage-collection-system-design-interview-answers/" />
-  <meta property="og:title" content="Caching, Garbage Collection, and System Design: Three .NET Interview Answers" />
-  <meta property="og:description" content="Three questions that separate seniors from mid-levels, and the trade-off answer for each." />
-  <meta property="og:image" content="https://ayman-atif.vercel.app/assets/img/ayman-atif.jpg" />
-  <meta property="article:published_time" content="2026-09-06" />
-  <meta property="article:modified_time" content="2026-09-06" />
-  <meta property="article:author" content="Ayman Atif" />
-  <meta property="article:section" content="Software Engineering" />
-  <meta property="article:tag" content=".NET" />
-  <meta property="article:tag" content="Technical interviews" />
-  <meta property="article:tag" content="System design" />
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Caching, Garbage Collection, and System Design: Three .NET Interview Answers" />
-  <meta name="twitter:description" content="Three questions that separate seniors from mid-levels, and the trade-off answer for each." />
-  <meta name="twitter:image" content="https://ayman-atif.vercel.app/assets/img/ayman-atif.jpg" />
-
-  <title>Caching, Garbage Collection, and System Design: Three .NET Interview Answers</title>
-
-  <link rel="icon" href="../../assets/img/favicon.svg" type="image/svg+xml" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="../../assets/css/styles.css" />
-  <link rel="stylesheet" href="../../assets/css/blog.css" />
-
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "BlogPosting",
-    "@id": "https://ayman-atif.vercel.app/blog/caching-garbage-collection-system-design-interview-answers/#article",
-    "headline": "Caching, Garbage Collection, and System Design: Three .NET Interview Answers",
-    "description": "Three .NET interview questions that separate seniors from mid-levels: caching and invalidation, garbage collection generations, and a basic system-design walkthrough. The trade-off answer for each.",
-    "image": "https://ayman-atif.vercel.app/assets/img/ayman-atif.jpg",
-    "datePublished": "2026-09-06",
-    "dateModified": "2026-09-06",
-    "wordCount": 1450,
-    "inLanguage": "en",
-    "url": "https://ayman-atif.vercel.app/blog/caching-garbage-collection-system-design-interview-answers/",
-    "author": {
-      "@type": "Person",
-      "name": "Ayman Atif",
-      "url": "https://ayman-atif.vercel.app/",
-      "jobTitle": "Freelance Software Engineer",
-      "sameAs": [
-        "https://www.linkedin.com/in/a95yman/",
-        "https://github.com/i95compile",
-        "https://medium.com/@a95yman"
-      ]
-    },
-    "publisher": {
-      "@type": "Person",
-      "name": "Ayman Atif",
-      "url": "https://ayman-atif.vercel.app/"
-    },
-    "mainEntityOfPage": { "@type": "WebPage", "@id": "https://ayman-atif.vercel.app/blog/caching-garbage-collection-system-design-interview-answers/" },
-    "isPartOf": { "@type": "Blog", "@id": "https://ayman-atif.vercel.app/blog/#blog" },
-    "keywords": ["caching interview question", "cache invalidation", "garbage collection generations", "large object heap", "system design interview"],
-    "articleSection": "Software Engineering"
-  }
-  </script>
-  <script type="application/ld+json">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="Three .NET interview questions that separate seniors from mid-levels: caching and invalidation, garbage collection generations, and a basic system-design walkthrough. The trade-off answer for each." name="description"/>
+<meta content="Ayman Atif" name="author"/>
+<meta content="index, follow, max-image-preview:large, max-snippet:-1" name="robots"/>
+<meta content="dark light" name="color-scheme"/>
+<meta content="#0b0d10" name="theme-color"/>
+<meta content="caching interview question, cache invalidation, .NET garbage collection generations interview, gen 0 gen 1 gen 2, large object heap, system design interview .NET" name="keywords"/>
+<link href="https://ayman-atif.vercel.app/blog/caching-garbage-collection-system-design-interview-answers/" rel="canonical"/>
+<meta content="article" property="og:type"/>
+<meta content="en_US" property="og:locale"/>
+<meta content="Ayman Atif Portfolio" property="og:site_name"/>
+<meta content="https://ayman-atif.vercel.app/blog/caching-garbage-collection-system-design-interview-answers/" property="og:url"/>
+<meta content="Caching, Garbage Collection, and System Design: Three .NET Interview Answers" property="og:title"/>
+<meta content="Three questions that separate seniors from mid-levels, and the trade-off answer for each." property="og:description"/>
+<meta content="https://ayman-atif.vercel.app/assets/img/ayman-atif.jpg" property="og:image"/>
+<meta content="2026-09-06" property="article:published_time"/>
+<meta content="2026-09-18" property="article:modified_time"/>
+<meta content="Ayman Atif" property="article:author"/>
+<meta content="Software Engineering" property="article:section"/>
+<meta content=".NET" property="article:tag"/>
+<meta content="Technical interviews" property="article:tag"/>
+<meta content="System design" property="article:tag"/>
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="Caching, Garbage Collection, and System Design: Three .NET Interview Answers" name="twitter:title"/>
+<meta content="Three questions that separate seniors from mid-levels, and the trade-off answer for each." name="twitter:description"/>
+<meta content="https://ayman-atif.vercel.app/assets/img/ayman-atif.jpg" name="twitter:image"/>
+<title>Caching, Garbage Collection, and System Design: Three .NET Interview Answers</title>
+<link href="../../assets/img/favicon.svg" rel="icon" type="image/svg+xml"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Manrope:wght@500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="../../assets/css/styles.css" rel="stylesheet"/>
+<link href="../../assets/css/blog.css" rel="stylesheet"/>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "@id": "https://ayman-atif.vercel.app/blog/caching-garbage-collection-system-design-interview-answers/#article",
+  "headline": "Caching, Garbage Collection, and System Design: Three .NET Interview Answers",
+  "description": "Three .NET interview questions that separate seniors from mid-levels: caching and invalidation, garbage collection generations, and a basic system-design walkthrough. The trade-off answer for each.",
+  "image": "https://ayman-atif.vercel.app/assets/img/ayman-atif.jpg",
+  "datePublished": "2026-09-06",
+  "dateModified": "2026-09-18",
+  "wordCount": 1109,
+  "inLanguage": "en",
+  "url": "https://ayman-atif.vercel.app/blog/caching-garbage-collection-system-design-interview-answers/",
+  "author": {
+    "@type": "Person",
+    "name": "Ayman Atif",
+    "url": "https://ayman-atif.vercel.app/",
+    "jobTitle": "Freelance Software Engineer",
+    "sameAs": [
+      "https://www.linkedin.com/in/a95yman/",
+      "https://github.com/i95compile",
+      "https://medium.com/@a95yman"
+    ]
+  },
+  "publisher": {
+    "@type": "Person",
+    "name": "Ayman Atif",
+    "url": "https://ayman-atif.vercel.app/"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://ayman-atif.vercel.app/blog/caching-garbage-collection-system-design-interview-answers/"
+  },
+  "isPartOf": {
+    "@type": "Blog",
+    "@id": "https://ayman-atif.vercel.app/blog/#blog"
+  },
+  "keywords": [
+    "caching interview question",
+    "cache invalidation",
+    "garbage collection generations",
+    "large object heap",
+    "system design interview"
+  ],
+  "articleSection": "Software Engineering"
+}
+</script>
+<script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
@@ -87,123 +96,95 @@
   </script>
 </head>
 <body>
-  <a class="skip-link" href="#main-content">Skip to main content</a>
-  <div class="noise" aria-hidden="true"></div>
-  <div class="cursor-glow" aria-hidden="true"></div>
+<a class="skip-link" href="#main-content">Skip to main content</a>
+<div aria-hidden="true" class="noise"></div>
+<div aria-hidden="true" class="cursor-glow"></div>
+<header class="site-header">
+<a aria-label="Ayman Atif, home" class="brand" href="../../index.html">
+<span aria-hidden="true" class="brand-mark">AA</span>
+<span class="brand-copy">Ayman Atif</span>
+</a>
+<nav aria-label="Primary navigation" class="nav">
+<a href="../../index.html">Home</a><a href="../../about/index.html">About</a>
+<a href="../../services/index.html">Services</a>
+<a aria-current="page" href="../index.html">Blog</a><a href="../../certifications/index.html">Certifications</a>
+<a class="nav-cta" href="mailto:a95yman@gmail.com?subject=Software%20project%20inquiry">Start a conversation</a>
+</nav>
+<button aria-controls="mobile-menu" aria-expanded="false" aria-label="Open menu" class="menu-toggle" type="button">
+<span></span><span></span>
+</button>
+</header>
+<nav aria-hidden="true" aria-label="Mobile navigation" class="mobile-menu" id="mobile-menu">
+<a href="../../index.html">Home</a><a href="../../about/index.html">About</a>
+<a href="../../services/index.html">Services</a>
+<a aria-current="page" href="../index.html">Blog</a><a href="../../certifications/index.html">Certifications</a>
+<a href="mailto:a95yman@gmail.com?subject=Software%20project%20inquiry">Contact</a>
+</nav>
+<main class="section-dark blog-page" id="main-content">
+<article class="post">
+<nav aria-label="Breadcrumb" class="post-breadcrumb">
+<a href="../../index.html">Home</a><span aria-hidden="true">/</span>
+<a href="../index.html">Blog</a><span aria-hidden="true">/</span>
+<span>Caching, GC &amp; system design</span>
+</nav>
+<header class="post-header">
+<h1 class="post-title">Caching, Garbage Collection, and System Design: Three .NET Interview Answers</h1>
+<p class="post-meta">
+<span>Ayman Atif</span>
+<span aria-hidden="true" class="dot"></span>
+<time datetime="2026-09-06">6 September 2026</time>
+<span aria-hidden="true" class="dot"></span>
+<span>6 min read</span>
+</p>
+</header>
+<p class="post-lede">Three questions where the textbook answer is easy and the senior answer is a different thing entirely. Same format each time: definition, cost, scenario, decision.</p>
+<div class="post-body">
+<h2>1. “When would you use caching, and what are the trade-offs?”</h2>
+<p><strong>Student answer:</strong> “Caching stores frequently accessed data in memory to cut database load and improve response times. You can use <code>IMemoryCache</code> or a distributed cache like Redis.”</p>
+<p><strong>Engineer answer:</strong> “Caching is cheap to add and genuinely tricky, because the failure mode is silent — stale data that looks correct. The hard part is never storage, it’s invalidation. I’ve seen a team cache aggressively for a performance win and then spend a fortnight chasing reports of users seeing outdated values after an edit, because there was no clear invalidation strategy — just TTLs that were too long and no cache-busting on write.”</p>
+<p>My defaults: cache read-heavy, rarely-changing data first — reference lists, config, computed rollups. Be explicit about TTL and treat invalidation as a design decision made <em>before</em> the cache goes in, not a patch afterwards. In-process <code>IMemoryCache</code> is fine for a single instance, but the moment you scale out you get per-node divergence, so anything that must be consistent across instances goes in a distributed cache. And I always guard the cache-miss path against a stampede — if a hot key expires under load, a hundred requests shouldn’t all hit the database at once.”</p>
+<p><strong>Follow-ups:</strong> cache-aside vs write-through; how you’d handle a thundering herd (locking, staggered expiry, background refresh); why caching per-user data often isn’t worth it.</p>
+<h2>2. “Explain .NET garbage collection.”</h2>
+<p><strong>Student answer:</strong> “The GC is generational. Gen 0 is short-lived objects, gen 1 is a buffer, gen 2 is long-lived. Collecting gen 0 is cheap and frequent; gen 2 is expensive. There’s also a Large Object Heap for objects over 85,000 bytes.”</p>
+<p>All correct — and it’s a recital. The interviewer wants to know if GC behaviour has ever shown up in your production metrics.</p>
+<p><strong>Engineer answer:</strong> “The generational model rests on one assumption: most objects die young. When that assumption holds, the GC is nearly free. It stops being free when you promote a lot of objects to gen 2 that then die anyway — because gen 2 collections are the expensive, potentially blocking ones. In practice the problems I’ve actually seen are: allocation rate so high that gen 0 collections dominate CPU; large short-lived buffers landing on the LOH, which isn’t compacted by default, causing fragmentation and rising memory; and mid-lived objects — things cached for a few minutes — that survive gen 0 and 1 and pile into gen 2.</p>
+<p>The fixes aren’t ‘call <code>GC.Collect()</code>’ — that’s almost always wrong. They’re: reduce allocations on hot paths, use <code>ArrayPool</code> / <code>RecyclableMemoryStream</code> for big buffers, prefer <code>Span</code> and struct-based APIs where it matters, and choose Server GC for throughput on multi-core boxes versus Workstation GC for lower latency on smaller ones. I’d confirm any of this with allocation profiling and the GC counters before changing anything.”</p>
+<p><strong>Follow-ups:</strong> what makes a gen 2 / full collection expensive (it can suspend managed threads); Server vs Workstation and background GC; how <code>IDisposable</code> and finalizers interact with the GC (a finalizer keeps an object alive one extra collection).</p>
+<h2>3. “Design a URL shortener / a rate limiter / a notification service.”</h2>
+<p>The junior failure here is jumping straight to boxes and arrows. The senior move is to spend the first two minutes on the questions that change the design:</p>
+<ul>
+<li><strong>Scale:</strong> hundreds of requests a day or hundreds of thousands a second? This decides almost everything downstream.</li>
+<li><strong>Read/write ratio:</strong> a URL shortener is read-heavy by orders of magnitude — so the design centres on caching and cheap reads, not write throughput.</li>
+<li><strong>Consistency needs:</strong> is eventual consistency acceptable? For shortened URLs, yes. For a payment ledger, no.</li>
+<li><strong>Failure tolerance:</strong> what happens if a component is down — degrade, queue, or reject?</li>
+</ul>
+<p><strong>Then</strong> a walkthrough for a URL shortener sounds like: “API in front, a key-generation strategy — base62 of an incrementing ID, or a hash with collision handling — a primary store keyed by short code, a cache in front because reads dominate, and a redirect path that has to be fast and can tolerate a slightly stale mapping. The interesting trade-offs are the key strategy (sequential IDs are guessable and leak volume; random keys need collision checks), and analytics writes (do them async off the redirect path so tracking a click never slows the redirect).”</p>
+<p>The interviewer is not grading the diagram. They’re grading whether you drove the requirements before the solution, and whether you named trade-offs instead of asserting one true architecture.</p>
+<h2>The pattern, one more time</h2>
+<p>Definition in a sentence. The real cost of getting it wrong. A concrete time it mattered. The rule or decision you now carry. Three very different topics, one structure — and it’s the structure, not the facts, that reads as senior.</p>
 
-  <header class="site-header">
-    <a class="brand" href="../../index.html" aria-label="Ayman Atif, home">
-      <span class="brand-mark" aria-hidden="true">AA</span>
-      <span class="brand-copy">Ayman Atif</span>
-    </a>
-    <nav class="nav" aria-label="Primary navigation">
-      <a href="../../index.html">Home</a>
-      <a href="../../services/index.html">Services</a>
-      <a href="../index.html" aria-current="page">Blog</a>
-      <a class="nav-cta" href="mailto:a95yman@gmail.com?subject=Software%20project%20inquiry">Start a conversation</a>
-    </nav>
-    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-menu" aria-label="Open menu">
-      <span></span><span></span>
-    </button>
-  </header>
-
-  <nav class="mobile-menu" id="mobile-menu" aria-label="Mobile navigation" aria-hidden="true">
-    <a href="../../index.html">Home</a>
-    <a href="../../services/index.html">Services</a>
-    <a href="../index.html" aria-current="page">Blog</a>
-    <a href="mailto:a95yman@gmail.com?subject=Software%20project%20inquiry">Contact</a>
-  </nav>
-
-  <main id="main-content" class="section-dark blog-page">
-    <article class="post">
-      <nav class="post-breadcrumb" aria-label="Breadcrumb">
-        <a href="../../index.html">Home</a><span aria-hidden="true">/</span>
-        <a href="../index.html">Blog</a><span aria-hidden="true">/</span>
-        <span>Caching, GC &amp; system design</span>
-      </nav>
-
-      <header class="post-header">
-        <h1 class="post-title">Caching, Garbage Collection, and System Design: Three .NET Interview Answers</h1>
-        <p class="post-meta">
-          <span>Ayman Atif</span>
-          <span class="dot" aria-hidden="true"></span>
-          <time datetime="2026-09-06">6 September 2026</time>
-          <span class="dot" aria-hidden="true"></span>
-          <span>7 min read</span>
-        </p>
-      </header>
-
-      <p class="post-lede">Three questions where the textbook answer is easy and the senior answer is a different thing entirely. Same format each time: definition, cost, scenario, decision.</p>
-
-      <div class="post-body">
-        <h2>1. &ldquo;When would you use caching, and what are the trade-offs?&rdquo;</h2>
-
-        <p><strong>Student answer:</strong> &ldquo;Caching stores frequently accessed data in memory to cut database load and improve response times. You can use <code>IMemoryCache</code> or a distributed cache like Redis.&rdquo;</p>
-
-        <p><strong>Engineer answer:</strong> &ldquo;Caching is cheap to add and genuinely tricky, because the failure mode is silent &mdash; stale data that looks correct. The hard part is never storage, it&rsquo;s invalidation. I&rsquo;ve seen a team cache aggressively for a performance win and then spend a fortnight chasing reports of users seeing outdated values after an edit, because there was no clear invalidation strategy &mdash; just TTLs that were too long and no cache-busting on write.&rdquo;</p>
-
-        <p>My defaults: cache read-heavy, rarely-changing data first &mdash; reference lists, config, computed rollups. Be explicit about TTL and treat invalidation as a design decision made <em>before</em> the cache goes in, not a patch afterwards. In-process <code>IMemoryCache</code> is fine for a single instance, but the moment you scale out you get per-node divergence, so anything that must be consistent across instances goes in a distributed cache. And I always guard the cache-miss path against a stampede &mdash; if a hot key expires under load, a hundred requests shouldn&rsquo;t all hit the database at once.&rdquo;</p>
-
-        <p><strong>Follow-ups:</strong> cache-aside vs write-through; how you&rsquo;d handle a thundering herd (locking, staggered expiry, background refresh); why caching per-user data often isn&rsquo;t worth it.</p>
-
-        <h2>2. &ldquo;Explain .NET garbage collection.&rdquo;</h2>
-
-        <p><strong>Student answer:</strong> &ldquo;The GC is generational. Gen 0 is short-lived objects, gen 1 is a buffer, gen 2 is long-lived. Collecting gen 0 is cheap and frequent; gen 2 is expensive. There&rsquo;s also a Large Object Heap for objects over 85,000 bytes.&rdquo;</p>
-
-        <p>All correct &mdash; and it&rsquo;s a recital. The interviewer wants to know if GC behaviour has ever shown up in your production metrics.</p>
-
-        <p><strong>Engineer answer:</strong> &ldquo;The generational model rests on one assumption: most objects die young. When that assumption holds, the GC is nearly free. It stops being free when you promote a lot of objects to gen 2 that then die anyway &mdash; because gen 2 collections are the expensive, potentially blocking ones. In practice the problems I&rsquo;ve actually seen are: allocation rate so high that gen 0 collections dominate CPU; large short-lived buffers landing on the LOH, which isn&rsquo;t compacted by default, causing fragmentation and rising memory; and mid-lived objects &mdash; things cached for a few minutes &mdash; that survive gen 0 and 1 and pile into gen 2.</p>
-
-        <p>The fixes aren&rsquo;t &lsquo;call <code>GC.Collect()</code>&rsquo; &mdash; that&rsquo;s almost always wrong. They&rsquo;re: reduce allocations on hot paths, use <code>ArrayPool</code> / <code>RecyclableMemoryStream</code> for big buffers, prefer <code>Span</code> and struct-based APIs where it matters, and choose Server GC for throughput on multi-core boxes versus Workstation GC for lower latency on smaller ones. I&rsquo;d confirm any of this with allocation profiling and the GC counters before changing anything.&rdquo;</p>
-
-        <p><strong>Follow-ups:</strong> what makes a gen 2 / full collection expensive (it can suspend managed threads); Server vs Workstation and background GC; how <code>IDisposable</code> and finalizers interact with the GC (a finalizer keeps an object alive one extra collection).</p>
-
-        <h2>3. &ldquo;Design a URL shortener / a rate limiter / a notification service.&rdquo;</h2>
-
-        <p>The junior failure here is jumping straight to boxes and arrows. The senior move is to spend the first two minutes on the questions that change the design:</p>
-
-        <ul>
-          <li><strong>Scale:</strong> hundreds of requests a day or hundreds of thousands a second? This decides almost everything downstream.</li>
-          <li><strong>Read/write ratio:</strong> a URL shortener is read-heavy by orders of magnitude &mdash; so the design centres on caching and cheap reads, not write throughput.</li>
-          <li><strong>Consistency needs:</strong> is eventual consistency acceptable? For shortened URLs, yes. For a payment ledger, no.</li>
-          <li><strong>Failure tolerance:</strong> what happens if a component is down &mdash; degrade, queue, or reject?</li>
-        </ul>
-
-        <p><strong>Then</strong> a walkthrough for a URL shortener sounds like: &ldquo;API in front, a key-generation strategy &mdash; base62 of an incrementing ID, or a hash with collision handling &mdash; a primary store keyed by short code, a cache in front because reads dominate, and a redirect path that has to be fast and can tolerate a slightly stale mapping. The interesting trade-offs are the key strategy (sequential IDs are guessable and leak volume; random keys need collision checks), and analytics writes (do them async off the redirect path so tracking a click never slows the redirect).&rdquo;</p>
-
-        <p>The interviewer is not grading the diagram. They&rsquo;re grading whether you drove the requirements before the solution, and whether you named trade-offs instead of asserting one true architecture.</p>
-
-        <h2>The pattern, one more time</h2>
-
-        <p>Definition in a sentence. The real cost of getting it wrong. A concrete time it mattered. The rule or decision you now carry. Three very different topics, one structure &mdash; and it&rsquo;s the structure, not the facts, that reads as senior.</p>
-
-        <div class="post-note">
-          <p>Every core .NET interview topic, written in this exact format with weak-versus-strong answers side by side, is <a href="https://yaman95.gumroad.com/l/dotnet-job-interview-os" target="_blank" rel="noreferrer"><strong>.NET Job Interview OS</strong></a> &mdash; an A4-printable prep system covering .NET foundations, ASP.NET Core internals, EF Core trade-offs and system design.</p>
-        </div>
-
-        <h2>The takeaway</h2>
-
-        <p>Caching, GC, and system design questions all reward the same thing: showing you&rsquo;ve seen the failure, not just read the definition. Rehearse each answer as definition &rarr; cost &rarr; scenario &rarr; decision, and the topic almost stops mattering.</p>
-      </div>
-
-      <footer class="post-end">
-        <p>Written by Ayman Atif &mdash; freelance .NET and Python software engineer, working remotely with clients worldwide.</p>
-        <a class="button button-primary" href="../../index.html#contact">Start a conversation <span aria-hidden="true">&#8599;</span></a>
-      </footer>
-    </article>
-  </main>
-
-  <footer class="site-footer">
-    <div class="container site-footer-inner">
-      <div class="site-footer-brand"><strong>Ayman Atif</strong><p>Freelance .NET and Python software engineer building reliable business software for remote clients worldwide.</p></div>
-      <nav class="site-footer-nav" aria-label="Footer navigation">
-        <a href="../../index.html">Home</a><a href="../../services/index.html">Services</a><a href="../../index.html#work">Selected work</a><a href="../index.html">Blog</a><a href="mailto:a95yman@gmail.com">Email</a><a href="https://www.linkedin.com/in/a95yman/" target="_blank" rel="me noreferrer">LinkedIn</a>
-      </nav>
-      <div class="site-footer-bottom"><span>Working remotely with clients worldwide</span><span>© <span class="current-year">2026</span> Ayman Atif</span></div>
-    </div>
-  </footer>
-
-  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js" defer></script>
-  <script src="../../assets/js/script.js" defer></script>
+<section class="post-deep-dive"><h2>Caching starts with an invalidation decision</h2><p>Before adding a cache, I want an answer to one uncomfortable question: how stale may this value be? If nobody can answer that, the cache policy is not designed yet. A five-minute TTL can be perfectly acceptable for a public catalogue and completely wrong for an authorization decision.</p><p>The next question is scope. An in-memory cache belongs to one process. In a multi-instance deployment, each instance can hold a different value. A distributed cache changes that dynamic, but it also adds network calls, serialization and another system that can fail.</p><h2>GC problems are allocation problems before they are “GC problems”</h2><p>The garbage collector is usually doing exactly what the application asked it to do. If a hot path creates huge temporary object graphs, frequent collections are a symptom. I would measure allocations first, then look for avoidable churn: repeated large buffers, unnecessary strings, materializing collections too early, or retaining references longer than intended.</p><h2>System design needs numbers</h2><p>“Use Redis, a queue and microservices” is not a design. I would rather start with request volume, payload size, latency target, consistency requirements and failure tolerance. Those constraints tell us whether a simple application plus a database is enough or whether another moving part earns its keep.</p><ul><li>What is the expected read/write ratio?</li><li>Which operations must be strongly consistent?</li><li>What can be retried safely?</li><li>Where can backpressure build up?</li><li>What happens when a dependency is unavailable for ten minutes?</li></ul></section><div class="post-note">
+<p>Every core .NET interview topic, written in this exact format with weak-versus-strong answers side by side, is <a href="https://yaman95.gumroad.com/l/dotnet-job-interview-os" rel="noreferrer" target="_blank"><strong>.NET Job Interview OS</strong></a> — an A4-printable prep system covering .NET foundations, ASP.NET Core internals, EF Core trade-offs and system design.</p>
+</div>
+<h2>The takeaway</h2>
+<p>Caching, GC, and system design questions all reward the same thing: showing you’ve seen the failure, not just read the definition. Rehearse each answer as definition → cost → scenario → decision, and the topic almost stops mattering.</p>
+</div>
+<footer class="post-end">
+<p>Written by Ayman Atif — freelance .NET and Python software engineer, working remotely with clients worldwide.</p>
+<a class="button button-primary" href="../../index.html#contact">Start a conversation <span aria-hidden="true">↗</span></a>
+</footer>
+</article>
+</main>
+<footer class="site-footer">
+<div class="container site-footer-inner">
+<div class="site-footer-brand"><strong>Ayman Atif</strong><p>Freelance .NET and Python software engineer building reliable business software for remote clients worldwide.</p></div>
+<nav aria-label="Footer navigation" class="site-footer-nav">
+<a href="../../index.html">Home</a><a href="../../services/index.html">Services</a><a href="../../index.html#work">Selected work</a><a href="../index.html">Blog</a><a href="mailto:a95yman@gmail.com">Email</a><a href="https://www.linkedin.com/in/a95yman/" rel="me noreferrer" target="_blank">LinkedIn</a>
+</nav>
+<div class="site-footer-bottom"><span>Working remotely with clients worldwide</span><span>© <span class="current-year">2026</span> Ayman Atif</span></div>
+</div>
+</footer>
+<script defer="" src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script defer="" src="../../assets/js/script.js"></script>
 </body>
 </html>

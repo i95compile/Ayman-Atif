@@ -1,80 +1,90 @@
-<!doctype html>
+<!DOCTYPE html>
+
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="EF Core interview questions test whether you have watched a query melt in production. Tracking overhead, the N+1 problem, IQueryable that silently pulls a table into memory, and the trade-off answers that sound senior." />
-  <meta name="author" content="Ayman Atif" />
-  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
-  <meta name="color-scheme" content="dark light" />
-  <meta name="theme-color" content="#0b0d10" />
-  <meta name="keywords" content="EF Core interview questions, AsNoTracking, N+1 query problem, IQueryable vs IEnumerable, EF Core tracking vs no tracking, split query, senior .NET interview" />
-  <link rel="canonical" href="https://ayman-atif.vercel.app/blog/ef-core-tracking-n-plus-1-interview-questions/" />
-
-  <meta property="og:type" content="article" />
-  <meta property="og:locale" content="en_US" />
-  <meta property="og:site_name" content="Ayman Atif Portfolio" />
-  <meta property="og:url" content="https://ayman-atif.vercel.app/blog/ef-core-tracking-n-plus-1-interview-questions/" />
-  <meta property="og:title" content="EF Core Interview Questions: Tracking, N+1, and IQueryable Traps" />
-  <meta property="og:description" content="These questions test whether you have watched an EF Core query melt in production. The trade-off answers that separate seniors from mid-levels." />
-  <meta property="og:image" content="https://ayman-atif.vercel.app/assets/img/ayman-atif.jpg" />
-  <meta property="article:published_time" content="2026-09-06" />
-  <meta property="article:modified_time" content="2026-09-06" />
-  <meta property="article:author" content="Ayman Atif" />
-  <meta property="article:section" content="Software Engineering" />
-  <meta property="article:tag" content=".NET" />
-  <meta property="article:tag" content="Entity Framework Core" />
-  <meta property="article:tag" content="Technical interviews" />
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="EF Core Interview Questions: Tracking, N+1, and IQueryable Traps" />
-  <meta name="twitter:description" content="These questions test whether you have watched an EF Core query melt in production. The trade-off answers that sound senior." />
-  <meta name="twitter:image" content="https://ayman-atif.vercel.app/assets/img/ayman-atif.jpg" />
-
-  <title>EF Core Interview Questions: Tracking, N+1, and IQueryable Traps</title>
-
-  <link rel="icon" href="../../assets/img/favicon.svg" type="image/svg+xml" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="../../assets/css/styles.css" />
-  <link rel="stylesheet" href="../../assets/css/blog.css" />
-
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "BlogPosting",
-    "@id": "https://ayman-atif.vercel.app/blog/ef-core-tracking-n-plus-1-interview-questions/#article",
-    "headline": "EF Core Interview Questions: Tracking, the N+1 Problem, and IQueryable Traps",
-    "description": "EF Core interview questions test whether you have watched a query melt in production. Tracking overhead, the N+1 problem, IQueryable that silently pulls a table into memory, and the trade-off answers that sound senior.",
-    "image": "https://ayman-atif.vercel.app/assets/img/ayman-atif.jpg",
-    "datePublished": "2026-09-06",
-    "dateModified": "2026-09-06",
-    "wordCount": 1400,
-    "inLanguage": "en",
-    "url": "https://ayman-atif.vercel.app/blog/ef-core-tracking-n-plus-1-interview-questions/",
-    "author": {
-      "@type": "Person",
-      "name": "Ayman Atif",
-      "url": "https://ayman-atif.vercel.app/",
-      "jobTitle": "Freelance Software Engineer",
-      "sameAs": [
-        "https://www.linkedin.com/in/a95yman/",
-        "https://github.com/i95compile",
-        "https://medium.com/@a95yman"
-      ]
-    },
-    "publisher": {
-      "@type": "Person",
-      "name": "Ayman Atif",
-      "url": "https://ayman-atif.vercel.app/"
-    },
-    "mainEntityOfPage": { "@type": "WebPage", "@id": "https://ayman-atif.vercel.app/blog/ef-core-tracking-n-plus-1-interview-questions/" },
-    "isPartOf": { "@type": "Blog", "@id": "https://ayman-atif.vercel.app/blog/#blog" },
-    "keywords": ["EF Core interview questions", "AsNoTracking", "N+1 query problem", "IQueryable vs IEnumerable", "split query", "EF Core performance"],
-    "articleSection": "Software Engineering"
-  }
-  </script>
-  <script type="application/ld+json">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="EF Core interview questions test whether you have watched a query melt in production. Tracking overhead, the N+1 problem, IQueryable that silently pulls a table into memory, and the trade-off answers that sound senior." name="description"/>
+<meta content="Ayman Atif" name="author"/>
+<meta content="index, follow, max-image-preview:large, max-snippet:-1" name="robots"/>
+<meta content="dark light" name="color-scheme"/>
+<meta content="#0b0d10" name="theme-color"/>
+<meta content="EF Core interview questions, AsNoTracking, N+1 query problem, IQueryable vs IEnumerable, EF Core tracking vs no tracking, split query, senior .NET interview" name="keywords"/>
+<link href="https://ayman-atif.vercel.app/blog/ef-core-tracking-n-plus-1-interview-questions/" rel="canonical"/>
+<meta content="article" property="og:type"/>
+<meta content="en_US" property="og:locale"/>
+<meta content="Ayman Atif Portfolio" property="og:site_name"/>
+<meta content="https://ayman-atif.vercel.app/blog/ef-core-tracking-n-plus-1-interview-questions/" property="og:url"/>
+<meta content="EF Core Interview Questions: Tracking, N+1, and IQueryable Traps" property="og:title"/>
+<meta content="These questions test whether you have watched an EF Core query melt in production. The trade-off answers that separate seniors from mid-levels." property="og:description"/>
+<meta content="https://ayman-atif.vercel.app/assets/img/ayman-atif.jpg" property="og:image"/>
+<meta content="2026-09-06" property="article:published_time"/>
+<meta content="2026-09-18" property="article:modified_time"/>
+<meta content="Ayman Atif" property="article:author"/>
+<meta content="Software Engineering" property="article:section"/>
+<meta content=".NET" property="article:tag"/>
+<meta content="Entity Framework Core" property="article:tag"/>
+<meta content="Technical interviews" property="article:tag"/>
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="EF Core Interview Questions: Tracking, N+1, and IQueryable Traps" name="twitter:title"/>
+<meta content="These questions test whether you have watched an EF Core query melt in production. The trade-off answers that sound senior." name="twitter:description"/>
+<meta content="https://ayman-atif.vercel.app/assets/img/ayman-atif.jpg" name="twitter:image"/>
+<title>EF Core Interview Questions: Tracking, N+1, and IQueryable Traps</title>
+<link href="../../assets/img/favicon.svg" rel="icon" type="image/svg+xml"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Manrope:wght@500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="../../assets/css/styles.css" rel="stylesheet"/>
+<link href="../../assets/css/blog.css" rel="stylesheet"/>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "@id": "https://ayman-atif.vercel.app/blog/ef-core-tracking-n-plus-1-interview-questions/#article",
+  "headline": "EF Core Interview Questions: Tracking, the N+1 Problem, and IQueryable Traps",
+  "description": "EF Core interview questions test whether you have watched a query melt in production. Tracking overhead, the N+1 problem, IQueryable that silently pulls a table into memory, and the trade-off answers that sound senior.",
+  "image": "https://ayman-atif.vercel.app/assets/img/ayman-atif.jpg",
+  "datePublished": "2026-09-06",
+  "dateModified": "2026-09-18",
+  "wordCount": 1098,
+  "inLanguage": "en",
+  "url": "https://ayman-atif.vercel.app/blog/ef-core-tracking-n-plus-1-interview-questions/",
+  "author": {
+    "@type": "Person",
+    "name": "Ayman Atif",
+    "url": "https://ayman-atif.vercel.app/",
+    "jobTitle": "Freelance Software Engineer",
+    "sameAs": [
+      "https://www.linkedin.com/in/a95yman/",
+      "https://github.com/i95compile",
+      "https://medium.com/@a95yman"
+    ]
+  },
+  "publisher": {
+    "@type": "Person",
+    "name": "Ayman Atif",
+    "url": "https://ayman-atif.vercel.app/"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://ayman-atif.vercel.app/blog/ef-core-tracking-n-plus-1-interview-questions/"
+  },
+  "isPartOf": {
+    "@type": "Blog",
+    "@id": "https://ayman-atif.vercel.app/blog/#blog"
+  },
+  "keywords": [
+    "EF Core interview questions",
+    "AsNoTracking",
+    "N+1 query problem",
+    "IQueryable vs IEnumerable",
+    "split query",
+    "EF Core performance"
+  ],
+  "articleSection": "Software Engineering"
+}
+</script>
+<script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
@@ -87,127 +97,106 @@
   </script>
 </head>
 <body>
-  <a class="skip-link" href="#main-content">Skip to main content</a>
-  <div class="noise" aria-hidden="true"></div>
-  <div class="cursor-glow" aria-hidden="true"></div>
+<a class="skip-link" href="#main-content">Skip to main content</a>
+<div aria-hidden="true" class="noise"></div>
+<div aria-hidden="true" class="cursor-glow"></div>
+<header class="site-header">
+<a aria-label="Ayman Atif, home" class="brand" href="../../index.html">
+<span aria-hidden="true" class="brand-mark">AA</span>
+<span class="brand-copy">Ayman Atif</span>
+</a>
+<nav aria-label="Primary navigation" class="nav">
+<a href="../../index.html">Home</a><a href="../../about/index.html">About</a>
+<a href="../../services/index.html">Services</a>
+<a aria-current="page" href="../index.html">Blog</a><a href="../../certifications/index.html">Certifications</a>
+<a class="nav-cta" href="mailto:a95yman@gmail.com?subject=Software%20project%20inquiry">Start a conversation</a>
+</nav>
+<button aria-controls="mobile-menu" aria-expanded="false" aria-label="Open menu" class="menu-toggle" type="button">
+<span></span><span></span>
+</button>
+</header>
+<nav aria-hidden="true" aria-label="Mobile navigation" class="mobile-menu" id="mobile-menu">
+<a href="../../index.html">Home</a><a href="../../about/index.html">About</a>
+<a href="../../services/index.html">Services</a>
+<a aria-current="page" href="../index.html">Blog</a><a href="../../certifications/index.html">Certifications</a>
+<a href="mailto:a95yman@gmail.com?subject=Software%20project%20inquiry">Contact</a>
+</nav>
+<main class="section-dark blog-page" id="main-content">
+<article class="post">
+<nav aria-label="Breadcrumb" class="post-breadcrumb">
+<a href="../../index.html">Home</a><span aria-hidden="true">/</span>
+<a href="../index.html">Blog</a><span aria-hidden="true">/</span>
+<span>EF Core interview questions</span>
+</nav>
+<header class="post-header">
+<h1 class="post-title">EF Core Interview Questions: Tracking, the N+1 Problem, and IQueryable Traps</h1>
+<p class="post-meta">
+<span>Ayman Atif</span>
+<span aria-hidden="true" class="dot"></span>
+<time datetime="2026-09-06">6 September 2026</time>
+<span aria-hidden="true" class="dot"></span>
+<span>6 min read</span>
+</p>
+</header>
+<p class="post-lede">EF Core questions are database questions in disguise. The interviewer wants to know whether you have watched an ORM turn one endpoint into three hundred queries — and fixed it.</p>
+<div class="post-body">
+<p>Three questions come up in almost every .NET interview that touches data access:</p>
+<ul>
+<li>“What’s the difference between tracking and no-tracking queries?”</li>
+<li>“What is the N+1 problem and how do you avoid it?”</li>
+<li>“What’s the difference between <code>IQueryable</code> and <code>IEnumerable</code>?”</li>
+</ul>
+<p>All three are really asking: <em>do you know what SQL your C# produces, and have you been on the hook when it produced the wrong SQL at scale?</em></p>
+<h2>1. Tracking vs no-tracking</h2>
+<p><strong>Student answer:</strong> “Tracking queries let EF Core detect changes so <code>SaveChanges()</code> works. <code>AsNoTracking()</code> skips that and is read-only.”</p>
+<p><strong>Engineer answer:</strong> “Tracking means EF Core keeps a snapshot of every entity it returns and diffs it on <code>SaveChanges</code>. That’s exactly what you want when you load an entity, mutate it, and save it in the same context. But on a read-heavy path — an API endpoint returning a list, a report, a dashboard — you’re paying to snapshot hundreds of rows you will never write back. I default read endpoints to <code>AsNoTracking()</code>, or set <code>QueryTrackingBehavior.NoTrackingWithIdentityResolution</code> at the context level when the read graph has shared references. I’ve seen a listing endpoint that was tracking by default sit at the top of a slow-query dashboard purely from change-tracking overhead and the extra allocations under load; switching it to no-tracking took a meaningful slice off the p95.”</p>
+<p>The follow-up: <em>“Does no-tracking make writes faster?”</em> No — it’s irrelevant to writes; you need tracking (or manual <code>Update</code>/<code>Attach</code>) to save. The distinction is a read-path optimisation.</p>
+<h2>2. The N+1 problem</h2>
+<p><strong>Student answer:</strong> “N+1 is when you run one query for a list and then one query per item for a related property. You fix it with <code>Include()</code>.”</p>
+<p><strong>Engineer answer:</strong> “N+1 usually isn’t written on purpose — it’s lazy loading, or a <code>.Select</code> that touches a navigation property inside a loop, or an <code>AutoMapper</code> projection that walks children. You load 200 orders, then something accesses <code>order.Customer</code> per row, and you’ve quietly issued 201 queries. The tell in production is a endpoint whose latency scales linearly with result count and whose database shows a flood of near-identical parameterised selects. Fixes, in order of preference: project to a DTO with a single <code>Select</code> so EF builds one join; use <code>Include</code> / <code>ThenInclude</code> when you genuinely need the entities; and if a multi-collection <code>Include</code> causes cartesian explosion, switch to <code>AsSplitQuery()</code>. I also keep lazy loading proxies off by default so this can’t happen silently.”</p>
+<p>Naming <code>AsSplitQuery()</code> and the cartesian-explosion trade-off (multiple round trips vs one bloated result set) is usually what tips this answer from “knows the term” to “has fixed this”.</p>
+<h2>3. IQueryable vs IEnumerable</h2>
+<p><strong>Student answer:</strong> “<code>IQueryable</code> builds an expression tree and runs on the database; <code>IEnumerable</code> runs in memory with delegates.”</p>
+<p><strong>Engineer answer:</strong> “The classic anti-pattern here is a method that returns <code>IEnumerable&lt;T&gt;</code> from a repository. The moment you return <code>IEnumerable</code>, or call <code>.ToList()</code> / <code>.AsEnumerable()</code> too early, every filter after that point runs in application memory — so <code>repo.GetAll().Where(x =&gt; x.IsActive)</code> pulls the entire table across the wire and filters it in C#. I’ve traced a memory spike to exactly that: a helper returned <code>IEnumerable</code>, a caller added a <code>.Where</code>, and a table that was fine at 10,000 rows became a problem at two million. Keep the query as <code>IQueryable</code> until the last responsible moment, then materialise once. And be aware some LINQ operators don’t translate — EF Core will either throw or, in older versions, silently switch to client evaluation.”</p>
+<h2>The pattern across all three</h2>
+<p>Each answer follows the same shape the strong candidates use for every topic: state the definition briefly, name the real cost, attach a production scenario, then give the rule you now follow. Notice what the engineer answers have that the student answers don’t — a symptom you could actually observe on a dashboard, and a decision.</p>
+<h2>Follow-ups worth rehearsing</h2>
+<ul>
+<li><strong>“How do you find N+1 in an existing app?”</strong> Log generated SQL in development, watch query counts per request, or use an interceptor / MiniProfiler. In production: correlate endpoint latency with row count.</li>
+<li><strong>“When is <code>Include</code> worse than a projection?”</strong> When you only need three columns of the child but <code>Include</code> hydrates the whole entity, and when multiple <code>Include</code>s multiply rows together.</li>
+<li><strong>“Why not one giant DbContext for the whole request?”</strong> DbContext isn’t thread-safe, the change tracker grows without bound on long-lived contexts, and stale tracked entities cause confusing bugs. Scoped-per-request, short-lived.</li>
+<li><strong>“Bulk update of 100,000 rows?”</strong> Not a <code>foreach</code> with <code>SaveChanges</code>. <code>ExecuteUpdate</code> / <code>ExecuteDelete</code> (EF Core 7+), or drop to raw SQL / a bulk library.</li>
+</ul>
 
-  <header class="site-header">
-    <a class="brand" href="../../index.html" aria-label="Ayman Atif, home">
-      <span class="brand-mark" aria-hidden="true">AA</span>
-      <span class="brand-copy">Ayman Atif</span>
-    </a>
-    <nav class="nav" aria-label="Primary navigation">
-      <a href="../../index.html">Home</a>
-      <a href="../../services/index.html">Services</a>
-      <a href="../index.html" aria-current="page">Blog</a>
-      <a class="nav-cta" href="mailto:a95yman@gmail.com?subject=Software%20project%20inquiry">Start a conversation</a>
-    </nav>
-    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-menu" aria-label="Open menu">
-      <span></span><span></span>
-    </button>
-  </header>
-
-  <nav class="mobile-menu" id="mobile-menu" aria-label="Mobile navigation" aria-hidden="true">
-    <a href="../../index.html">Home</a>
-    <a href="../../services/index.html">Services</a>
-    <a href="../index.html" aria-current="page">Blog</a>
-    <a href="mailto:a95yman@gmail.com?subject=Software%20project%20inquiry">Contact</a>
-  </nav>
-
-  <main id="main-content" class="section-dark blog-page">
-    <article class="post">
-      <nav class="post-breadcrumb" aria-label="Breadcrumb">
-        <a href="../../index.html">Home</a><span aria-hidden="true">/</span>
-        <a href="../index.html">Blog</a><span aria-hidden="true">/</span>
-        <span>EF Core interview questions</span>
-      </nav>
-
-      <header class="post-header">
-        <h1 class="post-title">EF Core Interview Questions: Tracking, the N+1 Problem, and IQueryable Traps</h1>
-        <p class="post-meta">
-          <span>Ayman Atif</span>
-          <span class="dot" aria-hidden="true"></span>
-          <time datetime="2026-09-06">6 September 2026</time>
-          <span class="dot" aria-hidden="true"></span>
-          <span>7 min read</span>
-        </p>
-      </header>
-
-      <p class="post-lede">EF Core questions are database questions in disguise. The interviewer wants to know whether you have watched an ORM turn one endpoint into three hundred queries &mdash; and fixed it.</p>
-
-      <div class="post-body">
-        <p>Three questions come up in almost every .NET interview that touches data access:</p>
-
-        <ul>
-          <li>&ldquo;What&rsquo;s the difference between tracking and no-tracking queries?&rdquo;</li>
-          <li>&ldquo;What is the N+1 problem and how do you avoid it?&rdquo;</li>
-          <li>&ldquo;What&rsquo;s the difference between <code>IQueryable</code> and <code>IEnumerable</code>?&rdquo;</li>
-        </ul>
-
-        <p>All three are really asking: <em>do you know what SQL your C# produces, and have you been on the hook when it produced the wrong SQL at scale?</em></p>
-
-        <h2>1. Tracking vs no-tracking</h2>
-
-        <p><strong>Student answer:</strong> &ldquo;Tracking queries let EF Core detect changes so <code>SaveChanges()</code> works. <code>AsNoTracking()</code> skips that and is read-only.&rdquo;</p>
-
-        <p><strong>Engineer answer:</strong> &ldquo;Tracking means EF Core keeps a snapshot of every entity it returns and diffs it on <code>SaveChanges</code>. That&rsquo;s exactly what you want when you load an entity, mutate it, and save it in the same context. But on a read-heavy path &mdash; an API endpoint returning a list, a report, a dashboard &mdash; you&rsquo;re paying to snapshot hundreds of rows you will never write back. I default read endpoints to <code>AsNoTracking()</code>, or set <code>QueryTrackingBehavior.NoTrackingWithIdentityResolution</code> at the context level when the read graph has shared references. I&rsquo;ve seen a listing endpoint that was tracking by default sit at the top of a slow-query dashboard purely from change-tracking overhead and the extra allocations under load; switching it to no-tracking took a meaningful slice off the p95.&rdquo;</p>
-
-        <p>The follow-up: <em>&ldquo;Does no-tracking make writes faster?&rdquo;</em> No &mdash; it&rsquo;s irrelevant to writes; you need tracking (or manual <code>Update</code>/<code>Attach</code>) to save. The distinction is a read-path optimisation.</p>
-
-        <h2>2. The N+1 problem</h2>
-
-        <p><strong>Student answer:</strong> &ldquo;N+1 is when you run one query for a list and then one query per item for a related property. You fix it with <code>Include()</code>.&rdquo;</p>
-
-        <p><strong>Engineer answer:</strong> &ldquo;N+1 usually isn&rsquo;t written on purpose &mdash; it&rsquo;s lazy loading, or a <code>.Select</code> that touches a navigation property inside a loop, or an <code>AutoMapper</code> projection that walks children. You load 200 orders, then something accesses <code>order.Customer</code> per row, and you&rsquo;ve quietly issued 201 queries. The tell in production is a endpoint whose latency scales linearly with result count and whose database shows a flood of near-identical parameterised selects. Fixes, in order of preference: project to a DTO with a single <code>Select</code> so EF builds one join; use <code>Include</code> / <code>ThenInclude</code> when you genuinely need the entities; and if a multi-collection <code>Include</code> causes cartesian explosion, switch to <code>AsSplitQuery()</code>. I also keep lazy loading proxies off by default so this can&rsquo;t happen silently.&rdquo;</p>
-
-        <p>Naming <code>AsSplitQuery()</code> and the cartesian-explosion trade-off (multiple round trips vs one bloated result set) is usually what tips this answer from &ldquo;knows the term&rdquo; to &ldquo;has fixed this&rdquo;.</p>
-
-        <h2>3. IQueryable vs IEnumerable</h2>
-
-        <p><strong>Student answer:</strong> &ldquo;<code>IQueryable</code> builds an expression tree and runs on the database; <code>IEnumerable</code> runs in memory with delegates.&rdquo;</p>
-
-        <p><strong>Engineer answer:</strong> &ldquo;The classic anti-pattern here is a method that returns <code>IEnumerable&lt;T&gt;</code> from a repository. The moment you return <code>IEnumerable</code>, or call <code>.ToList()</code> / <code>.AsEnumerable()</code> too early, every filter after that point runs in application memory &mdash; so <code>repo.GetAll().Where(x =&gt; x.IsActive)</code> pulls the entire table across the wire and filters it in C#. I&rsquo;ve traced a memory spike to exactly that: a helper returned <code>IEnumerable</code>, a caller added a <code>.Where</code>, and a table that was fine at 10,000 rows became a problem at two million. Keep the query as <code>IQueryable</code> until the last responsible moment, then materialise once. And be aware some LINQ operators don&rsquo;t translate &mdash; EF Core will either throw or, in older versions, silently switch to client evaluation.&rdquo;</p>
-
-        <h2>The pattern across all three</h2>
-
-        <p>Each answer follows the same shape the strong candidates use for every topic: state the definition briefly, name the real cost, attach a production scenario, then give the rule you now follow. Notice what the engineer answers have that the student answers don&rsquo;t &mdash; a symptom you could actually observe on a dashboard, and a decision.</p>
-
-        <h2>Follow-ups worth rehearsing</h2>
-
-        <ul>
-          <li><strong>&ldquo;How do you find N+1 in an existing app?&rdquo;</strong> Log generated SQL in development, watch query counts per request, or use an interceptor / MiniProfiler. In production: correlate endpoint latency with row count.</li>
-          <li><strong>&ldquo;When is <code>Include</code> worse than a projection?&rdquo;</strong> When you only need three columns of the child but <code>Include</code> hydrates the whole entity, and when multiple <code>Include</code>s multiply rows together.</li>
-          <li><strong>&ldquo;Why not one giant DbContext for the whole request?&rdquo;</strong> DbContext isn&rsquo;t thread-safe, the change tracker grows without bound on long-lived contexts, and stale tracked entities cause confusing bugs. Scoped-per-request, short-lived.</li>
-          <li><strong>&ldquo;Bulk update of 100,000 rows?&rdquo;</strong> Not a <code>foreach</code> with <code>SaveChanges</code>. <code>ExecuteUpdate</code> / <code>ExecuteDelete</code> (EF Core 7+), or drop to raw SQL / a bulk library.</li>
-        </ul>
-
-        <div class="post-note">
-          <p>This is the format I use for every .NET interview topic: <strong>definition &rarr; cost &rarr; real scenario &rarr; decision</strong>. The complete set &mdash; EF Core, async, ASP.NET Core internals, CLR and GC, system design &mdash; is an A4-printable prep system called <a href="https://yaman95.gumroad.com/l/dotnet-job-interview-os" target="_blank" rel="noreferrer"><strong>.NET Job Interview OS</strong></a>, with weak-versus-strong answers laid out side by side.</p>
-        </div>
-
-        <h2>The takeaway</h2>
-
-        <p>EF Core interview questions are a proxy for one skill: knowing what SQL your LINQ becomes, and noticing when it becomes the wrong SQL. If your answers stay at the level of &ldquo;<code>Include</code> fixes N+1&rdquo; you sound like someone who read the docs. If they include a dashboard symptom and a rule, you sound like someone who has paid for the lesson.</p>
-      </div>
-
-      <footer class="post-end">
-        <p>Written by Ayman Atif &mdash; freelance .NET and Python software engineer, working remotely with clients worldwide.</p>
-        <a class="button button-primary" href="../../index.html#contact">Start a conversation <span aria-hidden="true">&#8599;</span></a>
-      </footer>
-    </article>
-  </main>
-
-  <footer class="site-footer">
-    <div class="container site-footer-inner">
-      <div class="site-footer-brand"><strong>Ayman Atif</strong><p>Freelance .NET and Python software engineer building reliable business software for remote clients worldwide.</p></div>
-      <nav class="site-footer-nav" aria-label="Footer navigation">
-        <a href="../../index.html">Home</a><a href="../../services/index.html">Services</a><a href="../../index.html#work">Selected work</a><a href="../index.html">Blog</a><a href="mailto:a95yman@gmail.com">Email</a><a href="https://www.linkedin.com/in/a95yman/" target="_blank" rel="me noreferrer">LinkedIn</a>
-      </nav>
-      <div class="site-footer-bottom"><span>Working remotely with clients worldwide</span><span>© <span class="current-year">2026</span> Ayman Atif</span></div>
-    </div>
-  </footer>
-
-  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js" defer></script>
-  <script src="../../assets/js/script.js" defer></script>
+<section class="post-deep-dive"><h2>Start with the SQL, not the LINQ</h2><p>When an EF Core endpoint gets slow, I want to know what SQL actually reached the database. LINQ is a convenient way to express a query; it is not evidence that the generated query is efficient. Logging generated SQL and checking query count often makes an N+1 problem obvious within minutes.</p><pre><code>var orders = await db.Orders
+    .AsNoTracking()
+    .Where(o =&gt; o.Status == OrderStatus.Open)
+    .Select(o =&gt; new OrderRow(
+        o.Id,
+        o.Customer.Name,
+        o.Total))
+    .ToListAsync();</code></pre><p>For a read-only screen, projection often gives me exactly what the UI needs without materializing a large tracked entity graph. That reduces transferred columns, tracking overhead and accidental lazy-loading surprises.</p><h2>IQueryable is a promise, not data</h2><p>An <code>IQueryable&lt;T&gt;</code> is still a query description. Operations added before materialization can be translated into SQL. Once <code>ToList()</code> or another materializer runs, later filtering happens in memory. That boundary is important enough that I try to keep it visible in repository and service code.</p><h2>Quick EF Core review checklist</h2><ul><li>How many SQL statements does one request execute?</li><li>Are read-only queries using tracking unnecessarily?</li><li>Are we loading entire entities when a projection would do?</li><li>Did materialization happen before filtering, sorting or pagination?</li><li>Are related entities loaded deliberately rather than accidentally?</li><li>Does the database have an index that matches the real filter and sort pattern?</li></ul></section><div class="post-note">
+<p>This is the format I use for every .NET interview topic: <strong>definition → cost → real scenario → decision</strong>. The complete set — EF Core, async, ASP.NET Core internals, CLR and GC, system design — is an A4-printable prep system called <a href="https://yaman95.gumroad.com/l/dotnet-job-interview-os" rel="noreferrer" target="_blank"><strong>.NET Job Interview OS</strong></a>, with weak-versus-strong answers laid out side by side.</p>
+</div>
+<h2>The takeaway</h2>
+<p>EF Core interview questions are a proxy for one skill: knowing what SQL your LINQ becomes, and noticing when it becomes the wrong SQL. If your answers stay at the level of “<code>Include</code> fixes N+1” you sound like someone who read the docs. If they include a dashboard symptom and a rule, you sound like someone who has paid for the lesson.</p>
+</div>
+<footer class="post-end">
+<p>Written by Ayman Atif — freelance .NET and Python software engineer, working remotely with clients worldwide.</p>
+<a class="button button-primary" href="../../index.html#contact">Start a conversation <span aria-hidden="true">↗</span></a>
+</footer>
+</article>
+</main>
+<footer class="site-footer">
+<div class="container site-footer-inner">
+<div class="site-footer-brand"><strong>Ayman Atif</strong><p>Freelance .NET and Python software engineer building reliable business software for remote clients worldwide.</p></div>
+<nav aria-label="Footer navigation" class="site-footer-nav">
+<a href="../../index.html">Home</a><a href="../../services/index.html">Services</a><a href="../../index.html#work">Selected work</a><a href="../index.html">Blog</a><a href="mailto:a95yman@gmail.com">Email</a><a href="https://www.linkedin.com/in/a95yman/" rel="me noreferrer" target="_blank">LinkedIn</a>
+</nav>
+<div class="site-footer-bottom"><span>Working remotely with clients worldwide</span><span>© <span class="current-year">2026</span> Ayman Atif</span></div>
+</div>
+</footer>
+<script defer="" src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script defer="" src="../../assets/js/script.js"></script>
 </body>
 </html>

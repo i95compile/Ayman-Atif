@@ -1,38 +1,35 @@
-<!doctype html>
+<!DOCTYPE html>
+
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="InvoiceFlow is an open-source Python toolkit that converts batches of PDF invoices into clean, structured, multi-sheet Excel workbooks &mdash; with multiprocessing, pluggable extraction and an OCR-ready parser layer." />
-  <meta name="author" content="Ayman Atif" />
-  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
-  <meta name="color-scheme" content="dark light" />
-  <meta name="theme-color" content="#0b0d10" />
-  <meta name="keywords" content="convert PDF invoices to Excel, PDF invoice to Excel Python, extract data from PDF invoices to spreadsheet, bulk invoice data extraction, open source invoice parser" />
-  <link rel="canonical" href="https://ayman-atif.vercel.app/invoiceflow/" />
-
-  <meta property="og:type" content="website" />
-  <meta property="og:locale" content="en_US" />
-  <meta property="og:site_name" content="Ayman Atif Portfolio" />
-  <meta property="og:url" content="https://ayman-atif.vercel.app/invoiceflow/" />
-  <meta property="og:title" content="InvoiceFlow &mdash; Convert PDF Invoices to Excel (Open Source, Python)" />
-  <meta property="og:description" content="An open-source Python toolkit that turns batches of PDF invoices into clean, structured, multi-sheet Excel workbooks." />
-  <meta property="og:image" content="https://ayman-atif.vercel.app/assets/img/ayman-atif.jpg" />
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="InvoiceFlow &mdash; Convert PDF Invoices to Excel (Open Source, Python)" />
-  <meta name="twitter:description" content="An open-source Python toolkit that turns batches of PDF invoices into clean, structured, multi-sheet Excel workbooks." />
-  <meta name="twitter:image" content="https://ayman-atif.vercel.app/assets/img/ayman-atif.jpg" />
-
-  <title>InvoiceFlow &mdash; Convert PDF Invoices to Excel (Open Source, Python)</title>
-
-  <link rel="icon" href="../assets/img/favicon.svg" type="image/svg+xml" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="../assets/css/styles.css" />
-  <link rel="stylesheet" href="../assets/css/blog.css" />
-
-  <script type="application/ld+json">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="InvoiceFlow is an open-source Python toolkit that converts batches of PDF invoices into clean, structured, multi-sheet Excel workbooks — with multiprocessing, pluggable extraction and an OCR-ready parser layer." name="description"/>
+<meta content="Ayman Atif" name="author"/>
+<meta content="index, follow, max-image-preview:large, max-snippet:-1" name="robots"/>
+<meta content="dark light" name="color-scheme"/>
+<meta content="#0b0d10" name="theme-color"/>
+<meta content="convert PDF invoices to Excel, PDF invoice to Excel Python, extract data from PDF invoices to spreadsheet, bulk invoice data extraction, open source invoice parser" name="keywords"/>
+<link href="https://ayman-atif.vercel.app/invoiceflow/" rel="canonical"/>
+<meta content="website" property="og:type"/>
+<meta content="en_US" property="og:locale"/>
+<meta content="Ayman Atif Portfolio" property="og:site_name"/>
+<meta content="https://ayman-atif.vercel.app/invoiceflow/" property="og:url"/>
+<meta content="InvoiceFlow — Convert PDF Invoices to Excel (Open Source, Python)" property="og:title"/>
+<meta content="An open-source Python toolkit that turns batches of PDF invoices into clean, structured, multi-sheet Excel workbooks." property="og:description"/>
+<meta content="https://ayman-atif.vercel.app/assets/img/ayman-atif.jpg" property="og:image"/>
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="InvoiceFlow — Convert PDF Invoices to Excel (Open Source, Python)" name="twitter:title"/>
+<meta content="An open-source Python toolkit that turns batches of PDF invoices into clean, structured, multi-sheet Excel workbooks." name="twitter:description"/>
+<meta content="https://ayman-atif.vercel.app/assets/img/ayman-atif.jpg" name="twitter:image"/>
+<title>InvoiceFlow — Convert PDF Invoices to Excel (Open Source, Python)</title>
+<link href="../assets/img/favicon.svg" rel="icon" type="image/svg+xml"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Manrope:wght@500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="../assets/css/styles.css" rel="stylesheet"/>
+<link href="../assets/css/blog.css" rel="stylesheet"/>
+<script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@graph": [
@@ -88,159 +85,122 @@
   </script>
 </head>
 <body>
-  <a class="skip-link" href="#main-content">Skip to main content</a>
-  <div class="noise" aria-hidden="true"></div>
-  <div class="cursor-glow" aria-hidden="true"></div>
-
-  <header class="site-header">
-    <a class="brand" href="../index.html" aria-label="Ayman Atif, home">
-      <span class="brand-mark" aria-hidden="true">AA</span>
-      <span class="brand-copy">Ayman Atif</span>
-    </a>
-    <nav class="nav" aria-label="Primary navigation">
-      <a href="../index.html">Home</a>
-      <a href="../services/index.html">Services</a>
-      <a href="../blog/index.html">Blog</a>
-      <a class="nav-cta" href="mailto:a95yman@gmail.com?subject=Software%20project%20inquiry">Start a conversation</a>
-    </nav>
-    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-menu" aria-label="Open menu">
-      <span></span><span></span>
-    </button>
-  </header>
-
-  <nav class="mobile-menu" id="mobile-menu" aria-label="Mobile navigation" aria-hidden="true">
-    <a href="../index.html">Home</a>
-    <a href="../services/index.html">Services</a>
-    <a href="../blog/index.html">Blog</a>
-    <a href="mailto:a95yman@gmail.com?subject=Software%20project%20inquiry">Contact</a>
-  </nav>
-
-  <main id="main-content" class="section-dark blog-page">
-    <article class="post">
-      <nav class="post-breadcrumb" aria-label="Breadcrumb">
-        <a href="../index.html">Home</a><span aria-hidden="true">/</span>
-        <span>InvoiceFlow</span>
-      </nav>
-
-      <header class="post-header">
-        <h1 class="post-title">InvoiceFlow: convert PDF invoices to Excel, at batch scale</h1>
-        <p class="post-meta">
-          <span>Open-source Python toolkit</span>
-          <span class="dot" aria-hidden="true"></span>
-          <span>Version 0.1.0</span>
-          <span class="dot" aria-hidden="true"></span>
-          <span>Python 3.10+</span>
-        </p>
-      </header>
-
-      <p class="post-lede">InvoiceFlow takes a folder of PDF invoices and produces a clean, structured, multi-sheet Excel workbook &mdash; invoice headers on one sheet, line items on another &mdash; using parallel extraction and a parser layer built to swap in OCR later.</p>
-
-      <div class="post-body">
-        <p style="margin-bottom:34px;">
-          <a class="button button-primary" href="https://github.com/i95compile/PDF2Excel-Invoices" target="_blank" rel="noreferrer">View the source on GitHub <span aria-hidden="true">&#8599;</span></a>
-        </p>
-
-        <h2>The problem it solves</h2>
-
-        <p>Finance and operations teams routinely receive invoices as PDFs and need them as rows in a spreadsheet &mdash; for reconciliation, reporting, or import into another system. Doing that by hand is slow and error-prone. Most quick scripts handle one invoice layout and fall apart on the second. InvoiceFlow is built the other way around: a batch pipeline, with extraction isolated behind a strategy interface so new formats and methods slot in without rewriting the core.</p>
-
-        <h2>What it does</h2>
-
-        <ul>
-          <li><strong>Extracts structured data</strong> from PDF invoices &mdash; invoice number, date, parties, and line items.</li>
-          <li><strong>Exports multi-sheet Excel workbooks</strong> &mdash; one sheet for invoice-level fields, a separate sheet for line items, ready for pivot tables and formulas.</li>
-          <li><strong>Generates realistic demo invoices</strong> with Faker and ReportLab, so you can test the pipeline at any volume without real documents.</li>
-          <li><strong>Runs in parallel</strong> via <code>ProcessPoolExecutor</code>, with a benchmark command that reports throughput in PDFs per second.</li>
-          <li><strong>Configurable and observable</strong> &mdash; environment-based configuration, rotating file logs, and a sequential mode for debugging.</li>
-        </ul>
-
-        <h2>How it works</h2>
-
-        <p>The pipeline is a clean chain of responsibilities:</p>
-
-        <ul>
-          <li><strong>CLI layer</strong> (<code>app.py</code>) &mdash; parses arguments and routes the <code>generate</code>, <code>process</code> and <code>benchmark</code> commands.</li>
-          <li><strong>Pipeline</strong> &mdash; discovers PDFs, coordinates workers, and drives Excel generation.</li>
-          <li><strong>Parser</strong> &mdash; pulls raw text out of each PDF. This layer is deliberately thin so an OCR backend can replace it.</li>
-          <li><strong>Extractor strategy</strong> &mdash; maps raw text to an <code>InvoiceData</code> model. Implement a <code>BaseExtractor</code> subclass to support a new invoice layout or extraction method without touching anything else.</li>
-          <li><strong>Worker</strong> &mdash; runs extraction sequentially or across processes.</li>
-          <li><strong>Exporter</strong> &mdash; converts the collected <code>InvoiceData</code> into a formatted, multi-sheet workbook.</li>
-        </ul>
-
-        <h2>Install</h2>
-
-        <p>Requires <strong>Python 3.10 or newer</strong>.</p>
-
-        <pre><code>git clone https://github.com/i95compile/PDF2Excel-Invoices.git
+<a class="skip-link" href="#main-content">Skip to main content</a>
+<div aria-hidden="true" class="noise"></div>
+<div aria-hidden="true" class="cursor-glow"></div>
+<header class="site-header">
+<a aria-label="Ayman Atif, home" class="brand" href="../index.html">
+<span aria-hidden="true" class="brand-mark">AA</span>
+<span class="brand-copy">Ayman Atif</span>
+</a>
+<nav aria-label="Primary navigation" class="nav">
+<a href="../index.html">Home</a><a href="../about/index.html">About</a>
+<a href="../services/index.html">Services</a>
+<a href="../blog/index.html">Blog</a><a href="../certifications/index.html">Certifications</a>
+<a class="nav-cta" href="mailto:a95yman@gmail.com?subject=Software%20project%20inquiry">Start a conversation</a>
+</nav>
+<button aria-controls="mobile-menu" aria-expanded="false" aria-label="Open menu" class="menu-toggle" type="button">
+<span></span><span></span>
+</button>
+</header>
+<nav aria-hidden="true" aria-label="Mobile navigation" class="mobile-menu" id="mobile-menu">
+<a href="../index.html">Home</a><a href="../about/index.html">About</a>
+<a href="../services/index.html">Services</a>
+<a href="../blog/index.html">Blog</a><a href="../certifications/index.html">Certifications</a>
+<a href="mailto:a95yman@gmail.com?subject=Software%20project%20inquiry">Contact</a>
+</nav>
+<main class="section-dark blog-page" id="main-content">
+<article class="post">
+<nav aria-label="Breadcrumb" class="post-breadcrumb">
+<a href="../index.html">Home</a><span aria-hidden="true">/</span>
+<span>InvoiceFlow</span>
+</nav>
+<header class="post-header">
+<h1 class="post-title">InvoiceFlow: convert PDF invoices to Excel, at batch scale</h1>
+<p class="post-meta">
+<span>Open-source Python toolkit</span>
+<span aria-hidden="true" class="dot"></span>
+<span>Version 0.1.0</span>
+<span aria-hidden="true" class="dot"></span>
+<span>Python 3.10+</span>
+</p>
+</header>
+<p class="post-lede">InvoiceFlow takes a folder of PDF invoices and produces a clean, structured, multi-sheet Excel workbook — invoice headers on one sheet, line items on another — using parallel extraction and a parser layer built to swap in OCR later.</p>
+<div class="post-body">
+<p style="margin-bottom:34px;">
+<a class="button button-primary" href="https://github.com/i95compile/PDF2Excel-Invoices" rel="noreferrer" target="_blank">View the source on GitHub <span aria-hidden="true">↗</span></a>
+</p>
+<h2>The problem it solves</h2>
+<p>Finance and operations teams routinely receive invoices as PDFs and need them as rows in a spreadsheet — for reconciliation, reporting, or import into another system. Doing that by hand is slow and error-prone. Most quick scripts handle one invoice layout and fall apart on the second. InvoiceFlow is built the other way around: a batch pipeline, with extraction isolated behind a strategy interface so new formats and methods slot in without rewriting the core.</p>
+<h2>What it does</h2>
+<ul>
+<li><strong>Extracts structured data</strong> from PDF invoices — invoice number, date, parties, and line items.</li>
+<li><strong>Exports multi-sheet Excel workbooks</strong> — one sheet for invoice-level fields, a separate sheet for line items, ready for pivot tables and formulas.</li>
+<li><strong>Generates realistic demo invoices</strong> with Faker and ReportLab, so you can test the pipeline at any volume without real documents.</li>
+<li><strong>Runs in parallel</strong> via <code>ProcessPoolExecutor</code>, with a benchmark command that reports throughput in PDFs per second.</li>
+<li><strong>Configurable and observable</strong> — environment-based configuration, rotating file logs, and a sequential mode for debugging.</li>
+</ul>
+<h2>How it works</h2>
+<p>The pipeline is a clean chain of responsibilities:</p>
+<ul>
+<li><strong>CLI layer</strong> (<code>app.py</code>) — parses arguments and routes the <code>generate</code>, <code>process</code> and <code>benchmark</code> commands.</li>
+<li><strong>Pipeline</strong> — discovers PDFs, coordinates workers, and drives Excel generation.</li>
+<li><strong>Parser</strong> — pulls raw text out of each PDF. This layer is deliberately thin so an OCR backend can replace it.</li>
+<li><strong>Extractor strategy</strong> — maps raw text to an <code>InvoiceData</code> model. Implement a <code>BaseExtractor</code> subclass to support a new invoice layout or extraction method without touching anything else.</li>
+<li><strong>Worker</strong> — runs extraction sequentially or across processes.</li>
+<li><strong>Exporter</strong> — converts the collected <code>InvoiceData</code> into a formatted, multi-sheet workbook.</li>
+</ul>
+<h2>Install</h2>
+<p>Requires <strong>Python 3.10 or newer</strong>.</p>
+<pre><code>git clone https://github.com/i95compile/PDF2Excel-Invoices.git
 cd PDF2Excel-Invoices
 python -m venv .venv
 source .venv/bin/activate        # Windows: .venv\Scripts\activate
 pip install -r requirements.txt</code></pre>
-
-        <h2>Usage</h2>
-
-        <p><strong>Generate a batch of demo invoices</strong> to work with:</p>
-        <pre><code>python app.py generate --count 500 --output invoices/</code></pre>
-
-        <p><strong>Convert a folder of PDF invoices to Excel:</strong></p>
-        <pre><code>python app.py process --input invoices --output output/result.xlsx --workers auto</code></pre>
-
-        <p>The <code>process</code> command accepts <code>--workers</code> (<code>auto</code> or an integer) and <code>--mode</code> (<code>sequential</code> or <code>multiprocessing</code>). The output workbook has a sheet for invoice-level data and a sheet for line items.</p>
-
-        <p><strong>Benchmark throughput</strong> on your machine:</p>
-        <pre><code>python app.py benchmark --input invoices --workers auto</code></pre>
-
-        <p>This reports PDFs per second, elapsed time and optional CPU usage, and writes a JSON report.</p>
-
-        <h2>Configuration</h2>
-
-        <p>Settings resolve in three tiers &mdash; a <code>.env</code> file, defaults in <code>config.py</code>, and OS environment variables. Common keys: <code>LOG_LEVEL</code>, <code>WORKERS</code>, <code>PROCESSING_MODE</code>, and the input/output directory paths.</p>
-
-        <h2>Extending it</h2>
-
-        <p>The extractor is a strategy: subclass <code>BaseExtractor</code>, implement the mapping from raw PDF text to <code>InvoiceData</code>, and register it &mdash; no pipeline changes. The parser layer is isolated for the same reason, so OCR or an AI extraction backend can be dropped in. The documented roadmap includes OCR, AI extraction, CSV/JSON output, a REST API and a GUI.</p>
-
-        <h2>Tech stack</h2>
-
-        <p>Python &middot; pdfplumber &middot; pandas &middot; openpyxl &middot; ReportLab &middot; Faker &middot; <code>ProcessPoolExecutor</code> &middot; pytest</p>
-
-        <h2>FAQ</h2>
-
-        <h3>How do I convert PDF invoices to Excel with InvoiceFlow?</h3>
-        <p>Clone the repo, install the requirements, then run <code>python app.py process --input invoices --output output/result.xlsx --workers auto</code>. It reads every PDF in the input folder, extracts structured invoice data, and writes a multi-sheet Excel workbook.</p>
-
-        <h3>Does it handle scanned or image-only invoices?</h3>
-        <p>Version 0.1.0 extracts text from digital PDFs. The parser layer is isolated so an OCR backend can be substituted without changing the pipeline; OCR and AI extraction are on the roadmap.</p>
-
-        <h3>Is InvoiceFlow free?</h3>
-        <p>Yes &mdash; it is open source and free to use. The source is on GitHub.</p>
-
-        <h3>Can it process large batches quickly?</h3>
-        <p>Yes. Extraction runs in parallel across CPU cores via <code>ProcessPoolExecutor</code>, and the <code>benchmark</code> command reports throughput in PDFs per second.</p>
-
-        <div class="post-note">
-          <p>Need this adapted to your own invoice formats, wired into an existing system, or extended with OCR for scanned documents? That is the kind of work I do. <a href="../index.html#contact">Start a conversation</a> &mdash; or read more about <a href="../services/index.html">how I approach business process automation</a>.</p>
-        </div>
-      </div>
-
-      <footer class="post-end">
-        <p>Built and maintained by Ayman Atif &mdash; freelance .NET and Python software engineer, working remotely with clients worldwide.</p>
-        <a class="button button-primary" href="https://github.com/i95compile/PDF2Excel-Invoices" target="_blank" rel="noreferrer">Open on GitHub <span aria-hidden="true">&#8599;</span></a>
-      </footer>
-    </article>
-  </main>
-
-  <footer class="site-footer">
-    <div class="container site-footer-inner">
-      <div class="site-footer-brand"><strong>Ayman Atif</strong><p>Freelance .NET and Python software engineer building reliable business software for remote clients worldwide.</p></div>
-      <nav class="site-footer-nav" aria-label="Footer navigation">
-        <a href="../index.html">Home</a><a href="../services/index.html">Services</a><a href="../index.html#work">Selected work</a><a href="../blog/index.html">Blog</a><a href="mailto:a95yman@gmail.com">Email</a><a href="https://www.linkedin.com/in/a95yman/" target="_blank" rel="me noreferrer">LinkedIn</a>
-      </nav>
-      <div class="site-footer-bottom"><span>Working remotely with clients worldwide</span><span>© <span class="current-year">2026</span> Ayman Atif</span></div>
-    </div>
-  </footer>
-
-  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js" defer></script>
-  <script src="../assets/js/script.js" defer></script>
+<h2>Usage</h2>
+<p><strong>Generate a batch of demo invoices</strong> to work with:</p>
+<pre><code>python app.py generate --count 500 --output invoices/</code></pre>
+<p><strong>Convert a folder of PDF invoices to Excel:</strong></p>
+<pre><code>python app.py process --input invoices --output output/result.xlsx --workers auto</code></pre>
+<p>The <code>process</code> command accepts <code>--workers</code> (<code>auto</code> or an integer) and <code>--mode</code> (<code>sequential</code> or <code>multiprocessing</code>). The output workbook has a sheet for invoice-level data and a sheet for line items.</p>
+<p><strong>Benchmark throughput</strong> on your machine:</p>
+<pre><code>python app.py benchmark --input invoices --workers auto</code></pre>
+<p>This reports PDFs per second, elapsed time and optional CPU usage, and writes a JSON report.</p>
+<h2>Configuration</h2>
+<p>Settings resolve in three tiers — a <code>.env</code> file, defaults in <code>config.py</code>, and OS environment variables. Common keys: <code>LOG_LEVEL</code>, <code>WORKERS</code>, <code>PROCESSING_MODE</code>, and the input/output directory paths.</p>
+<h2>Extending it</h2>
+<p>The extractor is a strategy: subclass <code>BaseExtractor</code>, implement the mapping from raw PDF text to <code>InvoiceData</code>, and register it — no pipeline changes. The parser layer is isolated for the same reason, so OCR or an AI extraction backend can be dropped in. The documented roadmap includes OCR, AI extraction, CSV/JSON output, a REST API and a GUI.</p>
+<h2>Tech stack</h2>
+<p>Python · pdfplumber · pandas · openpyxl · ReportLab · Faker · <code>ProcessPoolExecutor</code> · pytest</p>
+<h2>FAQ</h2>
+<h3>How do I convert PDF invoices to Excel with InvoiceFlow?</h3>
+<p>Clone the repo, install the requirements, then run <code>python app.py process --input invoices --output output/result.xlsx --workers auto</code>. It reads every PDF in the input folder, extracts structured invoice data, and writes a multi-sheet Excel workbook.</p>
+<h3>Does it handle scanned or image-only invoices?</h3>
+<p>Version 0.1.0 extracts text from digital PDFs. The parser layer is isolated so an OCR backend can be substituted without changing the pipeline; OCR and AI extraction are on the roadmap.</p>
+<h3>Is InvoiceFlow free?</h3>
+<p>Yes — it is open source and free to use. The source is on GitHub.</p>
+<h3>Can it process large batches quickly?</h3>
+<p>Yes. Extraction runs in parallel across CPU cores via <code>ProcessPoolExecutor</code>, and the <code>benchmark</code> command reports throughput in PDFs per second.</p>
+<div class="post-note">
+<p>Need this adapted to your own invoice formats, wired into an existing system, or extended with OCR for scanned documents? That is the kind of work I do. <a href="../index.html#contact">Start a conversation</a> — or read more about <a href="../services/index.html">how I approach business process automation</a>.</p>
+</div>
+</div>
+<footer class="post-end">
+<p>Built and maintained by Ayman Atif — freelance .NET and Python software engineer, working remotely with clients worldwide.</p>
+<a class="button button-primary" href="https://github.com/i95compile/PDF2Excel-Invoices" rel="noreferrer" target="_blank">Open on GitHub <span aria-hidden="true">↗</span></a>
+</footer>
+</article>
+</main>
+<footer class="site-footer">
+<div class="container site-footer-inner">
+<div class="site-footer-brand"><strong>Ayman Atif</strong><p>Freelance .NET and Python software engineer building reliable business software for remote clients worldwide.</p></div>
+<nav aria-label="Footer navigation" class="site-footer-nav">
+<a href="../index.html">Home</a><a href="../services/index.html">Services</a><a href="../index.html#work">Selected work</a><a href="../blog/index.html">Blog</a><a href="mailto:a95yman@gmail.com">Email</a><a href="https://www.linkedin.com/in/a95yman/" rel="me noreferrer" target="_blank">LinkedIn</a>
+</nav>
+<div class="site-footer-bottom"><span>Working remotely with clients worldwide</span><span>© <span class="current-year">2026</span> Ayman Atif</span></div>
+</div>
+</footer>
+<script defer="" src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script defer="" src="../assets/js/script.js"></script>
 </body>
 </html>
