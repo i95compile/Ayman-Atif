@@ -696,6 +696,11 @@ button { font: inherit; }
   text-align: left;
 }
 .footer-links { display: flex; gap: 17px; }
+.profile-links { justify-content: center; margin: 32px 0 0; }
+.contact-footer > .site-footer-nav {
+  grid-column: 1 / -1;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+}
 .footer-links a { color: #9299a1; }
 
 /* Shared footer used by every standalone page. */

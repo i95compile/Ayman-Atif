@@ -9,7 +9,6 @@
 <meta content="index, follow, max-image-preview:large, max-snippet:-1" name="robots"/>
 <meta content="dark light" name="color-scheme"/>
 <meta content="#0b0d10" name="theme-color"/>
-<meta content="caching interview question, cache invalidation, .NET garbage collection generations interview, gen 0 gen 1 gen 2, large object heap, system design interview .NET" name="keywords"/>
 <link href="https://ayman-atif.vercel.app/blog/caching-garbage-collection-system-design-interview-answers/" rel="canonical"/>
 <meta content="article" property="og:type"/>
 <meta content="en_US" property="og:locale"/>
@@ -17,9 +16,9 @@
 <meta content="https://ayman-atif.vercel.app/blog/caching-garbage-collection-system-design-interview-answers/" property="og:url"/>
 <meta content="Caching, Garbage Collection, and System Design: Three .NET Interview Answers" property="og:title"/>
 <meta content="Three questions that separate seniors from mid-levels, and the trade-off answer for each." property="og:description"/>
-<meta content="https://ayman-atif.vercel.app/assets/img/ayman-atif.jpg" property="og:image"/>
+<meta content="https://ayman-atif.vercel.app/assets/img/ayman-atif-software-engineer.webp" property="og:image"/>
 <meta content="2026-09-06" property="article:published_time"/>
-<meta content="2026-09-18" property="article:modified_time"/>
+<meta content="2026-09-26" property="article:modified_time"/>
 <meta content="Ayman Atif" property="article:author"/>
 <meta content="Software Engineering" property="article:section"/>
 <meta content=".NET" property="article:tag"/>
@@ -28,7 +27,7 @@
 <meta content="summary_large_image" name="twitter:card"/>
 <meta content="Caching, Garbage Collection, and System Design: Three .NET Interview Answers" name="twitter:title"/>
 <meta content="Three questions that separate seniors from mid-levels, and the trade-off answer for each." name="twitter:description"/>
-<meta content="https://ayman-atif.vercel.app/assets/img/ayman-atif.jpg" name="twitter:image"/>
+<meta content="https://ayman-atif.vercel.app/assets/img/ayman-atif-software-engineer.webp" name="twitter:image"/>
 <title>Caching, Garbage Collection, and System Design: Three .NET Interview Answers</title>
 <link href="../../assets/img/favicon.svg" rel="icon" type="image/svg+xml"/>
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
@@ -36,21 +35,21 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Manrope:wght@500;600;700;800&amp;display=swap" rel="stylesheet"/>
 <link href="../../assets/css/styles.css" rel="stylesheet"/>
 <link href="../../assets/css/blog.css" rel="stylesheet"/>
-<script type="application/ld+json">
-{
+<script type="application/ld+json">{
   "@context": "https://schema.org",
   "@type": "BlogPosting",
   "@id": "https://ayman-atif.vercel.app/blog/caching-garbage-collection-system-design-interview-answers/#article",
   "headline": "Caching, Garbage Collection, and System Design: Three .NET Interview Answers",
   "description": "Three .NET interview questions that separate seniors from mid-levels: caching and invalidation, garbage collection generations, and a basic system-design walkthrough. The trade-off answer for each.",
-  "image": "https://ayman-atif.vercel.app/assets/img/ayman-atif.jpg",
+  "image": "https://ayman-atif.vercel.app/assets/img/ayman-atif-software-engineer.webp",
   "datePublished": "2026-09-06",
-  "dateModified": "2026-09-18",
+  "dateModified": "2026-09-26",
   "wordCount": 1109,
   "inLanguage": "en",
   "url": "https://ayman-atif.vercel.app/blog/caching-garbage-collection-system-design-interview-answers/",
   "author": {
     "@type": "Person",
+    "@id": "https://ayman-atif.vercel.app/#ayman-atif",
     "name": "Ayman Atif",
     "url": "https://ayman-atif.vercel.app/",
     "jobTitle": "Freelance Software Engineer",
@@ -63,7 +62,8 @@
   "publisher": {
     "@type": "Person",
     "name": "Ayman Atif",
-    "url": "https://ayman-atif.vercel.app/"
+    "url": "https://ayman-atif.vercel.app/",
+    "@id": "https://ayman-atif.vercel.app/#ayman-atif"
   },
   "mainEntityOfPage": {
     "@type": "WebPage",
@@ -81,45 +81,40 @@
     "system design interview"
   ],
   "articleSection": "Software Engineering"
-}
-</script>
-<script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    "itemListElement": [
-      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://ayman-atif.vercel.app/" },
-      { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://ayman-atif.vercel.app/blog/" },
-      { "@type": "ListItem", "position": 3, "name": "Caching, Garbage Collection, and System Design: Three .NET Interview Answers", "item": "https://ayman-atif.vercel.app/blog/caching-garbage-collection-system-design-interview-answers/" }
-    ]
-  }
-  </script>
+}</script>
+<script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://ayman-atif.vercel.app/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Blog",
+      "item": "https://ayman-atif.vercel.app/blog/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "Caching, Garbage Collection, and System Design: Three .NET Interview Answers",
+      "item": "https://ayman-atif.vercel.app/blog/caching-garbage-collection-system-design-interview-answers/"
+    }
+  ]
+}</script>
+<meta name="twitter:image:alt" content="Ayman Atif, software developer">
+<link rel="stylesheet" href="../../assets/css/seo-pages.css">
 </head>
 <body>
 <a class="skip-link" href="#main-content">Skip to main content</a>
 <div aria-hidden="true" class="noise"></div>
 <div aria-hidden="true" class="cursor-glow"></div>
-<header class="site-header">
-<a aria-label="Ayman Atif, home" class="brand" href="../../index.html">
-<span aria-hidden="true" class="brand-mark">AA</span>
-<span class="brand-copy">Ayman Atif</span>
-</a>
-<nav aria-label="Primary navigation" class="nav">
-<a href="../../index.html">Home</a><a href="../../about/index.html">About</a>
-<a href="../../services/index.html">Services</a>
-<a aria-current="page" href="../index.html">Blog</a><a href="../../certifications/index.html">Certifications</a>
-<a class="nav-cta" href="mailto:a95yman@gmail.com?subject=Software%20project%20inquiry">Start a conversation</a>
-</nav>
-<button aria-controls="mobile-menu" aria-expanded="false" aria-label="Open menu" class="menu-toggle" type="button">
-<span></span><span></span>
-</button>
-</header>
-<nav aria-hidden="true" aria-label="Mobile navigation" class="mobile-menu" id="mobile-menu">
-<a href="../../index.html">Home</a><a href="../../about/index.html">About</a>
-<a href="../../services/index.html">Services</a>
-<a aria-current="page" href="../index.html">Blog</a><a href="../../certifications/index.html">Certifications</a>
-<a href="mailto:a95yman@gmail.com?subject=Software%20project%20inquiry">Contact</a>
-</nav>
+<header class="site-header"><a aria-label="Ayman Atif, home" class="brand" href="../../index.html"><span aria-hidden="true" class="brand-mark">AA</span><span class="brand-copy">Ayman Atif</span></a><nav aria-label="Primary navigation" class="nav"><a href="../../index.html">Home</a><a href="../../services/index.html">Services</a><a href="../../work/index.html">Work</a><a href="../../about/index.html">About</a><a aria-current="page" href="../index.html">Blog</a><a class="nav-cta" href="../../contact/index.html">Contact</a></nav><button aria-controls="mobile-menu" aria-expanded="false" aria-label="Open menu" class="menu-toggle" type="button"><span></span><span></span></button></header>
+<nav aria-hidden="true" aria-label="Mobile navigation" class="mobile-menu" id="mobile-menu"><a href="../../index.html">Home</a><a href="../../services/index.html">Services</a><a href="../../work/index.html">Work</a><a href="../../about/index.html">About</a><a aria-current="page" href="../index.html">Blog</a><a href="../../contact/index.html">Contact</a></nav>
 <main class="section-dark blog-page" id="main-content">
 <article class="post">
 <nav aria-label="Breadcrumb" class="post-breadcrumb">
@@ -169,21 +164,14 @@
 <h2>The takeaway</h2>
 <p>Caching, GC, and system design questions all reward the same thing: showing you’ve seen the failure, not just read the definition. Rehearse each answer as definition → cost → scenario → decision, and the topic almost stops mattering.</p>
 </div>
+<aside class="author-box"><strong>About the author</strong><br/>Ayman Atif is a .NET and Python software engineer who has been building business software since 2014. <a href="../../about/index.html">Learn about Ayman</a> or explore <a href="../../services/dotnet-development/index.html">.NET development services</a> and <a href="../../services/aspnet-core-api-development/index.html">ASP.NET Core API development</a>.<p>For project work, see <a href="../../hire-dotnet-developer/index.html">working with me as a freelance .NET developer</a> or <a href="../../contact/index.html">contact me about your application</a>.</p></aside>
 <footer class="post-end">
 <p>Written by Ayman Atif — freelance .NET and Python software engineer, working remotely with clients worldwide.</p>
-<a class="button button-primary" href="../../index.html#contact">Start a conversation <span aria-hidden="true">↗</span></a>
+<a class="button button-primary" href="../../contact/index.html">Start a conversation <span aria-hidden="true">↗</span></a>
 </footer>
 </article>
 </main>
-<footer class="site-footer">
-<div class="container site-footer-inner">
-<div class="site-footer-brand"><strong>Ayman Atif</strong><p>Freelance .NET and Python software engineer building reliable business software for remote clients worldwide.</p></div>
-<nav aria-label="Footer navigation" class="site-footer-nav">
-<a href="../../index.html">Home</a><a href="../../services/index.html">Services</a><a href="../../index.html#work">Selected work</a><a href="../index.html">Blog</a><a href="mailto:a95yman@gmail.com">Email</a><a href="https://www.linkedin.com/in/a95yman/" rel="me noreferrer" target="_blank">LinkedIn</a>
-</nav>
-<div class="site-footer-bottom"><span>Working remotely with clients worldwide</span><span>© <span class="current-year">2026</span> Ayman Atif</span></div>
-</div>
-</footer>
+<footer class="site-footer"><div class="container site-footer-inner"><div class="site-footer-brand"><strong>Ayman Atif</strong><p>.NET and Python software developer building business applications, APIs and automation.</p></div><nav aria-label="Footer navigation" class="site-footer-nav"><a href="../../services/index.html">Services</a><a href="../../work/index.html">Work</a><a href="../../experience/index.html">Experience</a><a href="../../skills/index.html">Skills</a><a href="../../about/index.html">About</a><a href="../../certifications/index.html">Certifications</a><a href="../index.html">Blog</a><a href="../../contact/index.html">Contact</a><a href="../../hire-dotnet-developer/index.html">Hire a .NET developer</a><a href="https://www.linkedin.com/in/a95yman/" rel="me noreferrer" target="_blank">LinkedIn</a></nav><div class="site-footer-bottom"><span>Working remotely</span><span>© <span class="current-year">2026</span> Ayman Atif</span></div></div></footer>
 <script defer="" src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
 <script defer="" src="../../assets/js/script.js"></script>
 </body>

@@ -107,18 +107,8 @@ function initMotion() {
   const { gsap, ScrollTrigger } = window;
   gsap.registerPlugin(ScrollTrigger);
 
-  const intro = gsap.timeline({ defaults: { ease: 'power3.out' } });
-  intro
-    .from('.site-header', { opacity: 0, duration: .65 })
-    .from('.eyebrow', { y: 16, opacity: 0, duration: .5 }, '-=.2')
-    .from('.title-line > span', { yPercent: 110, duration: .9, stagger: .1 }, '-=.15')
-    .from('.hero-lead', { y: 22, opacity: 0, duration: .65 }, '-=.5')
-    .from('.hero-actions', { y: 18, opacity: 0, duration: .55 }, '-=.38')
-    .from('.hero-credibility', { y: 18, opacity: 0, duration: .6 }, '-=.38')
-    .from('.hero-links', { y: 12, opacity: 0, duration: .45 }, '-=.3')
-    .from('.portrait-frame', { clipPath: 'inset(18% 16% 18% 16% round 110px 20px)', scale: .94, opacity: 0, duration: 1.05 }, '-=1')
-    .from('.portrait-frame img', { scale: 1.1, duration: 1.2 }, '-=1.05')
-    .from('.portrait-card', { y: 25, opacity: 0, stagger: .12, duration: .45 }, '-=.5');
+  // Keep the header and hero visible from first paint. A deferred entrance
+  // timeline would hide already-rendered content before revealing it again.
 
   gsap.to('.portrait-frame', {
     y: -54,

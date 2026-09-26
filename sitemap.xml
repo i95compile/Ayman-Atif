@@ -1,88 +1,106 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
 
   <url>
     <loc>https://ayman-atif.vercel.app/</loc>
-    <lastmod>2026-09-18</lastmod>
+    <lastmod>2026-09-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://ayman-atif.vercel.app/assets/img/ayman-atif-software-engineer.webp</image:loc>
+      <image:title>Ayman Atif, .NET and Python software engineer</image:title>
+    </image:image>
   </url>
+
+  <url><loc>https://ayman-atif.vercel.app/work/</loc><lastmod>2026-09-26</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
+  <url><loc>https://ayman-atif.vercel.app/services/dotnet-development/</loc><lastmod>2026-09-26</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://ayman-atif.vercel.app/services/aspnet-core-api-development/</loc><lastmod>2026-09-26</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://ayman-atif.vercel.app/services/python-development/</loc><lastmod>2026-09-26</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://ayman-atif.vercel.app/services/business-software-development/</loc><lastmod>2026-09-26</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://ayman-atif.vercel.app/services/workflow-automation/</loc><lastmod>2026-09-26</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://ayman-atif.vercel.app/services/legacy-software-modernization/</loc><lastmod>2026-09-26</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
 
   <url>
     <loc>https://ayman-atif.vercel.app/about/</loc>
-    <lastmod>2026-09-18</lastmod>
+    <lastmod>2026-09-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
 
   <url>
     <loc>https://ayman-atif.vercel.app/services/</loc>
-    <lastmod>2026-09-18</lastmod>
+    <lastmod>2026-09-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
 
   <url>
     <loc>https://ayman-atif.vercel.app/certifications/</loc>
-    <lastmod>2026-09-18</lastmod>
+    <lastmod>2026-09-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
     <loc>https://ayman-atif.vercel.app/blog/</loc>
-    <lastmod>2026-09-18</lastmod>
+    <lastmod>2026-09-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
     <loc>https://ayman-atif.vercel.app/invoiceflow/</loc>
-    <lastmod>2026-09-06</lastmod>
+    <lastmod>2026-09-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
 
   <url>
     <loc>https://ayman-atif.vercel.app/blog/interview-trick-senior-net-developer/</loc>
-    <lastmod>2026-09-18</lastmod>
+    <lastmod>2026-09-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
     <loc>https://ayman-atif.vercel.app/blog/why-you-keep-failing-senior-developer-interviews/</loc>
-    <lastmod>2026-09-18</lastmod>
+    <lastmod>2026-09-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
     <loc>https://ayman-atif.vercel.app/blog/async-await-deadlocks-thread-pool-starvation/</loc>
-    <lastmod>2026-09-18</lastmod>
+    <lastmod>2026-09-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
     <loc>https://ayman-atif.vercel.app/blog/ef-core-tracking-n-plus-1-interview-questions/</loc>
-    <lastmod>2026-09-18</lastmod>
+    <lastmod>2026-09-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
     <loc>https://ayman-atif.vercel.app/blog/aspnet-core-middleware-order-di-lifetimes/</loc>
-    <lastmod>2026-09-18</lastmod>
+    <lastmod>2026-09-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
     <loc>https://ayman-atif.vercel.app/blog/caching-garbage-collection-system-design-interview-answers/</loc>
-    <lastmod>2026-09-18</lastmod>
+    <lastmod>2026-09-26</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
+  <url><loc>https://ayman-atif.vercel.app/contact/</loc><lastmod>2026-09-26</lastmod></url>
+  <url><loc>https://ayman-atif.vercel.app/experience/</loc><lastmod>2026-09-26</lastmod></url>
+  <url><loc>https://ayman-atif.vercel.app/skills/</loc><lastmod>2026-09-26</lastmod></url>
+  <url><loc>https://ayman-atif.vercel.app/hire-dotnet-developer/</loc><lastmod>2026-09-26</lastmod></url>
+  <url><loc>https://ayman-atif.vercel.app/work/business-software-platform/</loc><lastmod>2026-09-26</lastmod></url>
+  <url><loc>https://ayman-atif.vercel.app/work/invoiceflow/</loc><lastmod>2026-09-26</lastmod></url>
 </urlset>

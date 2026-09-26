@@ -9,7 +9,6 @@
 <meta content="index, follow, max-image-preview:large, max-snippet:-1" name="robots"/>
 <meta content="dark light" name="color-scheme"/>
 <meta content="#0b0d10" name="theme-color"/>
-<meta content="convert PDF invoices to Excel, PDF invoice to Excel Python, extract data from PDF invoices to spreadsheet, bulk invoice data extraction, open source invoice parser" name="keywords"/>
 <link href="https://ayman-atif.vercel.app/invoiceflow/" rel="canonical"/>
 <meta content="website" property="og:type"/>
 <meta content="en_US" property="og:locale"/>
@@ -17,11 +16,11 @@
 <meta content="https://ayman-atif.vercel.app/invoiceflow/" property="og:url"/>
 <meta content="InvoiceFlow — Convert PDF Invoices to Excel (Open Source, Python)" property="og:title"/>
 <meta content="An open-source Python toolkit that turns batches of PDF invoices into clean, structured, multi-sheet Excel workbooks." property="og:description"/>
-<meta content="https://ayman-atif.vercel.app/assets/img/ayman-atif.jpg" property="og:image"/>
+<meta content="https://ayman-atif.vercel.app/assets/img/ayman-atif-software-engineer.webp" property="og:image"/>
 <meta content="summary_large_image" name="twitter:card"/>
 <meta content="InvoiceFlow — Convert PDF Invoices to Excel (Open Source, Python)" name="twitter:title"/>
 <meta content="An open-source Python toolkit that turns batches of PDF invoices into clean, structured, multi-sheet Excel workbooks." name="twitter:description"/>
-<meta content="https://ayman-atif.vercel.app/assets/img/ayman-atif.jpg" name="twitter:image"/>
+<meta content="https://ayman-atif.vercel.app/assets/img/ayman-atif-software-engineer.webp" name="twitter:image"/>
 <title>InvoiceFlow — Convert PDF Invoices to Excel (Open Source, Python)</title>
 <link href="../assets/img/favicon.svg" rel="icon" type="image/svg+xml"/>
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
@@ -29,86 +28,95 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Manrope:wght@500;600;700;800&amp;display=swap" rel="stylesheet"/>
 <link href="../assets/css/styles.css" rel="stylesheet"/>
 <link href="../assets/css/blog.css" rel="stylesheet"/>
-<script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@graph": [
-      {
-        "@type": "SoftwareApplication",
-        "@id": "https://ayman-atif.vercel.app/invoiceflow/#software",
-        "name": "InvoiceFlow",
-        "applicationCategory": "DeveloperApplication",
-        "operatingSystem": "Windows, macOS, Linux",
-        "description": "Open-source Python toolkit that converts batches of PDF invoices into structured, multi-sheet Excel workbooks, with multiprocessing, pluggable extraction strategies and an OCR-ready parser layer.",
-        "url": "https://ayman-atif.vercel.app/invoiceflow/",
-        "codeRepository": "https://github.com/i95compile/PDF2Excel-Invoices",
-        "programmingLanguage": "Python",
-        "softwareVersion": "0.1.0",
-        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
-        "author": { "@type": "Person", "name": "Ayman Atif", "url": "https://ayman-atif.vercel.app/" }
+<script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "SoftwareApplication",
+      "@id": "https://ayman-atif.vercel.app/invoiceflow/#software",
+      "name": "InvoiceFlow",
+      "applicationCategory": "DeveloperApplication",
+      "operatingSystem": "Windows, macOS, Linux",
+      "description": "Open-source Python toolkit that converts batches of PDF invoices into structured, multi-sheet Excel workbooks, with multiprocessing, pluggable extraction strategies and an OCR-ready parser layer.",
+      "url": "https://ayman-atif.vercel.app/invoiceflow/",
+      "codeRepository": "https://github.com/i95compile/PDF2Excel-Invoices",
+      "programmingLanguage": "Python",
+      "softwareVersion": "0.1.0",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
       },
-      {
-        "@type": "FAQPage",
-        "@id": "https://ayman-atif.vercel.app/invoiceflow/#faq",
-        "mainEntity": [
-          {
-            "@type": "Question",
-            "name": "How do I convert PDF invoices to Excel with InvoiceFlow?",
-            "acceptedAnswer": { "@type": "Answer", "text": "Clone the repository, install the requirements, then run 'python app.py process --input invoices --output output/result.xlsx --workers auto'. InvoiceFlow reads every PDF in the input folder, extracts structured invoice data, and writes a multi-sheet Excel workbook with one sheet for invoice-level fields and one for line items." }
-          },
-          {
-            "@type": "Question",
-            "name": "Does InvoiceFlow handle scanned or image-only invoices?",
-            "acceptedAnswer": { "@type": "Answer", "text": "Version 0.1.0 extracts text from digital PDFs. The parser layer is deliberately isolated so an OCR backend can be substituted without touching the pipeline; OCR and AI-based extraction are on the roadmap." }
-          },
-          {
-            "@type": "Question",
-            "name": "Is InvoiceFlow free?",
-            "acceptedAnswer": { "@type": "Answer", "text": "Yes. InvoiceFlow is open source and free to use. The source is on GitHub." }
-          },
-          {
-            "@type": "Question",
-            "name": "Can InvoiceFlow process large batches of invoices quickly?",
-            "acceptedAnswer": { "@type": "Answer", "text": "Yes. It uses a ProcessPoolExecutor to extract invoices in parallel across CPU cores, and includes a benchmark command that reports throughput in PDFs per second." }
-          }
-        ]
-      },
-      {
-        "@type": "BreadcrumbList",
-        "itemListElement": [
-          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://ayman-atif.vercel.app/" },
-          { "@type": "ListItem", "position": 2, "name": "InvoiceFlow", "item": "https://ayman-atif.vercel.app/invoiceflow/" }
-        ]
+      "author": {
+        "@id": "https://ayman-atif.vercel.app/#ayman-atif"
       }
-    ]
-  }
-  </script>
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://ayman-atif.vercel.app/invoiceflow/#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How do I convert PDF invoices to Excel with InvoiceFlow?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Clone the repository, install the requirements, then run 'python app.py process --input invoices --output output/result.xlsx --workers auto'. InvoiceFlow reads every PDF in the input folder, extracts structured invoice data, and writes a multi-sheet Excel workbook with one sheet for invoice-level fields and one for line items."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does InvoiceFlow handle scanned or image-only invoices?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Version 0.1.0 extracts text from digital PDFs. The parser layer is deliberately isolated so an OCR backend can be substituted without touching the pipeline; OCR and AI-based extraction are on the roadmap."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is InvoiceFlow free?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. InvoiceFlow is open source and free to use. The source is on GitHub."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can InvoiceFlow process large batches of invoices quickly?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. It uses a ProcessPoolExecutor to extract invoices in parallel across CPU cores, and includes a benchmark command that reports throughput in PDFs per second."
+          }
+        }
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://ayman-atif.vercel.app/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "InvoiceFlow",
+          "item": "https://ayman-atif.vercel.app/invoiceflow/"
+        }
+      ]
+    }
+  ]
+}</script>
+<meta name="twitter:image:alt" content="Ayman Atif, software developer">
+<link rel="stylesheet" href="../assets/css/seo-pages.css">
 </head>
 <body>
 <a class="skip-link" href="#main-content">Skip to main content</a>
 <div aria-hidden="true" class="noise"></div>
 <div aria-hidden="true" class="cursor-glow"></div>
-<header class="site-header">
-<a aria-label="Ayman Atif, home" class="brand" href="../index.html">
-<span aria-hidden="true" class="brand-mark">AA</span>
-<span class="brand-copy">Ayman Atif</span>
-</a>
-<nav aria-label="Primary navigation" class="nav">
-<a href="../index.html">Home</a><a href="../about/index.html">About</a>
-<a href="../services/index.html">Services</a>
-<a href="../blog/index.html">Blog</a><a href="../certifications/index.html">Certifications</a>
-<a class="nav-cta" href="mailto:a95yman@gmail.com?subject=Software%20project%20inquiry">Start a conversation</a>
-</nav>
-<button aria-controls="mobile-menu" aria-expanded="false" aria-label="Open menu" class="menu-toggle" type="button">
-<span></span><span></span>
-</button>
-</header>
-<nav aria-hidden="true" aria-label="Mobile navigation" class="mobile-menu" id="mobile-menu">
-<a href="../index.html">Home</a><a href="../about/index.html">About</a>
-<a href="../services/index.html">Services</a>
-<a href="../blog/index.html">Blog</a><a href="../certifications/index.html">Certifications</a>
-<a href="mailto:a95yman@gmail.com?subject=Software%20project%20inquiry">Contact</a>
-</nav>
+<header class="site-header"><a aria-label="Ayman Atif, home" class="brand" href="../index.html"><span aria-hidden="true" class="brand-mark">AA</span><span class="brand-copy">Ayman Atif</span></a><nav aria-label="Primary navigation" class="nav"><a href="../index.html">Home</a><a href="../services/index.html">Services</a><a href="../work/index.html">Work</a><a href="../about/index.html">About</a><a href="../blog/index.html">Blog</a><a class="nav-cta" href="../contact/index.html">Contact</a></nav><button aria-controls="mobile-menu" aria-expanded="false" aria-label="Open menu" class="menu-toggle" type="button"><span></span><span></span></button></header>
+<nav aria-hidden="true" aria-label="Mobile navigation" class="mobile-menu" id="mobile-menu"><a href="../index.html">Home</a><a href="../services/index.html">Services</a><a href="../work/index.html">Work</a><a href="../about/index.html">About</a><a href="../blog/index.html">Blog</a><a href="../contact/index.html">Contact</a></nav>
 <main class="section-dark blog-page" id="main-content">
 <article class="post">
 <nav aria-label="Breadcrumb" class="post-breadcrumb">
@@ -150,6 +158,7 @@
 <li><strong>Worker</strong> — runs extraction sequentially or across processes.</li>
 <li><strong>Exporter</strong> — converts the collected <code>InvoiceData</code> into a formatted, multi-sheet workbook.</li>
 </ul>
+<p><a href="../work/invoiceflow/index.html">Read the InvoiceFlow engineering case study</a> for the design decisions behind this pipeline.</p>
 <h2>Install</h2>
 <p>Requires <strong>Python 3.10 or newer</strong>.</p>
 <pre><code>git clone https://github.com/i95compile/PDF2Excel-Invoices.git
@@ -182,7 +191,7 @@ pip install -r requirements.txt</code></pre>
 <h3>Can it process large batches quickly?</h3>
 <p>Yes. Extraction runs in parallel across CPU cores via <code>ProcessPoolExecutor</code>, and the <code>benchmark</code> command reports throughput in PDFs per second.</p>
 <div class="post-note">
-<p>Need this adapted to your own invoice formats, wired into an existing system, or extended with OCR for scanned documents? That is the kind of work I do. <a href="../index.html#contact">Start a conversation</a> — or read more about <a href="../services/index.html">how I approach business process automation</a>.</p>
+<p>Need this adapted to your own invoice formats, wired into an existing system, or extended with OCR for scanned documents? That is the kind of work I do. <a href="../contact/index.html">Start a conversation</a> — or read more about <a href="../services/workflow-automation/index.html">workflow automation services</a>.</p>
 </div>
 </div>
 <footer class="post-end">
@@ -191,15 +200,7 @@ pip install -r requirements.txt</code></pre>
 </footer>
 </article>
 </main>
-<footer class="site-footer">
-<div class="container site-footer-inner">
-<div class="site-footer-brand"><strong>Ayman Atif</strong><p>Freelance .NET and Python software engineer building reliable business software for remote clients worldwide.</p></div>
-<nav aria-label="Footer navigation" class="site-footer-nav">
-<a href="../index.html">Home</a><a href="../services/index.html">Services</a><a href="../index.html#work">Selected work</a><a href="../blog/index.html">Blog</a><a href="mailto:a95yman@gmail.com">Email</a><a href="https://www.linkedin.com/in/a95yman/" rel="me noreferrer" target="_blank">LinkedIn</a>
-</nav>
-<div class="site-footer-bottom"><span>Working remotely with clients worldwide</span><span>© <span class="current-year">2026</span> Ayman Atif</span></div>
-</div>
-</footer>
+<footer class="site-footer"><div class="container site-footer-inner"><div class="site-footer-brand"><strong>Ayman Atif</strong><p>.NET and Python software developer building business applications, APIs and automation.</p></div><nav aria-label="Footer navigation" class="site-footer-nav"><a href="../services/index.html">Services</a><a href="../work/index.html">Work</a><a href="../experience/index.html">Experience</a><a href="../skills/index.html">Skills</a><a href="../about/index.html">About</a><a href="../certifications/index.html">Certifications</a><a href="../blog/index.html">Blog</a><a href="../contact/index.html">Contact</a><a href="../hire-dotnet-developer/index.html">Hire a .NET developer</a><a href="https://www.linkedin.com/in/a95yman/" rel="me noreferrer" target="_blank">LinkedIn</a></nav><div class="site-footer-bottom"><span>Working remotely</span><span>© <span class="current-year">2026</span> Ayman Atif</span></div></div></footer>
 <script defer="" src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
 <script defer="" src="../assets/js/script.js"></script>
 </body>
