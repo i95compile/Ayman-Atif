@@ -1,0 +1,131 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "trailingSlash": true,
+  "redirects": [
+    {
+      "source": "/about/index.html",
+      "destination": "/about/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/aspnet-core-middleware-order-di-lifetimes/index.html",
+      "destination": "/blog/aspnet-core-middleware-order-di-lifetimes/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/async-await-deadlocks-thread-pool-starvation/index.html",
+      "destination": "/blog/async-await-deadlocks-thread-pool-starvation/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/caching-garbage-collection-system-design-interview-answers/index.html",
+      "destination": "/blog/caching-garbage-collection-system-design-interview-answers/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/ef-core-tracking-n-plus-1-interview-questions/index.html",
+      "destination": "/blog/ef-core-tracking-n-plus-1-interview-questions/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/index.html",
+      "destination": "/blog/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/interview-trick-senior-net-developer/index.html",
+      "destination": "/blog/interview-trick-senior-net-developer/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/why-you-keep-failing-senior-developer-interviews/index.html",
+      "destination": "/blog/why-you-keep-failing-senior-developer-interviews/",
+      "permanent": true
+    },
+    {
+      "source": "/certifications/index.html",
+      "destination": "/certifications/",
+      "permanent": true
+    },
+    {
+      "source": "/contact/index.html",
+      "destination": "/contact/",
+      "permanent": true
+    },
+    {
+      "source": "/experience/index.html",
+      "destination": "/experience/",
+      "permanent": true
+    },
+    {
+      "source": "/hire-dotnet-developer/index.html",
+      "destination": "/hire-dotnet-developer/",
+      "permanent": true
+    },
+    {
+      "source": "/index.html",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/invoiceflow/index.html",
+      "destination": "/invoiceflow/",
+      "permanent": true
+    },
+    {
+      "source": "/services/aspnet-core-api-development/index.html",
+      "destination": "/services/aspnet-core-api-development/",
+      "permanent": true
+    },
+    {
+      "source": "/services/business-software-development/index.html",
+      "destination": "/services/business-software-development/",
+      "permanent": true
+    },
+    {
+      "source": "/services/dotnet-development/index.html",
+      "destination": "/services/dotnet-development/",
+      "permanent": true
+    },
+    {
+      "source": "/services/index.html",
+      "destination": "/services/",
+      "permanent": true
+    },
+    {
+      "source": "/services/legacy-software-modernization/index.html",
+      "destination": "/services/legacy-software-modernization/",
+      "permanent": true
+    },
+    {
+      "source": "/services/python-development/index.html",
+      "destination": "/services/python-development/",
+      "permanent": true
+    },
+    {
+      "source": "/services/workflow-automation/index.html",
+      "destination": "/services/workflow-automation/",
+      "permanent": true
+    },
+    {
+      "source": "/skills/index.html",
+      "destination": "/skills/",
+      "permanent": true
+    },
+    {
+      "source": "/work/business-software-platform/index.html",
+      "destination": "/work/business-software-platform/",
+      "permanent": true
+    },
+    {
+      "source": "/work/index.html",
+      "destination": "/work/",
+      "permanent": true
+    },
+    {
+      "source": "/work/invoiceflow/index.html",
+      "destination": "/work/invoiceflow/",
+      "permanent": true
+    }
+  ]
+}
