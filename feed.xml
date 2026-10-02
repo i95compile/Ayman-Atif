@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+  <channel>
+    <title>Ayman Atif — Software Engineering Blog</title>
+    <link>https://ayman-atif.vercel.app/blog/</link>
+    <description>Practical software engineering lessons from real projects in .NET, backend architecture, databases, performance and automation.</description>
+    <language>en</language>
+    <lastBuildDate>Fri, 02 Oct 2026 00:00:00 GMT</lastBuildDate>
+    <item>
+      <title>How I Rebuilt an Excel-Like Web App After the First Architecture Failed</title>
+      <link>https://ayman-atif.vercel.app/blog/how-i-rebuilt-an-excel-like-web-app-after-the-first-architecture-failed/</link>
+      <guid isPermaLink="true">https://ayman-atif.vercel.app/blog/how-i-rebuilt-an-excel-like-web-app-after-the-first-architecture-failed/</guid>
+      <pubDate>Fri, 02 Oct 2026 00:00:00 GMT</pubDate>
+      <description>A case study on rebuilding an Excel-like web app around JSON document state after relational storage made formulas, undo and version history harder to preserve.</description>
+    </item>
+    <item>
+      <title>async/await in .NET Interviews: Request Stalls, Thread Pool Starvation, and What Interviewers Are Really Asking</title>
+      <link>https://ayman-atif.vercel.app/blog/async-await-request-stalls-thread-pool-starvation/</link>
+      <guid isPermaLink="true">https://ayman-atif.vercel.app/blog/async-await-request-stalls-thread-pool-starvation/</guid>
+      <pubDate>Sun, 06 Sep 2026 00:00:00 GMT</pubDate>
+      <description>A practical explanation of request stalls, thread-pool starvation and the async/await concepts that matter in .NET interviews.</description>
+    </item>
+    <item>
+      <title>EF Core Interview Questions: Tracking, the N+1 Problem, and IQueryable Traps</title>
+      <link>https://ayman-atif.vercel.app/blog/ef-core-tracking-n-plus-1-interview-questions/</link>
+      <guid isPermaLink="true">https://ayman-atif.vercel.app/blog/ef-core-tracking-n-plus-1-interview-questions/</guid>
+      <pubDate>Sun, 06 Sep 2026 00:00:00 GMT</pubDate>
+      <description>Practical EF Core guidance covering tracking, N+1 queries and IQueryable pitfalls.</description>
+    </item>
+  </channel>
+</rss>
