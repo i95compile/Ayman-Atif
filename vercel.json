@@ -13,8 +13,18 @@
       "permanent": true
     },
     {
+      "source": "/blog/async-await-deadlocks-thread-pool-starvation",
+      "destination": "/blog/async-await-request-stalls-thread-pool-starvation/",
+      "permanent": true
+    },
+    {
       "source": "/blog/async-await-deadlocks-thread-pool-starvation/index.html",
-      "destination": "/blog/async-await-deadlocks-thread-pool-starvation/",
+      "destination": "/blog/async-await-request-stalls-thread-pool-starvation/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/async-await-request-stalls-thread-pool-starvation/index.html",
+      "destination": "/blog/async-await-request-stalls-thread-pool-starvation/",
       "permanent": true
     },
     {

@@ -21,8 +21,8 @@ walk(root);
 assert.equal(config.trailingSlash, true);
 assert.equal(config.cleanUrls, undefined);
 assert.equal(config.rewrites, undefined);
-assert.equal(config.redirects.length, pages.length);
-assert.equal(new Set(config.redirects.map(r => r.source)).size, pages.length);
+assert.ok(config.redirects.length >= pages.length);
+assert.equal(new Set(config.redirects.map(r => r.source)).size, config.redirects.length);
 for (const source of pages) {
   const rule = config.redirects.find(r => r.source === source);
   assert.ok(rule, 'Missing redirect: ' + source);
