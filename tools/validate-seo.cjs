@@ -75,7 +75,7 @@ for (const [file,html] of data) {
 const sitemap=fs.readFileSync('sitemap.xml','utf8');
 const locations=[...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map(m=>m[1]);
 for(const url of locations)assert(!internalIndex(url),'Sitemap index.html URL '+url);
-assert(files.length===25 && locations.length===25,'Expected all 25 indexable pages and sitemap URLs');
+assert(files.length===26 && locations.length===26,'Expected all 26 indexable pages and sitemap URLs');
 for(const url of canonical)assert(locations.includes(url),'Sitemap missing '+url);
 for(const url of locations)assert(canonical.has(url),'Sitemap has noncanonical URL '+url);
 assert(new Set(locations).size===locations.length,'Duplicate sitemap entry');

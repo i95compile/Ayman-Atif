@@ -987,6 +987,7 @@ button { font: inherit; }
 .credential-preview img{display:block;width:100%;height:auto;aspect-ratio:auto;object-fit:contain;box-shadow:0 18px 45px rgba(0,0,0,.13);border-radius:4px}
 @media(max-width:900px){.story-hero-grid{grid-template-columns:1fr}.story-portrait{justify-self:start;max-width:620px}.skills-heading{grid-template-columns:1fr;gap:20px}.skill-grid{grid-template-columns:1fr 1fr}}
 @media(max-width:600px){.skill-grid{grid-template-columns:1fr}.skill-grid article{min-height:auto}.credential-preview{padding:14px}}
+.credential-card+.credential-card{margin-top:24px}
 
 /* 2026-09-18 v3: keep the About portrait editorial, not poster-tall */
 .story-hero-grid{grid-template-columns:minmax(0,1.12fr) minmax(420px,.88fr);gap:64px}

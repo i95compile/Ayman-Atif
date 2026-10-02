@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="A practical software architecture case study on rebuilding an Excel-like web app, replacing a fragile relational model with a JSON document approach for formulas, version history, undo, and redo." name="description"/>
+<meta content="Ayman Atif" name="author"/>
+<meta content="index, follow, max-image-preview:large, max-snippet:-1" name="robots"/>
+<meta content="dark light" name="color-scheme"/>
+<meta content="#0b0d10" name="theme-color"/>
+<link href="https://ayman-atif.vercel.app/blog/how-i-rebuilt-an-excel-like-web-app-after-the-first-architecture-failed/" rel="canonical"/>
+<meta content="article" property="og:type"/>
+<meta content="en_US" property="og:locale"/>
+<meta content="Ayman Atif Portfolio" property="og:site_name"/>
+<meta content="https://ayman-atif.vercel.app/blog/how-i-rebuilt-an-excel-like-web-app-after-the-first-architecture-failed/" property="og:url"/>
+<meta content="How I Rebuilt an Excel-Like Web App After the First Architecture Failed" property="og:title"/>
+<meta content="A practical case study on replacing a fragile relational spreadsheet model with JSON documents, version history, and reliable undo and redo." property="og:description"/>
+<meta content="https://ayman-atif.vercel.app/assets/img/ayman-atif-software-engineer.webp" property="og:image"/>
+<meta content="2026-10-02" property="article:published_time"/>
+<meta content="2026-10-02" property="article:modified_time"/>
+<meta content="Ayman Atif" property="article:author"/>
+<meta content="Software Architecture" property="article:section"/>
+<meta content="JSON" property="article:tag"/>
+<meta content="Web application architecture" property="article:tag"/>
+<meta content="Business software" property="article:tag"/>
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="How I Rebuilt an Excel-Like Web App After the First Architecture Failed" name="twitter:title"/>
+<meta content="A practical case study on replacing a fragile relational spreadsheet model with JSON documents, version history, and reliable undo and redo." name="twitter:description"/>
+<meta content="https://ayman-atif.vercel.app/assets/img/ayman-atif-software-engineer.webp" name="twitter:image"/>
+<title>How I Rebuilt an Excel-Like Web App After the First Architecture Failed | Ayman Atif</title>
+<link href="../../assets/img/favicon.svg" rel="icon" type="image/svg+xml"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Manrope:wght@500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="../../assets/css/styles.css" rel="stylesheet"/>
+<link href="../../assets/css/blog.css" rel="stylesheet"/>
+<script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "@id": "https://ayman-atif.vercel.app/blog/how-i-rebuilt-an-excel-like-web-app-after-the-first-architecture-failed/#article",
+  "headline": "How I Rebuilt an Excel-Like Web App After the First Architecture Failed",
+  "description": "A practical software architecture case study on rebuilding an Excel-like web app, replacing a fragile relational model with a JSON document approach for formulas, version history, undo, and redo.",
+  "image": "https://ayman-atif.vercel.app/assets/img/ayman-atif-software-engineer.webp",
+  "datePublished": "2026-10-02",
+  "dateModified": "2026-10-02",
+  "wordCount": 1518,
+  "inLanguage": "en",
+  "url": "https://ayman-atif.vercel.app/blog/how-i-rebuilt-an-excel-like-web-app-after-the-first-architecture-failed/",
+  "author": {"@type": "Person", "@id": "https://ayman-atif.vercel.app/#ayman-atif", "name": "Ayman Atif", "url": "https://ayman-atif.vercel.app/"},
+  "publisher": {"@type": "Person", "@id": "https://ayman-atif.vercel.app/#ayman-atif", "name": "Ayman Atif", "url": "https://ayman-atif.vercel.app/"},
+  "mainEntityOfPage": {"@type": "WebPage", "@id": "https://ayman-atif.vercel.app/blog/how-i-rebuilt-an-excel-like-web-app-after-the-first-architecture-failed/"},
+  "isPartOf": {"@type": "Blog", "@id": "https://ayman-atif.vercel.app/blog/#blog"},
+  "keywords": ["Excel-like web application", "JSON document architecture", "spreadsheet version history", "undo redo architecture", "business software development"],
+  "articleSection": "Software Architecture"
+}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://ayman-atif.vercel.app/"},{"@type":"ListItem","position":2,"name":"Blog","item":"https://ayman-atif.vercel.app/blog/"},{"@type":"ListItem","position":3,"name":"How I Rebuilt an Excel-Like Web App","item":"https://ayman-atif.vercel.app/blog/how-i-rebuilt-an-excel-like-web-app-after-the-first-architecture-failed/"}]}</script>
+<meta content="Ayman Atif, .NET and Python software developer" name="twitter:image:alt"/>
+<link href="../../assets/css/seo-pages.css" rel="stylesheet"/>
+</head>
+<body>
+<a class="skip-link" href="/blog/how-i-rebuilt-an-excel-like-web-app-after-the-first-architecture-failed/#main-content">Skip to main content</a>
+<div aria-hidden="true" class="noise"></div><div aria-hidden="true" class="cursor-glow"></div>
+<header class="site-header"><a aria-label="Ayman Atif, home" class="brand" href="/"><span aria-hidden="true" class="brand-mark">AA</span><span class="brand-copy">Ayman Atif</span></a><nav aria-label="Primary navigation" class="nav"><a href="/">Home</a><a href="/services/">Services</a><a href="/work/">Work</a><a href="/about/">About</a><a aria-current="page" href="/blog/">Blog</a><a class="nav-cta" href="/contact/">Contact</a></nav><button aria-controls="mobile-menu" aria-expanded="false" aria-label="Open menu" class="menu-toggle" type="button"><span></span><span></span></button></header>
+<nav aria-hidden="true" aria-label="Mobile navigation" class="mobile-menu" id="mobile-menu"><a href="/">Home</a><a href="/services/">Services</a><a href="/work/">Work</a><a href="/about/">About</a><a aria-current="page" href="/blog/">Blog</a><a href="/contact/">Contact</a></nav>
+<main class="section-dark blog-page" id="main-content"><article class="post case-study-post">
+<nav aria-label="Breadcrumb" class="post-breadcrumb"><a href="/">Home</a><span aria-hidden="true">/</span><a href="/blog/">Blog</a><span aria-hidden="true">/</span><span>Excel-like web app rebuild</span></nav>
+<header class="post-header"><p class="section-index light-index">ARCHITECTURE CASE STUDY</p><h1 class="post-title">How I Rebuilt an Excel-Like Web App After the First Architecture Failed</h1><p class="post-meta"><span>Ayman Atif</span><span aria-hidden="true" class="dot"></span><time datetime="2026-10-02">2 October 2026</time><span aria-hidden="true" class="dot"></span><span>8 min read</span></p></header>
+<p class="post-lede">The first version modelled a spreadsheet as relational data. It looked sensible on paper, then version history, formulas, and undo made every change harder to reason about. The rebuild started by treating a sheet as the document it actually was.</p>
+<div class="post-body">
+<aside class="case-summary" aria-label="Case study summary"><span>THE DECISION</span><p>Stop modelling individual spreadsheet parts as disconnected records. Store the working sheet as one JSON document, version it as a whole, and make state changes explicit.</p><ul><li><strong>Problem:</strong> relational state did not match spreadsheet behaviour</li><li><strong>Change:</strong> a JSON document became the source of truth</li><li><strong>Result:</strong> simpler reconstruction, versioning, and undo/redo</li></ul></aside>
+<h2>The first architecture: correct tables, wrong shape</h2>
+<p>The original design followed a familiar database instinct. A workbook had sheets. Sheets had rows and columns. Cells carried values and formulas. That is a reasonable way to describe the pieces, but it is not how people experience a spreadsheet.</p>
+<section class="architecture-comparison" aria-label="Original relational model compared with rebuilt JSON document model"><article class="architecture-lane architecture-lane-old"><p class="section-index">ORIGINAL MODEL</p><h3>Spreadsheet as linked records</h3><ol><li><span>Spreadsheet</span></li><li><span>Rows</span></li><li><span>Columns</span></li><li><span>Cells</span></li><li><span>Values, formulas, and relationships</span></li></ol></article><article class="architecture-lane architecture-lane-new"><p class="section-index">REBUILT MODEL</p><h3>Spreadsheet as a document</h3><ol><li><span>Spreadsheet document</span></li><li><span>JSON state</span></li><li><span>Cells keyed by coordinates</span></li><li><span>Values, formulas, and metadata</span></li></ol></article></section>
+<p>Users do not edit one database entity at a time. They paste a range, reorder columns, change a formula that affects a whole section, then expect the workbook to look exactly as it did a moment ago if they press undo. The state is interconnected and ordered. It behaves more like a document than a set of independent rows.</p>
+<h2>What started going wrong</h2>
+<p>The relational model was not inherently bad. It was a poor fit for the operations this product needed to perform often and safely. Each workaround solved a local issue while making the next one more expensive.</p>
+<section class="issue-grid" aria-label="Problems with the original architecture"><article><strong>Slow operations</strong><p>Large edits meant touching many related records.</p></article><article><strong>Synchronization work</strong><p>The client and server had to agree on partial state changes.</p></article><article><strong>Undo was fragile</strong><p>Reversing a multi-record change meant reconstructing its history.</p></article><article><strong>State was hard to rebuild</strong><p>One visible sheet required several queries and joins.</p></article><article><strong>Inconsistencies appeared</strong><p>Partial writes could leave related values out of step.</p></article><article><strong>Changes were lost</strong><p>Conflicting edits became difficult to detect clearly.</p></article><article><strong>Code grew around the model</strong><p>Business rules became recovery logic and glue code.</p></article></section>
+<blockquote><p>The warning sign was version history. If restoring one familiar screen means replaying a chain of low-level record changes, the persistence model is probably working against the product.</p></blockquote>
+<h2>The rebuild around JSON</h2>
+<p>The replacement did not try to make every cell a first-class database record. It represented the spreadsheet as a document and persisted the document as JSON. The application could load one coherent snapshot, change it in memory, validate it, and save a new version.</p>
+<figure class="code-example"><figcaption><span>JSON</span><span>Spreadsheet document snapshot</span></figcaption><pre><code>{
+  "sheetName": "Forecast",
+  "columns": ["Month", "Revenue", "Margin"],
+  "rows": [
+    { "month": "Jan", "revenue": 42000, "margin": "=B2*0.31" },
+    { "month": "Feb", "revenue": 45500, "margin": "=B3*0.31" }
+  ],
+  "settings": { "currency": "USD", "formulaMode": "standard" }
+}</code></pre></figure>
+<p>This was not an argument against relational databases. The database still handled users, access, workspaces, and searchable business entities well. JSON handled the object whose value came from being preserved, ordered, and changed together.</p>
+<section class="model-compare" aria-label="Before and after architecture comparison"><article><p class="section-index">BEFORE</p><h3>Relational records across related entities</h3><ul><li>Useful for users, ownership, and business records</li><li>Awkward when one spreadsheet edit touches many parts</li><li>State reconstruction needs several joins and rules</li></ul></article><article><p class="section-index">AFTER</p><h3>Spreadsheet state as one document</h3><ul><li>One snapshot carries layout, values, and formulas</li><li>Version history records the state users recognise</li><li>Relational data still supports the wider product</li></ul></article></section>
+<section class="relational-fit" aria-label="Where relational data still belongs"><p class="section-index">WHERE RELATIONAL DATA STILL BELONGS</p><div><span>Users</span><span>Permissions</span><span>Document ownership</span><span>Metadata</span><span>Business records</span></div></section>
+<h2>Undo and redo became a versioning problem</h2>
+<p>That change made undo and redo much less mysterious. Instead of inventing a reverse operation for every possible edit, the application could move through known document versions. The hard work moved to defining a clean commit boundary, which is a better problem to have.</p>
+<section class="version-flow" aria-label="Spreadsheet version history"><div><span>Version 41</span><small>Before paste</small></div><i aria-hidden="true">→</i><div><span>Version 42</span><small>Edit: range added</small></div><i aria-hidden="true">→</i><div><span>Version 43</span><small>Snapshot: formula updated</small></div><i aria-hidden="true">→</i><div><span>Version 44</span><small>Current state</small></div><p><b>Undo</b> moves back to a known snapshot. <b>Redo</b> moves forward until a new edit branches history.</p></section>
+<p>Undo points backward through committed states. Redo points forward until a new edit creates a new branch. It is still important to think about storage cost, concurrent editing, and how often a snapshot is taken. But the system now explains itself in the language of the feature: this is what the sheet looked like before and after a change.</p>
+<h2>When rebuilding costs less than patching</h2>
+<p>A rebuild is not automatically the brave or correct move. It becomes reasonable when each small feature needs a migration, a synchronization rule, and a special case for history. At that point the cost is no longer the next feature. It is the tax every future feature will pay.</p>
+<div class="post-note"><p><strong>The practical test:</strong> can the application load the complete state a user sees, apply one meaningful change, and save that state without a chain of hidden repair steps? If not, examine whether the storage model matches the behaviour you are trying to support.</p></div>
+<aside class="engineering-principle"><span>ENGINEERING PRINCIPLE</span><p>Choose a data model for how the data behaves under change, not only for the names of its individual pieces.</p></aside>
+<h2>What I would do differently now</h2>
+<section class="architecture-stack" aria-label="Architecture I would choose today"><p class="section-index">A CLEARER STACK</p><div><span>01</span><p><strong>Relational business data</strong><small>Users, permissions, ownership, and business records.</small></p></div><div><span>02</span><p><strong>JSON spreadsheet state</strong><small>One document for ordered layout, cell values, and formulas.</small></p></div><div><span>03</span><p><strong>Formula calculation layer</strong><small>Explicit evaluation and validation at defined boundaries.</small></p></div><div><span>04</span><p><strong>Versioning and retention rules</strong><small>Snapshots, undo/redo, and a practical policy for history.</small></p></div><div><span>05</span><p><strong>Concurrency handling</strong><small>Clear conflict rules when more than one person changes a sheet.</small></p></div></section>
+<section class="lesson-checklist" aria-label="Lessons learned"><div><b>✓</b><p><strong>Model the behaviour first.</strong> Start with the operations users need, not just the nouns in the domain.</p></div><div><b>✓</b><p><strong>Design history early.</strong> Versioning exposes assumptions that simple create-and-update flows hide.</p></div><div><b>✓</b><p><strong>Keep boundaries explicit.</strong> A document can be the source of truth while relational data supports the rest of the product.</p></div><div><b>✓</b><p><strong>Prefer explainable state.</strong> The best architecture is one a developer can reconstruct without detective work.</p></div></section>
+<p>This article is adapted from <a href="https://medium.com/@a95yman/how-i-rebuilt-an-excel-like-web-app-after-the-first-architecture-failed-ab4f6a38aa87" rel="noreferrer" target="_blank">my original Medium post</a>, with the implementation lessons reframed as a portfolio case study.</p>
+</div>
+<aside class="portfolio-cta"><p class="section-index">AYMAN ATIF · BUSINESS SOFTWARE &amp; AUTOMATION SPECIALIST</p><h2>Systems that make business work easier to run</h2><p>I build custom business applications, spreadsheet replacement systems, APIs, workflow automation, and reporting tools. If a critical process has outgrown a workbook or a first implementation, I can help map the next version.</p><div><a class="button button-primary" href="/contact/">Discuss a project <span aria-hidden="true">↗</span></a><a class="button button-ghost" href="/work/">View selected work</a></div></aside>
+</article></main>
+<footer class="site-footer"><div class="container site-footer-inner"><div class="site-footer-brand"><strong>Ayman Atif</strong><p>.NET and Python software developer building business applications, APIs and automation.</p></div><nav aria-label="Footer navigation" class="site-footer-nav"><a href="/services/">Services</a><a href="/work/">Work</a><a href="/experience/">Experience</a><a href="/skills/">Skills</a><a href="/about/">About</a><a href="/certifications/">Certifications</a><a href="/blog/">Blog</a><a href="/contact/">Contact</a><a href="/hire-dotnet-developer/">Hire a .NET developer</a><a href="https://www.linkedin.com/in/a95yman/" rel="me noreferrer" target="_blank">LinkedIn</a></nav><div class="site-footer-bottom"><span>Working remotely</span><span>© <span class="current-year">2026</span> Ayman Atif</span></div></div></footer>
+<script defer="" src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script><script defer="" src="../../assets/js/script.js"></script>
+</body></html>

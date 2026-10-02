@@ -33,6 +33,11 @@
       "permanent": true
     },
     {
+      "source": "/blog/how-i-rebuilt-an-excel-like-web-app-after-the-first-architecture-failed/index.html",
+      "destination": "/blog/how-i-rebuilt-an-excel-like-web-app-after-the-first-architecture-failed/",
+      "permanent": true
+    },
+    {
       "source": "/blog/interview-trick-senior-net-developer/index.html",
       "destination": "/blog/interview-trick-senior-net-developer/",
       "permanent": true
