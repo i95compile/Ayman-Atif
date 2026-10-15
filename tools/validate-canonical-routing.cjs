@@ -75,6 +75,14 @@ const server = http.createServer((request, response) => {
       assert.equal(result.status, 200, asset);
       assert.equal(result.headers.get('location'), null, asset);
     }
-    console.log(JSON.stringify({ fixture: 'local HTTP, not deployed Vercel', canonical200: pages.length, index308: pages.length, queryPreserved: pages.length, slashless308: slashless, unchangedAssetsAndSpecialFiles: assets.length, errors: [] }, null, 2));
+    // Redirects for URLs that no longer exist: one hop straight to a live canonical page.
+    const legacy = config.redirects.filter(r => !pages.includes(r.source));
+    for (const rule of legacy) {
+      const result = await head(rule.source);
+      assert.equal(result.status, 308, rule.source);
+      assert.equal(result.headers.get('location'), rule.destination, rule.source);
+      assert.equal((await head(rule.destination)).status, 200, rule.source + ': destination is not a live page');
+    }
+    console.log(JSON.stringify({ fixture: 'local HTTP, not deployed Vercel', canonical200: pages.length, index308: pages.length, queryPreserved: pages.length, slashless308: slashless, unchangedAssetsAndSpecialFiles: assets.length, legacyRedirects: legacy.length, errors: [] }, null, 2));
   } finally { await new Promise(resolve => server.close(resolve)); }
 })().catch(error => { console.error(error); process.exitCode = 1; });

@@ -122,7 +122,7 @@
 <nav aria-label="Breadcrumb" class="post-breadcrumb">
 <a href="/">Home</a><span aria-hidden="true">/</span>
 <a href="/blog/">Blog</a><span aria-hidden="true">/</span>
-<span>async/await continuation stalls</span>
+<span>async/await in .NET Interviews: Request Stalls and Thread Pool Blocking</span>
 </nav>
 <header class="post-header">
 <p class="post-kicker">.NET · async/await</p>
@@ -135,7 +135,7 @@
 <span>7 min read</span>
 </p>
 </header>
-<p class="post-lede">Almost every mid-to-senior .NET interview asks about async/await. Almost every candidate answers the wrong question — the definition instead of the trade-off.</p>
+<p class="post-lede">Almost every mid-to-senior .NET interview asks about async/await. Almost every candidate answers the wrong question: the definition instead of the trade-off.</p>
 <div class="post-body">
 <p>The question usually arrives in one of three shapes:</p>
 <ul>
@@ -148,27 +148,27 @@
 <blockquote><p>“async/await is for I/O-bound work and threads are for CPU-bound work. <code>await</code> doesn’t block the thread, it frees it up. <code>Task.Run</code> schedules work on the thread pool. You shouldn’t block on async code because it can continuation stall.”</p></blockquote>
 <p>Every sentence is true. None of it demonstrates that you have been on call for a service that fell over because of this. Interviewers hear this answer ten times a week and it moves nothing.</p>
 <h2>What is actually happening, so the trade-off makes sense</h2>
-<p>When you <code>await</code> a genuinely asynchronous operation — a database round trip, an HTTP call, a queue read — the compiler has rewritten your method as a state machine. At the <code>await</code> point, the method returns. The thread that was running it goes back to the pool and does other work. When the I/O completes, a continuation is scheduled to finish the method, possibly on a different thread.</p>
+<p>When you <code>await</code> a genuinely asynchronous operation (a database round trip, an HTTP call, a queue read), the compiler has rewritten your method as a state machine. At the <code>await</code> point, the method returns. The thread that was running it goes back to the pool and does other work. When the I/O completes, a continuation is scheduled to finish the method, possibly on a different thread.</p>
 <p>The entire value proposition is that <strong>a thread is not sitting still while something slow happens elsewhere</strong>. On a web server, threads are the scarce resource. A machine that can hold tens of thousands of open connections has a thread pool of maybe a few dozen threads to start. Async is how a small number of threads serve a large number of in-flight requests.</p>
 <p>Blocking breaks that. <code>task.Result</code>, <code>task.Wait()</code>, and <code>task.GetAwaiter().GetResult()</code> all stop the current thread until the task finishes. Now the thread is doing exactly what async was supposed to prevent: standing still, holding a slot, waiting.</p>
 <h2>Failure mode one: the classic continuation stall</h2>
-<p>In older frameworks — ASP.NET on .NET Framework, WPF, WinForms — there is a <code>SynchronizationContext</code> that forces continuations back onto a specific thread (the request thread, the UI thread). The continuation stall is mechanical:</p>
+<p>In older frameworks (ASP.NET on .NET Framework, WPF, WinForms), there is a <code>SynchronizationContext</code> that forces continuations back onto a specific thread (the request thread, the UI thread). The continuation stall is mechanical:</p>
 <ul>
 <li>You call <code>SomeAsyncMethod().Result</code> on the request thread.</li>
 <li>That thread is now blocked, waiting for the task.</li>
 <li>Inside, the method finishes its <code>await</code> and tries to schedule its continuation back onto… the request thread.</li>
 <li>Which is blocked, waiting for the continuation. Neither side moves.</li>
 </ul>
-<p>This is the continuation stall interviewers expect you to name. Knowing it exists is table stakes. Knowing that <code>ConfigureAwait(false)</code> avoids it — by telling the continuation it does not need the original context — is the next layer. Knowing that <code>ConfigureAwait(false)</code> is a workaround for a mistake you should not be making is the layer that sounds senior.</p>
+<p>This is the continuation stall interviewers expect you to name. Knowing it exists is table stakes. Knowing that <code>ConfigureAwait(false)</code> avoids it (by telling the continuation it does not need the original context) is the next layer. Knowing that <code>ConfigureAwait(false)</code> is a workaround for a mistake you should not be making is the layer that sounds senior.</p>
 <h2>Failure mode two: thread pool blocking (the one people miss)</h2>
 <p>ASP.NET Core removed the request <code>SynchronizationContext</code>. Candidates often conclude “so blocking is fine now.” It is not. The failure just changes shape from a hard lock to a slow collapse.</p>
-<p>Here is a scenario I have had to trace. A background component called a third-party client library that only exposed synchronous methods, so someone wrapped an async pipeline around it and blocked internally with <code>.GetAwaiter().GetResult()</code>. Fine in development. Under production traffic, every one of those calls parked a thread pool thread for the duration of a network call. As load rose, the pool ran out of free threads. The pool’s injection logic adds new threads slowly — on the order of one or two per second — so it could not keep up with the arrival rate.</p>
+<p>Here is a scenario I have had to trace. A background component called a third-party client library that only exposed synchronous methods, so someone wrapped an async pipeline around it and blocked internally with <code>.GetAwaiter().GetResult()</code>. Fine in development. Under production traffic, every one of those calls parked a thread pool thread for the duration of a network call. As load rose, the pool ran out of free threads. The pool’s injection logic adds new threads slowly (on the order of one or two per second), so it could not keep up with the arrival rate.</p>
 <p>The symptom was not an exception. It was latency: requests that normally returned in 80 ms started taking 3–10 seconds, because they were sitting in a queue waiting for a thread that was busy blocking on I/O. CPU was low. Memory was fine. Every dashboard looked healthy except the one that mattered. The fix was to use the library’s async API where it existed and to move the genuinely sync-only work off the request path entirely.</p>
 <h2>Task.Run is not a synonym for “make it async”</h2>
-<p><code>Task.Run</code> pushes a delegate onto the thread pool. That is the right tool for CPU-bound work you want off the current thread — image processing, a heavy calculation, parsing a large file. It is the wrong tool for I/O. Wrapping <code>await httpClient.GetAsync(...)</code> in <code>Task.Run</code> does not make the network faster; it just burns a second thread to wait for the first one. On a web server, <code>Task.Run</code> around I/O is usually a small self-inflicted wound.</p>
+<p><code>Task.Run</code> pushes a delegate onto the thread pool. That is the right tool for CPU-bound work you want off the current thread: image processing, a heavy calculation, parsing a large file. It is the wrong tool for I/O. Wrapping <code>await httpClient.GetAsync(...)</code> in <code>Task.Run</code> does not make the network faster; it just burns a second thread to wait for the first one. On a web server, <code>Task.Run</code> around I/O is usually a small self-inflicted wound.</p>
 <h2>The engineer answer</h2>
-<blockquote><p>“async/await isn’t really about I/O versus CPU — it’s about not holding a thread while you wait on something slow. Threads are the scarce resource on a server. The cost of getting it wrong is either a hard continuation stall, in frameworks with a SynchronizationContext, or blocked thread-pool threads in ASP.NET Core — which is worse to diagnose because it shows up as creeping latency with healthy CPU and memory. I’ve traced exactly that: a sync-over-async call to a third-party library that parked pool threads under load until requests started queuing for seconds. The rule I follow is: async all the way down, never block on a task on a request path, and only reach for <code>Task.Run</code> when the work is genuinely CPU-bound. <code>ConfigureAwait(false)</code> matters in library code; in an ASP.NET Core app it mostly doesn’t, because there’s no context to capture.”</p></blockquote>
-<p>Same knowledge as the student answer. Completely different signal — because it is anchored in a consequence, a diagnosis, and a rule you now follow.</p>
+<blockquote><p>“async/await isn’t really about I/O versus CPU. It’s about not holding a thread while you wait on something slow. Threads are the scarce resource on a server. The cost of getting it wrong is either a hard continuation stall, in frameworks with a SynchronizationContext, or blocked thread-pool threads in ASP.NET Core, which is worse to diagnose because it shows up as creeping latency with healthy CPU and memory. I’ve traced exactly that: a sync-over-async call to a third-party library that parked pool threads under load until requests started queuing for seconds. The rule I follow is: async all the way down, never block on a task on a request path, and only reach for <code>Task.Run</code> when the work is genuinely CPU-bound. <code>ConfigureAwait(false)</code> matters in library code; in an ASP.NET Core app it mostly doesn’t, because there’s no context to capture.”</p></blockquote>
+<p>Same knowledge as the student answer. Completely different signal, because it is anchored in a consequence, a diagnosis, and a rule you now follow.</p>
 <h2>Follow-ups interviewers use to check if the answer was memorised</h2>
 <ul>
 <li><strong>“Why is thread pool blocking hard to spot?”</strong> Low CPU, low memory, rising latency, requests queued before they reach your code.</li>
@@ -185,14 +185,14 @@
 
     return order is null ? NotFound() : Ok(order);
 }</code></pre><p>The useful property here is “async all the way.” The controller does not block on the task, and the data-access call uses an asynchronous database API. Replacing the <code>await</code> with <code>.Result</code> breaks that chain and makes the request hold a thread while it waits.</p><h2>Three debugging questions</h2><ul><li>Is the slow operation CPU-bound or I/O-bound?</li><li>Is anything synchronously blocking on a <code>Task</code> with <code>.Result</code>, <code>.Wait()</code> or <code>GetAwaiter().GetResult()</code>?</li><li>Did we create unbounded parallelism and flood the database, API or thread pool?</li></ul><p>Async code can improve scalability, but it does not remove capacity limits. If 5,000 requests all hit the same database at once, the bottleneck may simply move downstream. Concurrency still needs a budget.</p></section><div class="post-note">
-<p>This post is one worked example of a format I use for every .NET interview topic: <strong>definition → cost → real scenario → decision</strong>. I turned the full set — CLR and GC, async internals, EF Core, ASP.NET Core, system design — into an A4-printable prep system called <a href="https://yaman95.gumroad.com/l/dotnet-job-interview-os" rel="noreferrer" target="_blank"><strong>.NET Job Interview OS</strong></a>, with weak-versus-strong answers side by side for each question.</p>
+<p>This post is one worked example of a format I use for every .NET interview topic: <strong>definition → cost → real scenario → decision</strong>. I turned the full set (CLR and GC, async internals, EF Core, ASP.NET Core, system design) into an A4-printable prep system called <a href="https://yaman95.gumroad.com/l/dotnet-job-interview-os" rel="noreferrer" target="_blank"><strong>.NET Job Interview OS</strong></a>, with weak-versus-strong answers side by side for each question.</p>
 </div>
 <h2>The takeaway</h2>
 <p>When an interviewer asks about async/await, they are not asking you to recite the state machine. They are asking whether you understand that threads are scarce, that blocking spends them, and that the bill arrives as a latency cliff on a Tuesday afternoon. Answer that, with one real trace attached, and you have answered the question they meant to ask.</p>
 </div>
 <aside class="author-box"><strong>About the author</strong><br/>Ayman Atif is a .NET and Python software engineer who has been building business software since 2014. <a href="/about/">Learn about Ayman</a> or explore <a href="/services/dotnet-development/">.NET development services</a> and <a href="/services/aspnet-core-api-development/">ASP.NET Core API development</a>.<p>For project work, see <a href="/hire-dotnet-developer/">working with me as a freelance .NET developer</a> or <a href="/contact/">contact me about your application</a>.</p></aside>
 <footer class="post-end">
-<p>Written by Ayman Atif — freelance .NET and Python software engineer, working remotely with clients worldwide.</p>
+<p>Written by Ayman Atif, a freelance .NET and Python software engineer working remotely with clients worldwide.</p>
 <a class="button button-primary" href="/contact/">Start a conversation <span aria-hidden="true">↗</span></a>
 </footer>
 </article>

@@ -36,6 +36,36 @@
       "permanent": true
     },
     {
+      "source": "/blog/async-await-deadlocks-thread-pool-starvation",
+      "destination": "/blog/async-await-request-stalls-thread-pool-blocking/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/async-await-deadlocks-thread-pool-starvation/",
+      "destination": "/blog/async-await-request-stalls-thread-pool-blocking/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/async-await-deadlocks-thread-pool-starvation/index.html",
+      "destination": "/blog/async-await-request-stalls-thread-pool-blocking/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/async-await-request-stalls-thread-pool-starvation",
+      "destination": "/blog/async-await-request-stalls-thread-pool-blocking/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/async-await-request-stalls-thread-pool-starvation/",
+      "destination": "/blog/async-await-request-stalls-thread-pool-blocking/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/async-await-request-stalls-thread-pool-starvation/index.html",
+      "destination": "/blog/async-await-request-stalls-thread-pool-blocking/",
+      "permanent": true
+    },
+    {
       "source": "/blog/caching-garbage-collection-system-design-interview-answers/index.html",
       "destination": "/blog/caching-garbage-collection-system-design-interview-answers/",
       "permanent": true

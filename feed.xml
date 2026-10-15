@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0">
   <channel>
-    <title>Ayman Atif — Software Engineering Blog</title>
+    <title>Ayman Atif | Software Engineering Blog</title>
     <link>https://ayman-atif.vercel.app/blog/</link>
     <description>Practical software engineering lessons from real projects in .NET, backend architecture, databases, performance and automation.</description>
     <language>en</language>
