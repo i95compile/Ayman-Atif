@@ -31,7 +31,7 @@
 <link href="../../assets/img/favicon.svg" rel="icon" type="image/svg+xml"/>
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Manrope:wght@500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Manrope:wght@500;600;700;800&amp;family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&amp;display=swap" rel="stylesheet"/>
 <link href="../../assets/css/styles.css" rel="stylesheet"/>
 <link href="../../assets/css/blog.css" rel="stylesheet"/>
 <script type="application/ld+json">{
@@ -115,7 +115,8 @@
 <div aria-hidden="true" class="cursor-glow"></div>
 <header class="site-header"><a aria-label="Ayman Atif, home" class="brand" href="/"><span aria-hidden="true" class="brand-mark">AA</span><span class="brand-copy">Ayman Atif</span></a><nav aria-label="Primary navigation" class="nav"><a href="/">Home</a><a href="/services/">Services</a><a href="/work/">Work</a><a href="/about/">About</a><a aria-current="page" href="/blog/">Blog</a><a class="nav-cta" href="/contact/">Contact</a></nav><button aria-controls="mobile-menu" aria-expanded="false" aria-label="Open menu" class="menu-toggle" type="button"><span></span><span></span></button></header>
 <nav aria-hidden="true" aria-label="Mobile navigation" class="mobile-menu" id="mobile-menu"><a href="/">Home</a><a href="/services/">Services</a><a href="/work/">Work</a><a href="/about/">About</a><a aria-current="page" href="/blog/">Blog</a><a href="/contact/">Contact</a></nav>
-<main class="section-dark blog-page" id="main-content">
+<main class="blog-article" id="main-content">
+<div class="post-layout">
 <article class="post">
 <nav aria-label="Breadcrumb" class="post-breadcrumb">
 <a href="/">Home</a><span aria-hidden="true">/</span>
@@ -123,6 +124,7 @@
 <span>Interview trick</span>
 </nav>
 <header class="post-header">
+<p class="post-kicker">.NET · Career</p>
 <h1 class="post-title">The One Interview Trick That Got Me Hired as a Senior .NET Developer</h1>
 <p class="post-meta">
 <span>Ayman Atif</span>
@@ -149,7 +151,7 @@
 <p>Definitions are what students give. Trade-offs are what engineers give. And senior interviews are, almost without exception, screening for the second thing while sounding like they’re asking for the first.</p>
 <p>Once I understood that, I went back and re-answered every question I’d botched — this time out loud, to myself, in the trade-off format. The difference was staggering. Here’s the same async/await question, answered the second way:</p>
 <blockquote><p>“Async/await isn’t really about I/O versus CPU — it’s about not blocking a thread while you wait on something slow, like a database call or an external API. The cost is that it adds complexity: if you mix blocking and async code carelessly, you get continuation stalls, especially in older ASP.NET contexts with SynchronizationContext. In one production system I worked on, we had a service that started timing out under load because a <code>.Result</code> call was blocking a thread pool thread that async continuations needed. The fix wasn’t ‘use async’ — it was understanding why blocking there was expensive in the first place.”</p></blockquote>
-<p>Same underlying knowledge. Completely different signal. One says “I read the docs.” The other says “I’ve been paged at 2am because of this.” <a href="/blog/async-await-request-stalls-thread-pool-starvation/">The full trade-off answer for the async question is here</a>.</p>
+<p>Same underlying knowledge. Completely different signal. One says “I read the docs.” The other says “I’ve been paged at 2am because of this.” <a href="/blog/async-await-request-stalls-thread-pool-blocking/">The full trade-off answer for the async question is here</a>.</p>
 <h2>Why this works (and why almost nobody does it)</h2>
 <p>Most candidates prepare for interviews the way they prepared for university exams: memorize definitions, rehearse them, hope the right flashcard comes up. It’s an understandable instinct — it’s how we were trained to study for over a decade.</p>
 <p>But hiring managers for senior and mid-to-senior roles aren’t grading a knowledge test. They’re simulating what it’s like to have you on the team when production is on fire. A definition tells them nothing about that. A trade-off, delivered with a real scar attached to it, tells them everything.</p>
@@ -191,6 +193,15 @@
 <a class="button button-primary" href="/contact/">Start a conversation <span aria-hidden="true">↗</span></a>
 </footer>
 </article>
+<aside aria-label="About the author" class="author-sidebar">
+<img alt="Ayman Atif" decoding="async" height="88" src="/assets/img/ayman-atif-software-engineer.webp" width="88"/>
+<p class="author-label">Written by</p>
+<h2>Ayman Atif</h2>
+<p>I’m a software engineer working with .NET, Python and business software, building web applications, APIs and automation for real operations.</p>
+<p>I write to share practical engineering lessons and what I have learned from development work in production.</p>
+<p class="author-links"><a href="/about/">About me</a><a href="/contact/">Get in touch</a></p>
+</aside>
+</div>
 </main>
 <footer class="site-footer"><div class="container site-footer-inner"><div class="site-footer-brand"><strong>Ayman Atif</strong><p>.NET and Python software developer building business applications, APIs and automation.</p></div><nav aria-label="Footer navigation" class="site-footer-nav"><a href="/services/">Services</a><a href="/work/">Work</a><a href="/experience/">Experience</a><a href="/skills/">Skills</a><a href="/about/">About</a><a href="/certifications/">Certifications</a><a href="/blog/">Blog</a><a href="/contact/">Contact</a><a href="/hire-dotnet-developer/">Hire a .NET developer</a><a href="https://www.linkedin.com/in/a95yman/" rel="me noreferrer" target="_blank">LinkedIn</a></nav><div class="site-footer-bottom"><span>Working remotely</span><span>© <span class="current-year">2026</span> Ayman Atif</span></div></div></footer>
 <script defer="" src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>

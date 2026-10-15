@@ -77,8 +77,8 @@
   </url>
 
   <url>
-    <loc>https://ayman-atif.vercel.app/blog/async-await-request-stalls-thread-pool-starvation/</loc>
-    <lastmod>2026-10-02</lastmod>
+    <loc>https://ayman-atif.vercel.app/blog/async-await-request-stalls-thread-pool-blocking/</loc>
+    <lastmod>2026-10-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>

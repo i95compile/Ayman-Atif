@@ -36,26 +36,6 @@
       "permanent": true
     },
     {
-      "source": "/blog/async-await-deadlocks-thread-pool-starvation",
-      "destination": "/blog/async-await-request-stalls-thread-pool-starvation/",
-      "permanent": true
-    },
-    {
-      "source": "/blog/async-await-deadlocks-thread-pool-starvation/",
-      "destination": "/blog/async-await-request-stalls-thread-pool-starvation/",
-      "permanent": true
-    },
-    {
-      "source": "/blog/async-await-deadlocks-thread-pool-starvation/index.html",
-      "destination": "/blog/async-await-request-stalls-thread-pool-starvation/",
-      "permanent": true
-    },
-    {
-      "source": "/blog/async-await-request-stalls-thread-pool-starvation/index.html",
-      "destination": "/blog/async-await-request-stalls-thread-pool-starvation/",
-      "permanent": true
-    },
-    {
       "source": "/blog/caching-garbage-collection-system-design-interview-answers/index.html",
       "destination": "/blog/caching-garbage-collection-system-design-interview-answers/",
       "permanent": true
@@ -173,6 +153,11 @@
     {
       "source": "/work/uk-company-data-tool/index.html",
       "destination": "/work/uk-company-data-tool/",
+      "permanent": true
+    },
+    {
+      "source": "/blog/async-await-request-stalls-thread-pool-blocking/index.html",
+      "destination": "/blog/async-await-request-stalls-thread-pool-blocking/",
       "permanent": true
     }
   ]

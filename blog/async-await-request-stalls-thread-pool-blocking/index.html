@@ -9,12 +9,12 @@
 <meta content="index, follow, max-image-preview:large, max-snippet:-1" name="robots"/>
 <meta content="dark light" name="color-scheme"/>
 <meta content="#0b0d10" name="theme-color"/>
-<link href="https://ayman-atif.vercel.app/blog/async-await-request-stalls-thread-pool-starvation/" rel="canonical"/>
+<link href="https://ayman-atif.vercel.app/blog/async-await-request-stalls-thread-pool-blocking/" rel="canonical"/>
 <meta content="article" property="og:type"/>
 <meta content="en_US" property="og:locale"/>
 <meta content="Ayman Atif Portfolio" property="og:site_name"/>
-<meta content="https://ayman-atif.vercel.app/blog/async-await-request-stalls-thread-pool-starvation/" property="og:url"/>
-<meta content="async/await in .NET Interviews: Request Stalls and Thread Pool Starvation" property="og:title"/>
+<meta content="https://ayman-atif.vercel.app/blog/async-await-request-stalls-thread-pool-blocking/" property="og:url"/>
+<meta content="async/await in .NET Interviews: Request Stalls and Thread Pool Blocking" property="og:title"/>
 <meta content="The async question is not about I/O versus CPU. It is about what blocking a thread pool thread costs you under load. Here is the answer that sounds senior." property="og:description"/>
 <meta content="https://ayman-atif.vercel.app/assets/img/ayman-atif-software-engineer.webp" property="og:image"/>
 <meta content="2026-09-06" property="article:published_time"/>
@@ -25,28 +25,28 @@
 <meta content="Technical interviews" property="article:tag"/>
 <meta content="async/await" property="article:tag"/>
 <meta content="summary_large_image" name="twitter:card"/>
-<meta content="async/await in .NET Interviews: Request Stalls and Thread Pool Starvation" name="twitter:title"/>
+<meta content="async/await in .NET Interviews: Request Stalls and Thread Pool Blocking" name="twitter:title"/>
 <meta content="The async question is not about I/O versus CPU. It is about what blocking a thread pool thread costs you under load." name="twitter:description"/>
 <meta content="https://ayman-atif.vercel.app/assets/img/ayman-atif-software-engineer.webp" name="twitter:image"/>
-<title>async/await in .NET Interviews: Request Stalls and Thread Pool Starvation</title>
+<title>async/await in .NET Interviews: Request Stalls and Thread Pool Blocking</title>
 <link href="../../assets/img/favicon.svg" rel="icon" type="image/svg+xml"/>
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Manrope:wght@500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Manrope:wght@500;600;700;800&amp;family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&amp;display=swap" rel="stylesheet"/>
 <link href="../../assets/css/styles.css" rel="stylesheet"/>
 <link href="../../assets/css/blog.css" rel="stylesheet"/>
 <script type="application/ld+json">{
   "@context": "https://schema.org",
   "@type": "BlogPosting",
-  "@id": "https://ayman-atif.vercel.app/blog/async-await-request-stalls-thread-pool-starvation/#article",
-  "headline": "async/await in .NET Interviews: Request Stalls, Thread Pool Starvation, and What Interviewers Are Really Asking",
+  "@id": "https://ayman-atif.vercel.app/blog/async-await-request-stalls-thread-pool-blocking/#article",
+  "headline": "async/await in .NET Interviews: Request Stalls, Thread Pool Blocking, and What Interviewers Are Really Asking",
   "description": "The async/await interview question is not about I/O versus CPU. It is about what happens when you block a thread pool thread under load. The trade-off answer that signals senior.",
   "image": "https://ayman-atif.vercel.app/assets/img/ayman-atif-software-engineer.webp",
   "datePublished": "2026-09-06",
-  "dateModified": "2026-10-02",
+  "dateModified": "2026-10-15",
   "wordCount": 1411,
   "inLanguage": "en",
-  "url": "https://ayman-atif.vercel.app/blog/async-await-request-stalls-thread-pool-starvation/",
+  "url": "https://ayman-atif.vercel.app/blog/async-await-request-stalls-thread-pool-blocking/",
   "author": {
     "@type": "Person",
     "@id": "https://ayman-atif.vercel.app/#ayman-atif",
@@ -67,7 +67,7 @@
   },
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "https://ayman-atif.vercel.app/blog/async-await-request-stalls-thread-pool-starvation/"
+    "@id": "https://ayman-atif.vercel.app/blog/async-await-request-stalls-thread-pool-blocking/"
   },
   "isPartOf": {
     "@type": "Blog",
@@ -77,7 +77,7 @@
     "async await interview question",
     "Result continuation stall",
     "ConfigureAwait false",
-    "thread pool starvation",
+    "thread pool blocking",
     "SynchronizationContext continuation stall",
     "sync over async"
   ],
@@ -102,8 +102,8 @@
     {
       "@type": "ListItem",
       "position": 3,
-      "name": "async/await in .NET Interviews: Request Stalls and Thread Pool Starvation",
-      "item": "https://ayman-atif.vercel.app/blog/async-await-request-stalls-thread-pool-starvation/"
+      "name": "async/await in .NET Interviews: Request Stalls and Thread Pool Blocking",
+      "item": "https://ayman-atif.vercel.app/blog/async-await-request-stalls-thread-pool-blocking/"
     }
   ]
 }</script>
@@ -111,12 +111,13 @@
 <link rel="stylesheet" href="../../assets/css/seo-pages.css">
 </head>
 <body>
-<a class="skip-link" href="/blog/async-await-request-stalls-thread-pool-starvation/#main-content">Skip to main content</a>
+<a class="skip-link" href="/blog/async-await-request-stalls-thread-pool-blocking/#main-content">Skip to main content</a>
 <div aria-hidden="true" class="noise"></div>
 <div aria-hidden="true" class="cursor-glow"></div>
 <header class="site-header"><a aria-label="Ayman Atif, home" class="brand" href="/"><span aria-hidden="true" class="brand-mark">AA</span><span class="brand-copy">Ayman Atif</span></a><nav aria-label="Primary navigation" class="nav"><a href="/">Home</a><a href="/services/">Services</a><a href="/work/">Work</a><a href="/about/">About</a><a aria-current="page" href="/blog/">Blog</a><a class="nav-cta" href="/contact/">Contact</a></nav><button aria-controls="mobile-menu" aria-expanded="false" aria-label="Open menu" class="menu-toggle" type="button"><span></span><span></span></button></header>
 <nav aria-hidden="true" aria-label="Mobile navigation" class="mobile-menu" id="mobile-menu"><a href="/">Home</a><a href="/services/">Services</a><a href="/work/">Work</a><a href="/about/">About</a><a aria-current="page" href="/blog/">Blog</a><a href="/contact/">Contact</a></nav>
-<main class="section-dark blog-page" id="main-content">
+<main class="blog-article" id="main-content">
+<div class="post-layout">
 <article class="post">
 <nav aria-label="Breadcrumb" class="post-breadcrumb">
 <a href="/">Home</a><span aria-hidden="true">/</span>
@@ -124,7 +125,8 @@
 <span>async/await continuation stalls</span>
 </nav>
 <header class="post-header">
-<h1 class="post-title">async/await in .NET Interviews: Request Stalls, Thread Pool Starvation, and What Interviewers Are Really Asking</h1>
+<p class="post-kicker">.NET · async/await</p>
+<h1 class="post-title">async/await in .NET Interviews: Request Stalls, Thread Pool Blocking, and What Interviewers Are Really Asking</h1>
 <p class="post-meta">
 <span>Ayman Atif</span>
 <span aria-hidden="true" class="dot"></span>
@@ -158,18 +160,18 @@
 <li>Which is blocked, waiting for the continuation. Neither side moves.</li>
 </ul>
 <p>This is the continuation stall interviewers expect you to name. Knowing it exists is table stakes. Knowing that <code>ConfigureAwait(false)</code> avoids it — by telling the continuation it does not need the original context — is the next layer. Knowing that <code>ConfigureAwait(false)</code> is a workaround for a mistake you should not be making is the layer that sounds senior.</p>
-<h2>Failure mode two: thread pool starvation (the one people miss)</h2>
+<h2>Failure mode two: thread pool blocking (the one people miss)</h2>
 <p>ASP.NET Core removed the request <code>SynchronizationContext</code>. Candidates often conclude “so blocking is fine now.” It is not. The failure just changes shape from a hard lock to a slow collapse.</p>
 <p>Here is a scenario I have had to trace. A background component called a third-party client library that only exposed synchronous methods, so someone wrapped an async pipeline around it and blocked internally with <code>.GetAwaiter().GetResult()</code>. Fine in development. Under production traffic, every one of those calls parked a thread pool thread for the duration of a network call. As load rose, the pool ran out of free threads. The pool’s injection logic adds new threads slowly — on the order of one or two per second — so it could not keep up with the arrival rate.</p>
 <p>The symptom was not an exception. It was latency: requests that normally returned in 80 ms started taking 3–10 seconds, because they were sitting in a queue waiting for a thread that was busy blocking on I/O. CPU was low. Memory was fine. Every dashboard looked healthy except the one that mattered. The fix was to use the library’s async API where it existed and to move the genuinely sync-only work off the request path entirely.</p>
 <h2>Task.Run is not a synonym for “make it async”</h2>
 <p><code>Task.Run</code> pushes a delegate onto the thread pool. That is the right tool for CPU-bound work you want off the current thread — image processing, a heavy calculation, parsing a large file. It is the wrong tool for I/O. Wrapping <code>await httpClient.GetAsync(...)</code> in <code>Task.Run</code> does not make the network faster; it just burns a second thread to wait for the first one. On a web server, <code>Task.Run</code> around I/O is usually a small self-inflicted wound.</p>
 <h2>The engineer answer</h2>
-<blockquote><p>“async/await isn’t really about I/O versus CPU — it’s about not holding a thread while you wait on something slow. Threads are the scarce resource on a server. The cost of getting it wrong is either a hard continuation stall, in frameworks with a SynchronizationContext, or thread pool starvation in ASP.NET Core — which is worse to diagnose because it shows up as creeping latency with healthy CPU and memory. I’ve traced exactly that: a sync-over-async call to a third-party library that parked pool threads under load until requests started queuing for seconds. The rule I follow is: async all the way down, never block on a task on a request path, and only reach for <code>Task.Run</code> when the work is genuinely CPU-bound. <code>ConfigureAwait(false)</code> matters in library code; in an ASP.NET Core app it mostly doesn’t, because there’s no context to capture.”</p></blockquote>
+<blockquote><p>“async/await isn’t really about I/O versus CPU — it’s about not holding a thread while you wait on something slow. Threads are the scarce resource on a server. The cost of getting it wrong is either a hard continuation stall, in frameworks with a SynchronizationContext, or blocked thread-pool threads in ASP.NET Core — which is worse to diagnose because it shows up as creeping latency with healthy CPU and memory. I’ve traced exactly that: a sync-over-async call to a third-party library that parked pool threads under load until requests started queuing for seconds. The rule I follow is: async all the way down, never block on a task on a request path, and only reach for <code>Task.Run</code> when the work is genuinely CPU-bound. <code>ConfigureAwait(false)</code> matters in library code; in an ASP.NET Core app it mostly doesn’t, because there’s no context to capture.”</p></blockquote>
 <p>Same knowledge as the student answer. Completely different signal — because it is anchored in a consequence, a diagnosis, and a rule you now follow.</p>
 <h2>Follow-ups interviewers use to check if the answer was memorised</h2>
 <ul>
-<li><strong>“Why is thread pool starvation hard to spot?”</strong> Low CPU, low memory, rising latency, requests queued before they reach your code.</li>
+<li><strong>“Why is thread pool blocking hard to spot?”</strong> Low CPU, low memory, rising latency, requests queued before they reach your code.</li>
 <li><strong>“What’s <code>async void</code> for?”</strong> Event handlers only. Anywhere else, exceptions escape onto the synchronization context and can take the process down, and callers can’t await completion.</li>
 <li><strong>“Does async make a single request faster?”</strong> No. It improves throughput and scalability under concurrency. A lone request may even be marginally slower.</li>
 <li><strong>“How would you expose an async method to a sync-only caller?”</strong> Ideally you don’t. If forced, isolate it, understand you’re paying a thread, and keep it off hot paths.</li>
@@ -194,6 +196,15 @@
 <a class="button button-primary" href="/contact/">Start a conversation <span aria-hidden="true">↗</span></a>
 </footer>
 </article>
+<aside aria-label="About the author" class="author-sidebar">
+<img alt="Ayman Atif" decoding="async" height="88" src="/assets/img/ayman-atif-software-engineer.webp" width="88"/>
+<p class="author-label">Written by</p>
+<h2>Ayman Atif</h2>
+<p>I’m a software engineer working with .NET, Python and business software, building web applications, APIs and automation for real operations.</p>
+<p>I write to share practical engineering lessons and what I have learned from development work in production.</p>
+<p class="author-links"><a href="/about/">About me</a><a href="/contact/">Get in touch</a></p>
+</aside>
+</div>
 </main>
 <footer class="site-footer"><div class="container site-footer-inner"><div class="site-footer-brand"><strong>Ayman Atif</strong><p>.NET and Python software developer building business applications, APIs and automation.</p></div><nav aria-label="Footer navigation" class="site-footer-nav"><a href="/services/">Services</a><a href="/work/">Work</a><a href="/experience/">Experience</a><a href="/skills/">Skills</a><a href="/about/">About</a><a href="/certifications/">Certifications</a><a href="/blog/">Blog</a><a href="/contact/">Contact</a><a href="/hire-dotnet-developer/">Hire a .NET developer</a><a href="https://www.linkedin.com/in/a95yman/" rel="me noreferrer" target="_blank">LinkedIn</a></nav><div class="site-footer-bottom"><span>Working remotely</span><span>© <span class="current-year">2026</span> Ayman Atif</span></div></div></footer>
 <script defer="" src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>

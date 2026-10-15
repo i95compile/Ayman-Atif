@@ -14,11 +14,11 @@
       <description>A case study on rebuilding an Excel-like web app around JSON document state after relational storage made formulas, undo and version history harder to preserve.</description>
     </item>
     <item>
-      <title>async/await in .NET Interviews: Request Stalls, Thread Pool Starvation, and What Interviewers Are Really Asking</title>
-      <link>https://ayman-atif.vercel.app/blog/async-await-request-stalls-thread-pool-starvation/</link>
-      <guid isPermaLink="true">https://ayman-atif.vercel.app/blog/async-await-request-stalls-thread-pool-starvation/</guid>
+      <title>async/await in .NET Interviews: Request Stalls, Thread Pool Blocking, and What Interviewers Are Really Asking</title>
+      <link>https://ayman-atif.vercel.app/blog/async-await-request-stalls-thread-pool-blocking/</link>
+      <guid isPermaLink="true">https://ayman-atif.vercel.app/blog/async-await-request-stalls-thread-pool-blocking/</guid>
       <pubDate>Sun, 06 Sep 2026 00:00:00 GMT</pubDate>
-      <description>A practical explanation of request stalls, thread-pool starvation and the async/await concepts that matter in .NET interviews.</description>
+      <description>A practical explanation of request stalls, thread-pool blocking and the async/await concepts that matter in .NET interviews.</description>
     </item>
     <item>
       <title>EF Core Interview Questions: Tracking, the N+1 Problem, and IQueryable Traps</title>
