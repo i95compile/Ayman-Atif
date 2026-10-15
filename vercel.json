@@ -81,6 +81,11 @@
       "permanent": true
     },
     {
+      "source": "/blog/first-ai-powered-news-to-video-system/index.html",
+      "destination": "/blog/first-ai-powered-news-to-video-system/",
+      "permanent": true
+    },
+    {
       "source": "/blog/how-i-rebuilt-an-excel-like-web-app-after-the-first-architecture-failed/index.html",
       "destination": "/blog/how-i-rebuilt-an-excel-like-web-app-after-the-first-architecture-failed/",
       "permanent": true

@@ -5,7 +5,14 @@
     <link>https://ayman-atif.vercel.app/blog/</link>
     <description>Practical software engineering lessons from real projects in .NET, backend architecture, databases, performance and automation.</description>
     <language>en</language>
-    <lastBuildDate>Fri, 02 Oct 2026 00:00:00 GMT</lastBuildDate>
+    <lastBuildDate>Thu, 15 Oct 2026 00:00:00 GMT</lastBuildDate>
+    <item>
+      <title>How I Built My First AI-Powered News-to-Video System as a Junior Developer</title>
+      <link>https://ayman-atif.vercel.app/blog/first-ai-powered-news-to-video-system/</link>
+      <guid isPermaLink="true">https://ayman-atif.vercel.app/blog/first-ai-powered-news-to-video-system/</guid>
+      <pubDate>Thu, 15 Oct 2026 00:00:00 GMT</pubDate>
+      <description>A first-person case study on learning FFmpeg outside .NET, why a video pipeline is more than images plus audio, and rebuilding an MVP that only planned for one user.</description>
+    </item>
     <item>
       <title>How I Rebuilt an Excel-Like Web App After the First Architecture Failed</title>
       <link>https://ayman-atif.vercel.app/blog/how-i-rebuilt-an-excel-like-web-app-after-the-first-architecture-failed/</link>
