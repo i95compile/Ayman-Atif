@@ -164,6 +164,11 @@
       "source": "/work/invoiceflow/index.html",
       "destination": "/work/invoiceflow/",
       "permanent": true
+    },
+    {
+      "source": "/work/uk-company-data-tool/index.html",
+      "destination": "/work/uk-company-data-tool/",
+      "permanent": true
     }
   ]
 }

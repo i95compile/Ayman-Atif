@@ -33,7 +33,7 @@
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Manrope:wght@500;600;700;800&amp;display=swap" rel="stylesheet"/>
-<link href="assets/css/styles.css?v=20260926-2" rel="stylesheet"/>
+<link href="assets/css/styles.css?v=20261015-1" rel="stylesheet"/>
 <script type="application/ld+json">{
   "@context": "https://schema.org",
   "@graph": [
@@ -390,7 +390,8 @@
 </div>
 </section>
 <section aria-labelledby="invoice-title" class="invoice section-light">
-<div class="container invoice-grid">
+<div class="container"><p class="section-index project-section-label">PROJECTS / TWO PYTHON DATA TOOLS</p></div>
+<div class="container invoice-grid invoice-project">
 <div aria-label="Abstract architecture diagram for the InvoiceFlow open-source project" class="invoice-visual">
 <div class="invoice-topbar"><span>InvoiceFlow / architecture</span><i>open source</i></div>
 <div class="pipeline">
@@ -413,6 +414,31 @@
 <p><a href="/invoiceflow/">How InvoiceFlow converts PDF invoices to Excel — features, install and usage →</a></p>
 <div class="project-stack">Python · pdfplumber · pandas · openpyxl · ProcessPoolExecutor · pytest</div>
 <a class="button button-dark" href="https://github.com/i95compile/PDF2Excel-Invoices" rel="noreferrer" target="_blank">Inspect the project on GitHub <span aria-hidden="true">↗</span></a>
+</div>
+</div>
+<div class="container invoice-grid invoice-project invoice-project--mirrored">
+<div aria-label="Abstract architecture diagram for the UK Company Data Tool: a Companies House CSV is streamed in chunks, filtered and written to Excel workbooks by postcode area, with an optional website enrichment step" class="invoice-visual uk-visual" role="img">
+<div class="invoice-topbar"><span>uk-company-data-tool / architecture</span><i>public repository</i></div>
+<div class="pipeline">
+<div><span>CSV</span><small>Companies House</small></div><i></i>
+<div><span>Stream</span><small>chunks · two passes</small></div><i></i>
+<div><span>Excel</span><small>per postcode area</small></div><i></i>
+<div class="pipeline-optional"><span>Enrich</span><small>optional step</small></div>
+</div>
+<div class="invoice-details">
+<div><span>Input</span><strong>Public company data</strong></div>
+<div><span>Processing</span><strong>Chunked streaming</strong></div>
+<div><span>Output</span><strong>Filtered lead workbooks</strong></div>
+</div>
+</div>
+<div class="invoice-copy invoice-copy--long">
+<p class="project-type">PUBLIC DATA ENGINEERING PROJECT</p>
+<h2>UK Company Data Tool</h2>
+<p>A Python tool that streams the large Companies House company data file in chunks and writes filtered Excel lead lists, one folder per postcode area.</p>
+<p>An optional second step looks for each company's website and records publicly listed business contact details, only when the site can be verified as belonging to that company. Coverage is limited, and the project documents its limitations.</p>
+<p><a href="/work/uk-company-data-tool/">How the UK Company Data Tool works — approach, limits and responsible use →</a></p>
+<div class="project-stack">Python · pandas · xlsxwriter · chunked CSV streaming · Companies House data</div>
+<a class="button button-dark" href="https://github.com/i95compile/uk-company-data-tool" rel="noreferrer" target="_blank">Inspect the project on GitHub <span aria-hidden="true">↗</span></a>
 </div>
 </div>
 </section>
@@ -460,6 +486,6 @@
 </main>
 <script defer="" src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
 <script defer="" src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
-<script defer="" src="assets/js/script.js?v=20260926-2"></script>
+<script defer="" src="assets/js/script.js?v=20261015-1"></script>
 </body>
 </html>

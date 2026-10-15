@@ -250,25 +250,29 @@ function initMotion() {
     ease: 'power2.inOut'
   });
 
-  gsap.from('.invoice-visual', {
-    y: 70,
-    rotate: -5,
-    opacity: 0,
-    scrollTrigger: { trigger: '.invoice', start: 'top 78%', end: 'top 45%', scrub: .9 }
-  });
-  gsap.from('.pipeline div', {
-    y: 22,
-    opacity: 0,
-    stagger: .12,
-    duration: .55,
-    scrollTrigger: { trigger: '.invoice-visual', start: 'top 64%' }
-  });
-  gsap.from('.invoice-copy > *', {
-    y: 35,
-    opacity: 0,
-    stagger: .09,
-    duration: .65,
-    scrollTrigger: { trigger: '.invoice-copy', start: 'top 76%' }
+  gsap.utils.toArray('.invoice-project').forEach((project, index) => {
+    const visual = project.querySelector('.invoice-visual');
+    const copy = project.querySelector('.invoice-copy');
+    gsap.from(visual, {
+      y: 70,
+      rotate: index === 0 ? -5 : 5,
+      opacity: 0,
+      scrollTrigger: { trigger: index === 0 ? '.invoice' : project, start: 'top 78%', end: 'top 45%', scrub: .9 }
+    });
+    gsap.from(visual.querySelectorAll('.pipeline div'), {
+      y: 22,
+      opacity: 0,
+      stagger: .12,
+      duration: .55,
+      scrollTrigger: { trigger: visual, start: 'top 64%' }
+    });
+    gsap.from(copy.children, {
+      y: 35,
+      opacity: 0,
+      stagger: .09,
+      duration: .65,
+      scrollTrigger: { trigger: copy, start: 'top 76%' }
+    });
   });
 
   gsap.from('.about-grid > *', {

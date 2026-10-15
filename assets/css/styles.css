@@ -654,6 +654,41 @@ button { font: inherit; }
 .invoice-copy > p:not(.project-type) a { color: var(--ink); font-weight: 600; text-decoration: underline; text-underline-offset: 3px; }
 .project-stack { max-width: 520px; margin: 27px 0; padding: 16px 0; border-top: 1px solid var(--line-dark); border-bottom: 1px solid var(--line-dark); color: #55534f; font-size: 10px; line-height: 1.6; }
 
+/* Second project in the homepage project section and the UK Company Data Tool case-study diagram. */
+.project-section-label { margin: 0 auto 70px; }
+.invoice-project + .invoice-project { margin-top: 125px; padding-top: 125px; border-top: 1px solid var(--line-dark); }
+.invoice-project--mirrored .invoice-visual { transform: rotate(1.5deg); }
+.invoice-copy--long h2 { font-size: clamp(44px, 5.2vw, 68px); line-height: 1; }
+.uk-visual .invoice-topbar i { color: #d7dbe0; background: rgba(255, 255, 255, .08); }
+.uk-visual .pipeline small, .uk-visual .invoice-details span { color: #8a929c; font-size: 9px; }
+.uk-visual .pipeline small { line-height: 1.4; }
+.uk-visual .pipeline .pipeline-optional { border-style: dashed; border-color: rgba(183, 255, 90, .3); }
+.uk-flow { margin: 0; padding: 28px; border: 1px solid rgba(255, 255, 255, .1); border-radius: 23px; background: #161a1f; color: #fff; }
+.uk-lane + .uk-lane { margin-top: 28px; padding-top: 28px; border-top: 1px dashed rgba(255, 255, 255, .14); }
+.uk-lane-title { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px; margin: 0 0 16px; color: #a8afb8; font: 700 11px Manrope, sans-serif; letter-spacing: .12em; text-transform: uppercase; }
+.uk-lane-title i { padding: 6px 9px; border-radius: 99px; background: rgba(183, 255, 90, .08); color: var(--accent); font-size: 10px; font-style: normal; letter-spacing: .08em; }
+.uk-steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 22px; margin: 0; padding: 0; list-style: none; }
+.uk-steps li { position: relative; display: grid; min-height: 118px; align-content: start; gap: 6px; padding: 14px; border: 1px solid rgba(255, 255, 255, .1); border-radius: 13px; background: #1d2228; }
+.uk-steps li:not(:last-child)::after { position: absolute; top: 50%; right: -22px; width: 22px; height: 1px; background: rgba(183, 255, 90, .35); content: ""; }
+.uk-steps strong { font: 600 14px Manrope, sans-serif; }
+.uk-steps span { color: #9aa1a9; font-size: 12px; line-height: 1.5; }
+.uk-lane--optional .uk-steps li { border-style: dashed; border-color: rgba(183, 255, 90, .28); }
+.uk-flow figcaption { margin-top: 24px; color: #9aa1a9; font-size: 12px; line-height: 1.6; }
+@media (max-width: 920px) {
+  .invoice-project + .invoice-project { margin-top: 90px; padding-top: 90px; }
+  .project-section-label { margin-bottom: 55px; }
+}
+@media (max-width: 800px) {
+  .uk-flow { padding: 20px; }
+  .uk-steps { grid-template-columns: 1fr; gap: 20px; }
+  .uk-steps li { min-height: 0; }
+  .uk-steps li:not(:last-child)::after { top: auto; right: auto; bottom: -20px; left: 50%; width: 1px; height: 20px; }
+}
+@media (max-width: 680px) {
+  .invoice-copy--long h2 { font-size: clamp(42px, 12.5vw, 60px); }
+  .invoice-project--mirrored .invoice-visual { transform: none; }
+}
+
 .about { padding: 145px 0 155px; border-top: 1px solid var(--line-dark); }
 .about-grid { display: grid; grid-template-columns: 1fr .75fr; gap: 100px; }
 .about h2 {
