@@ -47,7 +47,9 @@ window.addEventListener('resize', () => {
 }, { passive: true });
 
 if (!prefersReducedMotion) {
-  let lastScroll = window.scrollY;
+  // Read the scroll position lazily: reading it here, right after the class change
+  // above, would force a full synchronous style and layout pass during page load.
+  let lastScroll = 0;
   let scrollTicking = false;
 
   window.addEventListener('scroll', () => {
@@ -304,10 +306,15 @@ function initMotion() {
 // Pages that opt in with data-lazy-motion load GSAP on the first interaction,
 // keeping it out of the critical path. The page is fully visible without it,
 // because initial animation states are only applied once GSAP has loaded.
+// data-lazy-motion="core" pages only use GSAP for the cursor glow, so they skip
+// ScrollTrigger and, on devices without a fine pointer, skip GSAP entirely.
+const lazyMotion = document.documentElement.getAttribute('data-lazy-motion');
+const glowOnly = lazyMotion === 'core';
 const GSAP_SOURCES = [
   'https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js',
-  'https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js'
+  ...(glowOnly ? [] : ['https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js'])
 ];
+const needsGsap = !glowOnly || window.matchMedia('(hover: hover) and (pointer: fine)').matches;
 
 function loadScript(src) {
   return new Promise((resolve, reject) => {
@@ -319,7 +326,7 @@ function loadScript(src) {
   });
 }
 
-if (document.documentElement.hasAttribute('data-lazy-motion') && !window.gsap && !prefersReducedMotion) {
+if (lazyMotion !== null && !window.gsap && !prefersReducedMotion && needsGsap) {
   const triggers = ['scroll', 'wheel', 'touchstart', 'pointerdown', 'pointermove', 'keydown'];
   const start = () => {
     triggers.forEach((type) => window.removeEventListener(type, start));
