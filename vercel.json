@@ -26,6 +26,16 @@
   ],
   "redirects": [
     {
+      "source": "/blog/rebuilding-a-crm-three-times/index.html",
+      "destination": "/blog/rebuilding-a-crm-three-times/",
+      "permanent": true
+    },
+    {
+      "source": "/work/crm-data-migration/index.html",
+      "destination": "/work/crm-data-migration/",
+      "permanent": true
+    },
+    {
       "source": "/about/index.html",
       "destination": "/about/",
       "permanent": true

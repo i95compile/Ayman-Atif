@@ -5,7 +5,14 @@
     <link>https://ayman-atif.vercel.app/blog/</link>
     <description>Practical software engineering lessons from real projects in .NET, backend architecture, databases, performance and automation.</description>
     <language>en</language>
-    <lastBuildDate>Thu, 15 Oct 2026 00:00:00 GMT</lastBuildDate>
+    <lastBuildDate>Fri, 16 Oct 2026 00:00:00 GMT</lastBuildDate>
+    <item>
+      <title>I Rebuilt a CRM Three Times. Here's What I Learned.</title>
+      <link>https://ayman-atif.vercel.app/blog/rebuilding-a-crm-three-times/</link>
+      <guid isPermaLink="true">https://ayman-atif.vercel.app/blog/rebuilding-a-crm-three-times/</guid>
+      <pubDate>Fri, 16 Oct 2026 00:00:00 GMT</pubDate>
+      <description>Rebuilding an agency CRM three times, and why migrating contacts and deals from Microsoft Access came down to matching records and mapping new IDs.</description>
+    </item>
     <item>
       <title>How I Built My First AI-Powered News-to-Video System as a Junior Developer</title>
       <link>https://ayman-atif.vercel.app/blog/first-ai-powered-news-to-video-system/</link>

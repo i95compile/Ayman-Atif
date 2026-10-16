@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<meta content="Rebuilding an agency CRM three times, and why migrating contacts and deals from Microsoft Access came down to matching records and mapping new IDs." name="description"/>
+<meta content="Ayman Atif" name="author"/>
+<meta content="index, follow, max-image-preview:large, max-snippet:-1" name="robots"/>
+<meta content="dark light" name="color-scheme"/>
+<meta content="#0b0d10" name="theme-color"/>
+<link href="https://ayman-atif.vercel.app/blog/rebuilding-a-crm-three-times/" rel="canonical"/>
+<meta content="article" property="og:type"/>
+<meta content="en_US" property="og:locale"/>
+<meta content="Ayman Atif Portfolio" property="og:site_name"/>
+<meta content="https://ayman-atif.vercel.app/blog/rebuilding-a-crm-three-times/" property="og:url"/>
+<meta content="I Rebuilt a CRM Three Times. Here's What I Learned." property="og:title"/>
+<meta content="What rebuilding an agency CRM taught me about designing for real users, and why the Microsoft Access migration needed record matching, ID mapping and human review." property="og:description"/>
+<meta content="https://ayman-atif.vercel.app/assets/img/ayman-atif-software-engineer.webp" property="og:image"/>
+<meta content="2026-10-16" property="article:published_time"/>
+<meta content="2026-10-16" property="article:modified_time"/>
+<meta content="Ayman Atif" property="article:author"/>
+<meta content="Building Software" property="article:section"/>
+<meta content="CRM" property="article:tag"/>
+<meta content="Data migration" property="article:tag"/>
+<meta content="Microsoft Access" property="article:tag"/>
+<meta content="Software architecture" property="article:tag"/>
+<meta content="summary_large_image" name="twitter:card"/>
+<meta content="I Rebuilt a CRM Three Times. Here's What I Learned." name="twitter:title"/>
+<meta content="What rebuilding an agency CRM taught me about designing for real users, and why the Microsoft Access migration needed record matching, ID mapping and human review." name="twitter:description"/>
+<meta content="https://ayman-atif.vercel.app/assets/img/ayman-atif-software-engineer.webp" name="twitter:image"/>
+<title>I Rebuilt a CRM Three Times. Here's What I Learned. | Ayman Atif</title>
+<link href="../../assets/img/favicon.svg" rel="icon" type="image/svg+xml"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Manrope:wght@500;600;700;800&amp;family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&amp;display=swap" rel="stylesheet"/>
+<link href="../../assets/css/styles.css" rel="stylesheet"/>
+<link href="../../assets/css/blog.css" rel="stylesheet"/>
+<script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "@id": "https://ayman-atif.vercel.app/blog/rebuilding-a-crm-three-times/#article",
+  "headline": "I Rebuilt a CRM Three Times. Here's What I Learned.",
+  "description": "Rebuilding an agency CRM three times, and why migrating contacts and deals from Microsoft Access came down to matching records and mapping new IDs.",
+  "image": "https://ayman-atif.vercel.app/assets/img/ayman-atif-software-engineer.webp",
+  "datePublished": "2026-10-16",
+  "dateModified": "2026-10-16",
+  "inLanguage": "en",
+  "url": "https://ayman-atif.vercel.app/blog/rebuilding-a-crm-three-times/",
+  "author": {
+    "@type": "Person",
+    "@id": "https://ayman-atif.vercel.app/#ayman-atif",
+    "name": "Ayman Atif",
+    "url": "https://ayman-atif.vercel.app/",
+    "jobTitle": "Freelance Software Engineer",
+    "sameAs": [
+      "https://www.linkedin.com/in/a95yman/",
+      "https://github.com/i95compile",
+      "https://medium.com/@a95yman"
+    ]
+  },
+  "publisher": {
+    "@type": "Person",
+    "name": "Ayman Atif",
+    "url": "https://ayman-atif.vercel.app/",
+    "@id": "https://ayman-atif.vercel.app/#ayman-atif"
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://ayman-atif.vercel.app/blog/rebuilding-a-crm-three-times/"
+  },
+  "isPartOf": {
+    "@type": "Blog",
+    "@id": "https://ayman-atif.vercel.app/blog/#blog"
+  },
+  "keywords": [
+    "CRM rebuild",
+    "Microsoft Access migration",
+    "legacy data migration",
+    "record matching",
+    "data migration review step"
+  ],
+  "articleSection": "Building Software"
+}</script>
+<script type="application/ld+json">{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": "https://ayman-atif.vercel.app/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Blog",
+      "item": "https://ayman-atif.vercel.app/blog/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "name": "I Rebuilt a CRM Three Times. Here's What I Learned.",
+      "item": "https://ayman-atif.vercel.app/blog/rebuilding-a-crm-three-times/"
+    }
+  ]
+}</script>
+<meta name="twitter:image:alt" content="Ayman Atif, software developer">
+<link rel="stylesheet" href="../../assets/css/seo-pages.css">
+</head>
+<body>
+<a class="skip-link" href="/blog/rebuilding-a-crm-three-times/#main-content">Skip to main content</a>
+<div aria-hidden="true" class="noise"></div>
+<div aria-hidden="true" class="cursor-glow"></div>
+<header class="site-header"><a aria-label="Ayman Atif, home" class="brand" href="/"><span aria-hidden="true" class="brand-mark">AA</span><span class="brand-copy">Ayman Atif</span></a><nav aria-label="Primary navigation" class="nav"><a href="/">Home</a><a href="/services/">Services</a><a href="/work/">Work</a><a href="/about/">About</a><a aria-current="page" href="/blog/">Blog</a><a class="nav-cta" href="/contact/">Contact</a></nav><button aria-controls="mobile-menu" aria-expanded="false" aria-label="Open menu" class="menu-toggle" type="button"><span></span><span></span></button></header>
+<nav aria-hidden="true" aria-label="Mobile navigation" class="mobile-menu" id="mobile-menu"><a href="/">Home</a><a href="/services/">Services</a><a href="/work/">Work</a><a href="/about/">About</a><a aria-current="page" href="/blog/">Blog</a><a href="/contact/">Contact</a></nav>
+<main class="blog-article" id="main-content">
+<div class="post-layout">
+<article class="post">
+<nav aria-label="Breadcrumb" class="post-breadcrumb">
+<a href="/">Home</a><span aria-hidden="true">/</span>
+<a href="/blog/">Blog</a><span aria-hidden="true">/</span>
+<span>I Rebuilt a CRM Three Times. Here's What I Learned.</span>
+</nav>
+<header class="post-header">
+<p class="post-kicker">Building Software · Case study</p>
+<h1 class="post-title">I Rebuilt a CRM Three Times. Here's What I Learned.</h1>
+<p class="post-meta">
+<span>Ayman Atif</span>
+<span aria-hidden="true" class="dot"></span>
+<time datetime="2026-10-16">16 October 2026</time>
+<span aria-hidden="true" class="dot"></span>
+<span>6 min read</span>
+</p>
+</header>
+<p class="post-lede">The first version of this CRM was built around what I assumed people needed. Much of what changed over three builds was how I approached the problem, not just the code.</p>
+<div class="post-body">
+<p>I rebuilt a CRM for an agency three times. The bigger problem turned out to be moving their existing contacts and deals out of Microsoft Access. This is a retrospective, written from memory. I am leaving out the agency's name, their data and the technical stack, because none of it is needed to explain what went wrong and some of it is not mine to share.</p>
+<h2>I designed it for myself</h2>
+<p>The first design came from a developer's assumptions, mine, rather than from how the people using the CRM actually behaved. I was thinking about what the system needed, not about what someone at an agency was trying to get done.</p>
+<p>The people using it were not technical. Form validation was not strong enough, and some interactions were confusing for them. When a screen needs explaining, the screen is the bug.</p>
+<figure class="video-slot" data-video-slot data-youtube-id="">
+<!-- VIDEO PLACEHOLDER. When the YouTube video is published, replace the .video-slot-frame div below with:
+<iframe src="https://www.youtube-nocookie.com/embed/YOUR_VIDEO_ID" title="CRM rebuild walkthrough" loading="lazy" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+and set data-youtube-id to the same ID. -->
+<div class="video-slot-frame">
+<div>
+<div aria-hidden="true" class="video-slot-play"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+<div class="video-slot-title">Video walkthrough coming soon</div>
+
+</div>
+</div>
+</figure>
+<h2>The migration was the harder problem</h2>
+<p>The agency's existing contacts and deals lived in Microsoft Access, and they had to come across. The obvious approach is to import the contacts and import the deals. That is not enough, for a reason that is easy to miss until you hit it.</p>
+<p>The new system generated its own IDs, so the legacy IDs were not simply carried over. Contacts and deals were related, and those relationships had to survive the move. Without a reliable mapping between each legacy record and the new ID it received, there is no dependable way to keep a deal connected to the right contact. Importing records independently can leave you with valid-looking records and the relationships between them lost.</p>
+<p>So the critical piece was that mapping: for every source record, which destination ID it became.</p>
+<h2>Records that do not identify themselves</h2>
+<p>That mapping would be trivial if every contact were cleanly identifiable. They were not. The data had duplicate names, missing email addresses and inconsistent phone numbers. No single field could be trusted on its own to say that two records were the same person.</p>
+<p>To find possible matches I used two rules: name plus email, and when there was no email, name plus phone. The important word is <em>possible</em>. Neither combination is guaranteed to be unique across the whole dataset, so a match under these rules is a candidate, not proof of identity.</p>
+<p>The rules gave a shortlist, not a verdict. Treating a candidate as a confirmed match risks linking a deal to the wrong contact.</p>
+<h2>Letting the person who knows the data decide</h2>
+<p>Where the rules could not settle it, the import had a review step. It displayed the affected records so the responsible person could inspect them before the import was confirmed.</p>
+<p>That keeps a decision the rules cannot settle with a person instead of leaving it to code. The trade-off is that a review step takes someone's time.</p>
+<p>The legacy data also contained inconsistent dates and other messy values, which needed cleaning. I am not claiming I caught every problem the old data contained.</p>
+<h2>Three builds, one change in thinking</h2>
+<p>Looking back across the three builds, the shift was from implementation-first thinking to problem-first thinking. Instead of starting with what to build, start with who will use it, what the existing data really contains and what would be unacceptable to get wrong, such as a deal attached to the wrong contact.</p>
+<p>These are the habits I take from it:</p>
+<ul>
+<li>Look at the real data early.</li>
+<li>Design around how the people using the system actually behave.</li>
+<li>Decide how record identity will work before writing an importer.</li>
+<li>Keep a person in the loop for matches the rules cannot settle.</li>
+</ul>
+<p>I do not have metrics to share and I am not going to invent any. I also would not call the result perfect. It is an account of how the way I approached the work changed.</p>
+<div class="post-note">
+<p>I wrote up the migration approach as a case study: <a href="/work/crm-data-migration/">CRM rebuild: making legacy data migration reliable</a>. For a different project where the first architecture had to change, see <a href="/blog/how-i-rebuilt-an-excel-like-web-app-after-the-first-architecture-failed/">how I rebuilt an Excel-like web app</a>.</p>
+</div>
+</div>
+<aside class="author-box"><strong>About the author</strong><br/>Ayman Atif is a .NET and Python software engineer who has been programming since 2014. <a href="/about/">Learn about Ayman</a> or explore <a href="/services/business-software-development/">business software development</a> and <a href="/services/legacy-software-modernization/">legacy software modernization</a>.<p>For project work, see <a href="/hire-dotnet-developer/">working with me as a freelance .NET developer</a> or <a href="/contact/">contact me about your application</a>.</p></aside>
+<footer class="post-end">
+<p>Written by Ayman Atif, a freelance .NET and Python software engineer working remotely with clients worldwide.</p>
+<a class="button button-primary" href="/contact/">Start a conversation <span aria-hidden="true">↗</span></a>
+</footer>
+</article>
+<aside aria-label="About the author" class="author-sidebar">
+<img alt="Ayman Atif" decoding="async" height="88" src="/assets/img/ayman-atif-software-engineer.webp" width="88"/>
+<p class="author-label">Written by</p>
+<h2>Ayman Atif</h2>
+<p>I’m a software engineer working with .NET, Python and business software, building web applications, APIs and automation for real operations.</p>
+<p>I write to share practical engineering lessons and what I have learned from development work in production.</p>
+<p class="author-links"><a href="/about/">About me</a><a href="/contact/">Get in touch</a></p>
+</aside>
+</div>
+</main>
+<footer class="site-footer"><div class="container site-footer-inner"><div class="site-footer-brand"><strong>Ayman Atif</strong><p>.NET and Python software developer building business applications, APIs and automation.</p></div><nav aria-label="Footer navigation" class="site-footer-nav"><a href="/services/">Services</a><a href="/work/">Work</a><a href="/experience/">Experience</a><a href="/skills/">Skills</a><a href="/about/">About</a><a href="/certifications/">Certifications</a><a href="/blog/">Blog</a><a href="/contact/">Contact</a><a href="/hire-dotnet-developer/">Hire a .NET developer</a><a href="https://www.linkedin.com/in/a95yman/" rel="me noreferrer" target="_blank">LinkedIn</a></nav><div class="site-footer-bottom"><span>Working remotely</span><span>© <span class="current-year">2026</span> Ayman Atif</span></div></div></footer>
+<script defer="" src="../../assets/js/script.js"></script>
+</body>
+</html>
