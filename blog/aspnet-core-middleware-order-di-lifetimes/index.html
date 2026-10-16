@@ -4,7 +4,7 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1" name="viewport"/>
-<meta content="Two ASP.NET Core interview questions that expose whether you have shipped: the middleware pipeline order, and DI service lifetimes with captive dependencies. The trade-off answers that sound senior." name="description"/>
+<meta content="Middleware pipeline order and DI service lifetimes, including captive dependencies, explained as .NET interview answers grounded in production bugs." name="description"/>
 <meta content="Ayman Atif" name="author"/>
 <meta content="index, follow, max-image-preview:large, max-snippet:-1" name="robots"/>
 <meta content="dark light" name="color-scheme"/>
@@ -170,8 +170,14 @@ app.MapControllers();</code></pre><p>The exact pipeline changes with the applica
 </div>
 <h2>The takeaway</h2>
 <p>Middleware order and DI lifetimes look like trivia. They are actually the two places in an ASP.NET Core app where a small, invisible mistake produces a confusing production bug: a CORS failure that isn’t about CORS, a threading exception that isn’t about your code. Interviewers ask them because the strong answer proves you’ve met that bug and know where to look next time.</p>
+<h2>Related reading</h2>
+<ul>
+<li>DbContext is the classic scoped service; see how <a href="/blog/ef-core-tracking-n-plus-1-interview-questions/">EF Core tracking and N+1 problems</a> show up in practice</li>
+<li>Request-path blocking in ASP.NET Core: <a href="/blog/async-await-request-stalls-thread-pool-blocking/">async/await and thread pool blocking</a></li>
+<li>For API design and backend work, see <a href="/services/aspnet-core-api-development/">ASP.NET Core API development</a></li>
+</ul>
 </div>
-<aside class="author-box"><strong>About the author</strong><br/>Ayman Atif is a .NET and Python software engineer who has been building business software since 2014. <a href="/about/">Learn about Ayman</a> or explore <a href="/services/dotnet-development/">.NET development services</a> and <a href="/services/aspnet-core-api-development/">ASP.NET Core API development</a>.<p>For project work, see <a href="/hire-dotnet-developer/">working with me as a freelance .NET developer</a> or <a href="/contact/">contact me about your application</a>.</p></aside>
+<aside class="author-box"><strong>About the author</strong><br/>Ayman Atif is a .NET and Python software engineer who has been programming since 2014. <a href="/about/">Learn about Ayman</a> or explore <a href="/services/dotnet-development/">.NET development services</a> and <a href="/services/aspnet-core-api-development/">ASP.NET Core API development</a>.<p>For project work, see <a href="/hire-dotnet-developer/">working with me as a freelance .NET developer</a> or <a href="/contact/">contact me about your application</a>.</p></aside>
 <footer class="post-end">
 <p>Written by Ayman Atif, a freelance .NET and Python software engineer working remotely with clients worldwide.</p>
 <a class="button button-primary" href="/contact/">Start a conversation <span aria-hidden="true">↗</span></a>

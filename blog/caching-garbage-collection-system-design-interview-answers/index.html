@@ -4,7 +4,7 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1" name="viewport"/>
-<meta content="Three .NET interview questions that separate seniors from mid-levels: caching and invalidation, garbage collection generations, and a basic system-design walkthrough. The trade-off answer for each." name="description"/>
+<meta content="Three .NET interview answers: caching and invalidation, garbage collection generations, and a system-design walkthrough, framed around trade-offs." name="description"/>
 <meta content="Ayman Atif" name="author"/>
 <meta content="index, follow, max-image-preview:large, max-snippet:-1" name="robots"/>
 <meta content="dark light" name="color-scheme"/>
@@ -144,7 +144,7 @@
 <h2>2. “Explain .NET garbage collection.”</h2>
 <p><strong>Student answer:</strong> “The GC is generational. Gen 0 is short-lived objects, gen 1 is a buffer, gen 2 is long-lived. Collecting gen 0 is cheap and frequent; gen 2 is expensive. There’s also a Large Object Heap for objects over 85,000 bytes.”</p>
 <p>All correct, and it’s a recital. The interviewer wants to know if GC behaviour has ever shown up in your production metrics.</p>
-<p><strong>Engineer answer:</strong> “The generational model rests on one assumption: most objects die young. When that assumption holds, the GC is nearly free. It stops being free when you promote a lot of objects to gen 2 that then die anyway, because gen 2 collections are the expensive, potentially blocking ones. In practice the problems I’ve actually seen are: allocation rate so high that gen 0 collections dominate CPU; large short-lived buffers landing on the LOH, which isn’t compacted by default, causing fragmentation and rising memory; and mid-lived objects (things cached for a few minutes) that survive gen 0 and 1 and pile into gen 2.</p>
+<p><strong>Engineer answer:</strong> “The generational model rests on one assumption: most objects are temporary. When that assumption holds, the GC is nearly free. It stops being free when you promote a lot of objects to gen 2 that then die anyway, because gen 2 collections are the expensive, potentially blocking ones. In practice the problems I’ve actually seen are: allocation rate so high that gen 0 collections dominate CPU; large short-lived buffers landing on the LOH, which isn’t compacted by default, causing fragmentation and rising memory; and mid-lived objects (things cached for a few minutes) that survive gen 0 and 1 and pile into gen 2.</p>
 <p>The fixes aren’t ‘call <code>GC.Collect()</code>’. That’s almost always wrong. They’re: reduce allocations on hot paths, use <code>ArrayPool</code> / <code>RecyclableMemoryStream</code> for big buffers, prefer <code>Span</code> and struct-based APIs where it matters, and choose Server GC for throughput on multi-core boxes versus Workstation GC for lower latency on smaller ones. I’d confirm any of this with allocation profiling and the GC counters before changing anything.”</p>
 <p><strong>Follow-ups:</strong> what makes a gen 2 / full collection expensive (it can suspend managed threads); Server vs Workstation and background GC; how <code>IDisposable</code> and finalizers interact with the GC (a finalizer keeps an object alive one extra collection).</p>
 <h2>3. “Design a URL shortener / a rate limiter / a notification service.”</h2>
@@ -165,8 +165,14 @@
 </div>
 <h2>The takeaway</h2>
 <p>Caching, GC, and system design questions all reward the same thing: showing you’ve seen the failure, not just read the definition. Rehearse each answer as definition → cost → scenario → decision, and the topic almost stops mattering.</p>
+<h2>Related reading</h2>
+<ul>
+<li>A common source of avoidable database load: <a href="/blog/ef-core-tracking-n-plus-1-interview-questions/">EF Core N+1 queries and tracking overhead</a></li>
+<li>Why load exposes blocking calls first: <a href="/blog/async-await-request-stalls-thread-pool-blocking/">async/await and thread pool blocking</a></li>
+<li>Lifetimes matter for cached data too: <a href="/blog/aspnet-core-middleware-order-di-lifetimes/">ASP.NET Core middleware order and DI lifetimes</a></li>
+</ul>
 </div>
-<aside class="author-box"><strong>About the author</strong><br/>Ayman Atif is a .NET and Python software engineer who has been building business software since 2014. <a href="/about/">Learn about Ayman</a> or explore <a href="/services/dotnet-development/">.NET development services</a> and <a href="/services/aspnet-core-api-development/">ASP.NET Core API development</a>.<p>For project work, see <a href="/hire-dotnet-developer/">working with me as a freelance .NET developer</a> or <a href="/contact/">contact me about your application</a>.</p></aside>
+<aside class="author-box"><strong>About the author</strong><br/>Ayman Atif is a .NET and Python software engineer who has been programming since 2014. <a href="/about/">Learn about Ayman</a> or explore <a href="/services/dotnet-development/">.NET development services</a> and <a href="/services/aspnet-core-api-development/">ASP.NET Core API development</a>.<p>For project work, see <a href="/hire-dotnet-developer/">working with me as a freelance .NET developer</a> or <a href="/contact/">contact me about your application</a>.</p></aside>
 <footer class="post-end">
 <p>Written by Ayman Atif, a freelance .NET and Python software engineer working remotely with clients worldwide.</p>
 <a class="button button-primary" href="/contact/">Start a conversation <span aria-hidden="true">↗</span></a>

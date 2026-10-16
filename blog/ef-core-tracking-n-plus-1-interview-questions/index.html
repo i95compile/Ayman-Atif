@@ -4,7 +4,7 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1" name="viewport"/>
-<meta content="EF Core interview questions test whether you have watched a query melt in production. Tracking overhead, the N+1 problem, IQueryable that silently pulls a table into memory, and the trade-off answers that sound senior." name="description"/>
+<meta content="EF Core interview questions on tracking overhead, the N+1 problem and IQueryable traps, with the trade-off answers that show production experience." name="description"/>
 <meta content="Ayman Atif" name="author"/>
 <meta content="index, follow, max-image-preview:large, max-snippet:-1" name="robots"/>
 <meta content="dark light" name="color-scheme"/>
@@ -177,8 +177,14 @@
 </div>
 <h2>The takeaway</h2>
 <p>EF Core interview questions are a proxy for one skill: knowing what SQL your LINQ becomes, and noticing when it becomes the wrong SQL. If your answers stay at the level of “<code>Include</code> fixes N+1” you sound like someone who read the docs. If they include a dashboard symptom and a rule, you sound like someone who has paid for the lesson.</p>
+<h2>Related reading</h2>
+<ul>
+<li>Once the query is right, the next production risk is blocking on it: <a href="/blog/async-await-request-stalls-thread-pool-blocking/">async/await and thread pool blocking</a></li>
+<li>For queries that run more often than they need to: <a href="/blog/caching-garbage-collection-system-design-interview-answers/">caching, invalidation and garbage collection trade-offs</a></li>
+<li>Query and database performance work is part of my <a href="/experience/">.NET professional experience</a></li>
+</ul>
 </div>
-<aside class="author-box"><strong>About the author</strong><br/>Ayman Atif is a .NET and Python software engineer who has been building business software since 2014. <a href="/about/">Learn about Ayman</a> or explore <a href="/services/dotnet-development/">.NET development services</a> and <a href="/services/aspnet-core-api-development/">ASP.NET Core API development</a>.<p>For project work, see <a href="/hire-dotnet-developer/">working with me as a freelance .NET developer</a> or <a href="/contact/">contact me about your application</a>.</p></aside>
+<aside class="author-box"><strong>About the author</strong><br/>Ayman Atif is a .NET and Python software engineer who has been programming since 2014. <a href="/about/">Learn about Ayman</a> or explore <a href="/services/dotnet-development/">.NET development services</a> and <a href="/services/aspnet-core-api-development/">ASP.NET Core API development</a>.<p>For project work, see <a href="/hire-dotnet-developer/">working with me as a freelance .NET developer</a> or <a href="/contact/">contact me about your application</a>.</p></aside>
 <footer class="post-end">
 <p>Written by Ayman Atif, a freelance .NET and Python software engineer working remotely with clients worldwide.</p>
 <a class="button button-primary" href="/contact/">Start a conversation <span aria-hidden="true">↗</span></a>

@@ -4,7 +4,7 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1" name="viewport"/>
-<meta content="The async/await interview question is not about I/O versus CPU. It is about what happens when you block a thread pool thread under load. The trade-off answer that signals senior." name="description"/>
+<meta content="Why blocking a thread pool thread hurts under load, how it differs from a classic continuation stall, and how to answer async/await interview questions." name="description"/>
 <meta content="Ayman Atif" name="author"/>
 <meta content="index, follow, max-image-preview:large, max-snippet:-1" name="robots"/>
 <meta content="dark light" name="color-scheme"/>
@@ -184,13 +184,18 @@
         .SingleOrDefaultAsync(x =&gt; x.Id == id);
 
     return order is null ? NotFound() : Ok(order);
-}</code></pre><p>The useful property here is “async all the way.” The controller does not block on the task, and the data-access call uses an asynchronous database API. Replacing the <code>await</code> with <code>.Result</code> breaks that chain and makes the request hold a thread while it waits.</p><h2>Three debugging questions</h2><ul><li>Is the slow operation CPU-bound or I/O-bound?</li><li>Is anything synchronously blocking on a <code>Task</code> with <code>.Result</code>, <code>.Wait()</code> or <code>GetAwaiter().GetResult()</code>?</li><li>Did we create unbounded parallelism and flood the database, API or thread pool?</li></ul><p>Async code can improve scalability, but it does not remove capacity limits. If 5,000 requests all hit the same database at once, the bottleneck may simply move downstream. Concurrency still needs a budget.</p></section><div class="post-note">
+}</code></pre><p>The useful property here is “async all the way.” The controller does not block on the task, and the data-access call uses an asynchronous database API (the <code>AsNoTracking()</code> choice is covered in the <a href="/blog/ef-core-tracking-n-plus-1-interview-questions/">EF Core tracking article</a>). Replacing the <code>await</code> with <code>.Result</code> breaks that chain and makes the request hold a thread while it waits.</p><h2>Three debugging questions</h2><ul><li>Is the slow operation CPU-bound or I/O-bound?</li><li>Is anything synchronously blocking on a <code>Task</code> with <code>.Result</code>, <code>.Wait()</code> or <code>GetAwaiter().GetResult()</code>?</li><li>Did we create unbounded parallelism and flood the database, API or thread pool?</li></ul><p>Async code can improve scalability, but it does not remove capacity limits. If 5,000 requests all hit the same database at once, the bottleneck may simply move downstream. Concurrency still needs a budget.</p></section><div class="post-note">
 <p>This post is one worked example of a format I use for every .NET interview topic: <strong>definition → cost → real scenario → decision</strong>. I turned the full set (CLR and GC, async internals, EF Core, ASP.NET Core, system design) into an A4-printable prep system called <a href="https://yaman95.gumroad.com/l/dotnet-job-interview-os" rel="noreferrer" target="_blank"><strong>.NET Job Interview OS</strong></a>, with weak-versus-strong answers side by side for each question.</p>
 </div>
 <h2>The takeaway</h2>
 <p>When an interviewer asks about async/await, they are not asking you to recite the state machine. They are asking whether you understand that threads are scarce, that blocking spends them, and that the bill arrives as a latency cliff on a Tuesday afternoon. Answer that, with one real trace attached, and you have answered the question they meant to ask.</p>
+<h2>Related reading</h2>
+<ul>
+<li>Another request-path failure that stays invisible until production: <a href="/blog/aspnet-core-middleware-order-di-lifetimes/">ASP.NET Core middleware order and DI lifetimes</a></li>
+<li>The answer format behind these posts: <a href="/blog/interview-trick-senior-net-developer/">answering the trade-off instead of the definition</a></li>
+</ul>
 </div>
-<aside class="author-box"><strong>About the author</strong><br/>Ayman Atif is a .NET and Python software engineer who has been building business software since 2014. <a href="/about/">Learn about Ayman</a> or explore <a href="/services/dotnet-development/">.NET development services</a> and <a href="/services/aspnet-core-api-development/">ASP.NET Core API development</a>.<p>For project work, see <a href="/hire-dotnet-developer/">working with me as a freelance .NET developer</a> or <a href="/contact/">contact me about your application</a>.</p></aside>
+<aside class="author-box"><strong>About the author</strong><br/>Ayman Atif is a .NET and Python software engineer who has been programming since 2014. <a href="/about/">Learn about Ayman</a> or explore <a href="/services/dotnet-development/">.NET development services</a> and <a href="/services/aspnet-core-api-development/">ASP.NET Core API development</a>.<p>For project work, see <a href="/hire-dotnet-developer/">working with me as a freelance .NET developer</a> or <a href="/contact/">contact me about your application</a>.</p></aside>
 <footer class="post-end">
 <p>Written by Ayman Atif, a freelance .NET and Python software engineer working remotely with clients worldwide.</p>
 <a class="button button-primary" href="/contact/">Start a conversation <span aria-hidden="true">↗</span></a>

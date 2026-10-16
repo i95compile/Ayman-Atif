@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1" name="viewport"/>
-<meta content="A practical software architecture case study on rebuilding an Excel-like web app, replacing a fragile relational model with a JSON document approach for formulas, version history, undo, and redo." name="description"/>
+<meta content="Why I rebuilt an Excel-like web app around a JSON document model for formulas, version history, undo and redo after the first relational design failed." name="description"/>
 <meta content="Ayman Atif" name="author"/>
 <meta content="index, follow, max-image-preview:large, max-snippet:-1" name="robots"/>
 <meta content="dark light" name="color-scheme"/>
@@ -103,6 +103,12 @@
 <section class="architecture-stack" aria-label="Architecture I would choose today"><p class="section-index">A CLEARER STACK</p><div><span>01</span><p><strong>Relational business data</strong><small>Users, permissions, ownership, and business records.</small></p></div><div><span>02</span><p><strong>JSON spreadsheet state</strong><small>One document for ordered layout, cell values, and formulas.</small></p></div><div><span>03</span><p><strong>Formula calculation layer</strong><small>Explicit evaluation and validation at defined boundaries.</small></p></div><div><span>04</span><p><strong>Versioning and retention rules</strong><small>Snapshots, undo/redo, and a practical policy for history.</small></p></div><div><span>05</span><p><strong>Concurrency handling</strong><small>Clear conflict rules when more than one person changes a sheet.</small></p></div></section>
 <section class="lesson-checklist" aria-label="Lessons learned"><div><b>✓</b><p><strong>Model the behaviour first.</strong> Start with the operations users need, not just the nouns in the domain.</p></div><div><b>✓</b><p><strong>Design history early.</strong> Versioning exposes assumptions that simple create-and-update flows hide.</p></div><div><b>✓</b><p><strong>Keep boundaries explicit.</strong> A document can be the source of truth while relational data supports the rest of the product.</p></div><div><b>✓</b><p><strong>Prefer explainable state.</strong> The best architecture is one a developer can reconstruct without detective work.</p></div></section>
 <p>This article is adapted from <a href="https://medium.com/@a95yman/how-i-rebuilt-an-excel-like-web-app-after-the-first-architecture-failed-ab4f6a38aa87" rel="noreferrer" target="_blank">my original Medium post</a>, with the implementation lessons reframed as a portfolio case study.</p>
+<h2>Related reading</h2>
+<ul>
+<li>Another rebuild that started with an MVP that assumed too little: <a href="/blog/first-ai-powered-news-to-video-system/">building a news-to-video pipeline as a junior developer</a></li>
+<li>A production project where versioned document state and shared access were central: the <a href="/work/business-software-platform/">business valuation and deal platform case study</a></li>
+<li>If a spreadsheet has outgrown its workbook, see how I approach <a href="/services/business-software-development/">business software development</a></li>
+</ul>
 </div>
 <aside class="portfolio-cta"><p class="section-index">AYMAN ATIF · BUSINESS SOFTWARE &amp; AUTOMATION SPECIALIST</p><h2>Systems that make business work easier to run</h2><p>I build custom business applications, spreadsheet replacement systems, APIs, workflow automation, and reporting tools. If a critical process has outgrown a workbook or a first implementation, I can help map the next version.</p><div><a class="button button-primary" href="/contact/">Discuss a project <span aria-hidden="true">↗</span></a><a class="button button-ghost" href="/work/">View selected work</a></div></aside>
 </article><aside aria-label="About the author" class="author-sidebar">
