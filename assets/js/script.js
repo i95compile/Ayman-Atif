@@ -68,14 +68,22 @@ if (!prefersReducedMotion) {
 
   if (glow && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
     const interactiveSelector = 'a, button, input, textarea, select, [role="button"]';
-    const moveX = window.gsap?.quickTo(glow, 'x', { duration: .28, ease: 'power3.out' });
-    const moveY = window.gsap?.quickTo(glow, 'y', { duration: .28, ease: 'power3.out' });
+    let moveX;
+    let moveY;
 
-    if (window.gsap) window.gsap.set(glow, { xPercent: -50, yPercent: -50 });
+    // GSAP can arrive after this script (it is loaded lazily on the home page),
+    // so the smoothed tweens are created the first time GSAP is available.
+    const glowTweens = () => {
+      if (moveX || !window.gsap) return Boolean(moveX);
+      window.gsap.set(glow, { xPercent: -50, yPercent: -50, left: 0, top: 0 });
+      moveX = window.gsap.quickTo(glow, 'x', { duration: .28, ease: 'power3.out' });
+      moveY = window.gsap.quickTo(glow, 'y', { duration: .28, ease: 'power3.out' });
+      return true;
+    };
 
     window.addEventListener('pointermove', (event) => {
       glow.style.opacity = '1';
-      if (moveX && moveY) {
+      if (glowTweens()) {
         moveX(event.clientX);
         moveY(event.clientY);
       } else {
@@ -140,7 +148,6 @@ function initMotion() {
   document.querySelectorAll('.problem-line').forEach((line) => {
     gsap.from(line, {
       x: 38,
-      opacity: .18,
       scrollTrigger: { trigger: line, start: 'top 82%', end: 'top 52%', scrub: .8 }
     });
   });
@@ -294,4 +301,32 @@ function initMotion() {
   });
 }
 
-initMotion();
+// Pages that opt in with data-lazy-motion load GSAP on the first interaction,
+// keeping it out of the critical path. The page is fully visible without it,
+// because initial animation states are only applied once GSAP has loaded.
+const GSAP_SOURCES = [
+  'https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js',
+  'https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js'
+];
+
+function loadScript(src) {
+  return new Promise((resolve, reject) => {
+    const script = document.createElement('script');
+    script.src = src;
+    script.onload = resolve;
+    script.onerror = reject;
+    document.head.appendChild(script);
+  });
+}
+
+if (document.documentElement.hasAttribute('data-lazy-motion') && !window.gsap && !prefersReducedMotion) {
+  const triggers = ['scroll', 'wheel', 'touchstart', 'pointerdown', 'pointermove', 'keydown'];
+  const start = () => {
+    triggers.forEach((type) => window.removeEventListener(type, start));
+    GSAP_SOURCES.reduce((chain, src) => chain.then(() => loadScript(src)), Promise.resolve())
+      .then(initMotion, initMotion);
+  };
+  triggers.forEach((type) => window.addEventListener(type, start, { passive: true, once: true }));
+} else {
+  initMotion();
+}
