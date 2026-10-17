@@ -72,6 +72,53 @@ for (const [file,html] of data) {
   // A generic university-exam analogy in an existing interview article is not a credential.
   assert(!/\b(education|diploma|degree|graduated|graduation|institution)\b/i.test(visible),name+': education privacy review needed');
 }
+// Career facts. Freelance work since 2020 overlaps employment, so a year count would double-count or go stale;
+// pages say "professionally since 2016" instead, and every stated employment period must match the Experience page.
+const roleDates={'Grosomodo':['July 2016 to June 2018','2016–2018'],'Tatbik.ma':['September 2018 to August 2025','2018–2025']};
+const text=html=>decode(html.replace(/<script[\s\S]*?<\/script>/gi,' ').replace(/<style[\s\S]*?<\/style>/gi,' ').replace(/<[^>]+>/g,' ')).replace(/&nbsp;/g,' ').replace(/\s+/g,' ');
+for(const [file,html] of data) {
+  const name=path.relative(root,file).replace(/\\/g,'/'), visible=text(html);
+  assert(!/\b\d+\+?\s*years?\s+(?:of\s+|in\s+)?(?:professional|experience)/i.test(visible),name+': hard-coded professional experience year count');
+  // A sentence ends at a full stop followed by a space, so ".NET" does not end it.
+  assert(!/(?:professional|experience)(?:[^.]|\.(?=\S)){0,60}\b2016\s*[–-]\s*2025\b/i.test(visible),name+': professional experience shown as ending in 2025');
+  assert(!/professional(?:[^.]|\.(?=\S)){0,40}since 2014/i.test(visible),name+': programming since 2014 presented as professional experience');
+  for(const m of visible.matchAll(/(Grosomodo|Tatbik\.ma)\s*\(([^)]*)\)/g))assert(roleDates[m[1]].includes(m[2].trim()),name+': '+m[1]+' period "'+m[2]+'" does not match the Experience page');
+  for(const m of html.matchAll(/<script\b[^>]*type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/gi)) {
+    (function check(x){if(!x || typeof x!=='object')return;if(x.address)assert(x.address.addressLocality==='Kenitra' && x.address.addressCountry==='MA',name+': JSON-LD address must match the visible Kenitra, Morocco location');Object.values(x).forEach(check);})(JSON.parse(m[1]));
+  }
+}
+for(const page of ['index.html','about/index.html','experience/index.html','contact/index.html','hire-dotnet-developer/index.html'])assert(text(data.get(path.join(root,page))).includes('Kenitra, Morocco'),page+': visible Kenitra, Morocco location missing');
+const experience=data.get(path.join(root,'experience/index.html'));
+for(const date of ['2016-07','2018-06','2018-09','2025-08','2020'])assert(experience.includes('<time datetime="'+date+'">'),'experience/index.html: missing period date '+date);
+assert(/Odoo backend development, 2024/.test(experience) && /not an additional full-time role/.test(experience),'experience/index.html: Odoo engagement must be described as 2024 freelance work, not a full-time role');
+// Both confidential case studies were freelance work done outside employment, never for Tatbik.ma.
+for(const page of ['work/business-software-platform/index.html','work/crm-data-migration/index.html']) {
+  const html=data.get(path.join(root,page));
+  assert(html.includes('CONFIDENTIAL FREELANCE WORK'),page+': missing freelance label');
+  assert(!/Tatbik|Grosomodo/.test(html),page+': case study must not be attributed to an employer');
+  assert(html.includes('href="/experience/#freelance"'),page+': missing link to the freelance experience section');
+}
+// FAQPage markup must repeat the visible questions and answers exactly: each question is an <h3> followed by its answer <p>.
+for(const [file,html] of data) {
+  const name=path.relative(root,file).replace(/\\/g,'/');
+  // Inline tags (links, code) are removed without adding spaces, so "work</a>, including" stays "work, including".
+  const inline=s=>decode(s.replace(/<[^>]+>/g,'')).replace(/\s+/g,' ').trim();
+  const visibleFaq=new Map([...html.matchAll(/<h3>([\s\S]*?)<\/h3>\s*<p>([\s\S]*?)<\/p>/g)].map(m=>[inline(m[1]),inline(m[2])]));
+  for(const m of html.matchAll(/<script\b[^>]*type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/gi)) {
+    const json=JSON.parse(m[1]);
+    for(const node of [json,...(json['@graph']||[])].filter(n=>n['@type']==='FAQPage')) {
+      const questions=node.mainEntity||[];
+      if(html.includes('class="faq-item"'))assert(questions.length===(html.match(/class="faq-item"/g)||[]).length,name+': FAQPage question count differs from the visible FAQ');
+      for(const q of questions) {
+        assert(visibleFaq.has(q.name),name+': FAQPage question not visible: '+q.name);
+        if(visibleFaq.has(q.name))assert(visibleFaq.get(q.name)===q.acceptedAnswer.text,name+': FAQPage answer differs from visible text: '+q.name);
+      }
+    }
+  }
+}
+// Homepage links to the main service pages, so each is one click from the most-linked page.
+const homeLinks=[...data.get(path.join(root,'index.html')).matchAll(/<a\b[^>]*href="([^"]+)"/g)].map(m=>m[1]);
+for(const service of ['dotnet-development','python-development','legacy-software-modernization','business-software-development','workflow-automation'])assert(homeLinks.includes('/services/'+service+'/'),'index.html: no link to /services/'+service+'/');
 const sitemap=fs.readFileSync('sitemap.xml','utf8');
 const locations=[...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map(m=>m[1]);
 for(const url of locations)assert(!internalIndex(url),'Sitemap index.html URL '+url);

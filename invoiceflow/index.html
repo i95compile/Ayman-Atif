@@ -58,15 +58,15 @@
           "name": "How do I convert PDF invoices to Excel with InvoiceFlow?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Clone the repository, install the requirements, then run 'python app.py process --input invoices --output output/result.xlsx --workers auto'. InvoiceFlow reads every PDF in the input folder, extracts structured invoice data, and writes a multi-sheet Excel workbook with one sheet for invoice-level fields and one for line items."
+            "text": "Clone the repo, install the requirements, then run python app.py process --input invoices --output output/result.xlsx --workers auto. It reads every PDF in the input folder, extracts structured invoice data, and writes a multi-sheet Excel workbook."
           }
         },
         {
           "@type": "Question",
-          "name": "Does InvoiceFlow handle scanned or image-only invoices?",
+          "name": "Does it handle scanned or image-only invoices?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Version 0.1.0 extracts text from digital PDFs. The parser layer is deliberately isolated so an OCR backend can be substituted without touching the pipeline; OCR and AI-based extraction are on the roadmap."
+            "text": "Version 0.1.0 extracts text from digital PDFs. The parser layer is isolated so an OCR backend can be substituted without changing the pipeline; OCR and AI extraction are on the roadmap."
           }
         },
         {
@@ -74,15 +74,15 @@
           "name": "Is InvoiceFlow free?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Yes. InvoiceFlow is open source and free to use. The source is on GitHub."
+            "text": "Yes, it is open source and free to use. The source is on GitHub."
           }
         },
         {
           "@type": "Question",
-          "name": "Can InvoiceFlow process large batches of invoices quickly?",
+          "name": "Can it process large batches quickly?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Yes. It uses a ProcessPoolExecutor to extract invoices in parallel across CPU cores, and includes a benchmark command that reports throughput in PDFs per second."
+            "text": "Yes. Extraction runs in parallel across CPU cores via ProcessPoolExecutor, and the benchmark command reports throughput in PDFs per second."
           }
         }
       ]
@@ -198,7 +198,7 @@ pip install -r requirements.txt</code></pre>
 </footer>
 </article>
 </main>
-<footer class="site-footer"><div class="container site-footer-inner"><div class="site-footer-brand"><strong>Ayman Atif</strong><p>.NET and Python software developer building business applications, APIs and automation.</p></div><nav aria-label="Footer navigation" class="site-footer-nav"><a href="/services/">Services</a><a href="/work/">Work</a><a href="/experience/">Experience</a><a href="/skills/">Skills</a><a href="/about/">About</a><a href="/certifications/">Certifications</a><a href="/blog/">Blog</a><a href="/contact/">Contact</a><a href="/hire-dotnet-developer/">Hire a .NET developer</a><a href="https://www.linkedin.com/in/a95yman/" rel="me noreferrer" target="_blank">LinkedIn</a></nav><div class="site-footer-bottom"><span>Working remotely</span><span>© <span class="current-year">2026</span> Ayman Atif</span></div></div></footer>
+<footer class="site-footer"><div class="container site-footer-inner"><div class="site-footer-brand"><strong>Ayman Atif</strong><p>.NET and Python software developer building business applications, APIs and automation.</p></div><nav aria-label="Footer navigation" class="site-footer-nav"><a href="/services/">Services</a><a href="/work/">Work</a><a href="/experience/">Experience</a><a href="/skills/">Skills</a><a href="/about/">About</a><a href="/certifications/">Certifications</a><a href="/blog/">Blog</a><a href="/contact/">Contact</a><a href="/hire-dotnet-developer/">Hire a .NET developer</a><a href="https://www.linkedin.com/in/a95yman/" rel="me noreferrer" target="_blank">LinkedIn</a></nav><div class="site-footer-bottom"><span>Kenitra, Morocco · Working remotely</span><span>© <span class="current-year">2026</span> Ayman Atif</span></div></div></footer>
 <script defer="" src="../assets/js/script.js"></script>
 </body>
 </html>

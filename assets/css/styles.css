@@ -307,7 +307,8 @@ button { font: inherit; }
 .hero-credibility > div:first-child { padding-left: 0; }
 .hero-credibility > div:last-child { border: 0; }
 .hero-credibility strong { color: #edf0f2; font: 600 14px/1.3 Manrope, "Manrope Fallback", sans-serif; }
-.hero-credibility .experience-mark { flex-direction: row; align-items: center; justify-content: flex-start; gap: 12px; }
+.hero-credibility .experience-mark { flex-direction: row; flex-wrap: wrap; align-items: center; align-content: center; justify-content: flex-start; gap: 6px 12px; }
+.hero-credibility .experience-mark span { white-space: nowrap; }
 .experience-mark strong { color: var(--accent); font: 700 38px/.9 Manrope, "Manrope Fallback", sans-serif; letter-spacing: -.05em; }
 .experience-mark span { color: #9299a2; font-size: 10px; line-height: 1.4; text-transform: uppercase; }
 .meta-label { margin-bottom: 7px; color: #6f7680; font-size: 9px; letter-spacing: .12em; text-transform: uppercase; }
@@ -702,6 +703,16 @@ button { font: inherit; }
 .about-copy > p:first-child { color: var(--ink); font-size: 18px; line-height: 1.62; }
 .about-capabilities { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 34px; }
 .about-capabilities span { padding: 8px 10px; border: 1px solid var(--line-dark); border-radius: 99px; color: #696762; font-size: 9px; }
+.faq { padding: 135px 0 145px; border-top: 1px solid var(--line-dark); }
+.faq-grid { display: grid; grid-template-columns: .8fr 1fr; gap: 100px; }
+.faq h2 { max-width: 560px; margin: 28px 0 0; font: 650 clamp(40px, 4.6vw, 64px)/1 Manrope, "Manrope Fallback", sans-serif; letter-spacing: -.06em; }
+.faq-list { padding-top: 38px; }
+.faq-item { padding: 24px 0; border-top: 1px solid var(--line-dark); }
+.faq-item:first-child { padding-top: 0; border-top: 0; }
+.faq-item h3 { margin: 0 0 10px; color: var(--ink); font: 700 18px/1.35 Manrope, "Manrope Fallback", sans-serif; letter-spacing: -.02em; }
+.faq-item p { margin: 0; color: #565550; font-size: 14px; line-height: 1.78; }
+.faq-item a { color: var(--ink); text-decoration: underline; text-decoration-color: rgba(20, 21, 23, .35); text-underline-offset: 3px; }
+.faq-item a:hover { text-decoration-color: currentColor; }
 
 .contact { position: relative; display: flex; min-height: 100svh; align-items: center; overflow: hidden; padding: 130px 0 45px; }
 .contact-glow { position: absolute; top: 50%; left: 50%; width: 1100px; height: 1100px; border-radius: 50%; background: radial-gradient(circle, rgba(183, 255, 90, .08), transparent 63%); transform: translate(-50%, -50%); }
@@ -855,6 +866,8 @@ button { font: inherit; }
   .invoice-copy { max-width: 690px; }
   .about-grid { gap: 40px; }
   .about-copy { max-width: 760px; padding-top: 0; }
+  .faq-grid { grid-template-columns: 1fr; gap: 40px; }
+  .faq-list { max-width: 760px; padding-top: 0; }
   .contact-footer { grid-template-columns: 1fr auto; }
   .footer-links { grid-column: 1 / -1; grid-row: 1; }
   .services-hero-grid, .services-fit-grid { grid-template-columns: 1fr; gap: 42px; }
@@ -873,7 +886,8 @@ button { font: inherit; }
   .hero-credibility { grid-template-columns: 1fr 1fr; }
   .hero-credibility > div { min-height: 78px; padding: 10px 13px; }
   .hero-credibility > div:nth-child(2) { border-right: 0; }
-  .hero-credibility > div:last-child { grid-column: 1 / -1; border-top: 1px solid var(--line); }
+  .hero-credibility > div { justify-content: flex-start; }
+  .hero-credibility > div:last-child { grid-column: 1 / -1; padding-left: 0; border-top: 1px solid var(--line); }
   .hero-links { flex-wrap: wrap; }
   .hero-links > span { width: 100%; margin-left: 0; }
   .portrait-stage { width: 100%; min-height: 520px; }
@@ -882,7 +896,9 @@ button { font: inherit; }
   .card-availability { top: 6%; left: -1%; }
   .card-role { right: -1%; bottom: 8%; max-width: 165px; }
   .hero-scroll-hint { display: none; }
-  .problems, .services, .process, .automation, .invoice, .about { padding: 100px 0; }
+  .problems, .services, .process, .automation, .invoice, .about, .faq { padding: 100px 0; }
+  .faq h2 { font-size: clamp(38px, 11vw, 52px); }
+  .faq-item h3 { font-size: 17px; }
   .problems-intro h2,
   .services-heading h2,
   .process-sticky h2,
