@@ -47,6 +47,8 @@ for (const [file,html] of data) {
   for(const m of html.matchAll(/<(?:a|img|script|link)\b[^>]*>/gi)) {
     const a=attr(m[0]); const ref=a.href || a.src;
     if(!ref || /^(mailto:|tel:|data:)/.test(ref))continue;
+    // Served by Vercel Web Analytics on the deployment, not a file in the repository.
+    if(/^<script\b/i.test(m[0]) && a.src==='/_vercel/insights/script.js')continue;
     const parsed=new URL(ref,origin+url);
     if(parsed.origin!==origin)continue;
     let target=path.join(root,decodeURIComponent(parsed.pathname));
